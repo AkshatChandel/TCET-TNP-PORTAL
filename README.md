@@ -44,6 +44,7 @@ JEE_Marks
 JEE_Out_Of
 CET_Marks
 CET_Out_Of
+Student_Resume
 Student_Status (Active / De-Active)
 
 => Student_Login
@@ -78,6 +79,9 @@ Designation_Status (Active / De-Active)
 
 => Staff_Master
 Staff_Id
+
+<!-- Designation_Id -->
+
 First_Name
 Middle_Name
 Last_Name
@@ -184,6 +188,10 @@ Company_Round_Id
 Company_Id
 Round_Name
 Round_Status
+
+=> Company_Student_Registration
+Company_Student_Registration_Id
+Student_Class_Id
 
 => Company_Round_Student_Selected
 Company_Round_Student_Selected_Id
