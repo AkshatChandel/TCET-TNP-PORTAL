@@ -1,7 +1,7 @@
 <?php
 require 'connection.php';
 ?>
-
+<!DOCTYPE html>
 <!doctype html>
 <html lang="en">
 
