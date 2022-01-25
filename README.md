@@ -143,7 +143,7 @@ Lecture_Status
 
 => Training_Lecture_Semester
 Training_Lecture_Id
-Semester_Id
+Semester
 
 Example: Suppose A training lecture is only available for Semester 3 and Semester 4 students. Then, there will be 2 entries in the "Training_Lecture_Semester table.
 
@@ -173,6 +173,7 @@ Minimum_CGPA
 Placement_Company_Status
 
 => Company_Branch
+Company_Branch_Id
 Company_Id
 Branch_Id
 
