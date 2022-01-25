@@ -13,9 +13,9 @@
 </head>
 
 <body>
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <!-- <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
         <img src="../../Images/vcetlogoicon.png"></img>&emsp;
-        <a class="navbar-brand" href="https://vcet.edu.in/">VCET</a>
+        <a class="navbar-brand" href="https://vcet.edu.in/">TCET</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
@@ -53,10 +53,10 @@
                         <a class="dropdown-item"><button class="btn btn-outline-success my-2 my-sm-0" type="button" onclick="logout()">Log Out</button></a>
                     </div>
                 </li>
-                <!-- <button class="btn btn-outline-success my-2 my-sm-0" type="button" onclick="logout()">Log Out</button> -->
+                <!-- <button class="btn btn-outline-success my-2 my-sm-0" type="button" onclick="logout()">Log Out</button>
             </ul>
         </div>
-    </nav>
+    </nav> -->
 
     <div class="container" id="main-container">
         <form action="" method="POST">
@@ -118,8 +118,44 @@
                     <input type="text" id="txt_Address" name="txt_Address" class="form-control" />
                 </div>
             </div>
+            <div class="form-row">
+                <div class="form-group col-md-4">
+                    <label for="txt_10thpercentage">Class 10 Percentage</label>
+                    <input type="text" id="txt_10thpercentage" name="txt_10thpercentage" class="form-control" />
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group col-md-4">
+                    <label for="12thordiploma">Are you a Diploma Student?</label>
+                    <select id="12thordiploma" name="12thordiploma" class="form-control">
+                    <option value="No">No</option>
+                    <option value="Yes">Yes</option>
+                    </select>
+                </div>
+            </div>
+            <div class="form-row ">
+                <div class="form-group col-md-4 class12th">
+                    <label for="txt_12thpercentage">12th Percentage</label>
+                    <input type="text" id="txt_12thpercentage" name="txt_12thpercentage" class="form-control"  />
+                </div>
+                <div class="form-group col-md-4 class12th">
+                    <label for="txt_JEEscore">JEE Score</label>
+                    <input type="text" id="txt_JEEscore" name="txt_JEEscore" class="form-control" />
+                </div>
+                <div class="form-group col-md-4 class12th">
+                    <label for="txt_CETscore">CET Score</label>
+                    <input type="text" id="txt_CETscore" name="txt_CETscore" class="form-control"  />
+                </div>
+                <div class="form-group col-md-4 diploma-form-group">
+                    <label for="txt_diplomapercentage">Diploma Percentage</label>
+                    <input type="text" id="txt_diplomapercentage" name="txt_diplomapercentage" class="form-control" />
+                </div>
+            </div>
             <hr color="grey">
             <div class="my-4" style="color:#0041b3">
+
+
+            <------->
                 <h5>Academic Details </h5>
             </div>
             <div class="form-row">
@@ -261,6 +297,10 @@
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
     <script>
+        $(".diploma-form-group").hide();
+
+
+
         $("#select_Year").change(function() {
             var year = parseInt($("#select_Year").val());
             $("#select_Semester").empty();
@@ -296,6 +336,8 @@
                 $("#select_Semester").append(html);
             }
         });
+
+        $(".diploma-form-group").hidefg();
     </script>
     <script>
         function logout() {
