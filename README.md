@@ -109,7 +109,7 @@ Staff_Designation_Status (Active / De-Active)
 => Quiz_Master
 Quiz_Id
 Quiz_Name
-QUiz_Code
+Quiz_Code
 Quiz_Time
 Quiz_Status
 
