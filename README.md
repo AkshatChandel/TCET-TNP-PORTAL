@@ -141,7 +141,7 @@ Lecture_Status
 Training_Lecture_Id
 Semester_Id
 
-# Example: Suppose A training lecture is only available for Semester 3 and Semester 4 students. Then, there will be 2 entries in the "Training_Lecture_Semester table.
+Example: Suppose A training lecture is only available for Semester 3 and Semester 4 students. Then, there will be 2 entries in the "Training_Lecture_Semester table.
 
 => Training_Lecture_Attendance
 Training_Lecture_Attendance_Id
@@ -172,7 +172,7 @@ Placement_Company_Status
 Company_Id
 Branch_Id
 
-# Example: If a company is only hiring students of Computer Engineering, IT and EXTC, then there will be three entries in the above table.
+Example: If a company is only hiring students of Computer Engineering, IT and EXTC, then there will be three entries in the above table.
 
 => Company_Criteria
 Company_Criteria_Id
