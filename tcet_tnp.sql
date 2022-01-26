@@ -181,6 +181,7 @@ CREATE TABLE `quiz_master` (
   `Quiz_Name` varchar(100) NOT NULL,
   `Quiz_Code` varchar(50) DEFAULT NULL,
   `Quiz_Time` int(11) DEFAULT NULL,
+  `Staff_Id` bigint(20) NOT NULL,
   `Quiz_Status` varchar(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 

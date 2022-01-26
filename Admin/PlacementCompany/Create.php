@@ -13,7 +13,7 @@ require '../../connection.php';
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
 
-    <title>Students</title>
+    <title>Company</title>
 </head>
 
 <body>
@@ -21,24 +21,21 @@ require '../../connection.php';
     <div class="container" id="main-container">
         <form action="" method="POST">
             <div class="my-4" style="color:#0041b3">
-                <h4>Student Master</h4>
+                <h4>Company Master</h4>
             </div>
             <hr color="grey">
-            <div class="my-4" style="color:#0041b3">
-                <h5>Personal Details</h5>
-            </div>
             <div class="form-row mt-5">
                 <div class="form-group col-md-4">
-                    <label for="txt_FirstName">First Name</label>
-                    <input type="text" id="txt_FirstName" name="txt_FirstName" class="form-control" required="required" />
+                    <label for="txt_CompanyName">Company Name</label>
+                    <input type="text" id="txt_CompanyName" name="txt_CompanyName" class="form-control" required="required" />
                 </div>
                 <div class="form-group col-md-4">
-                    <label for="txt_MiddleName">Middle Name</label>
-                    <input type="text" id="txt_MiddleName" name="txt_MiddleName" class="form-control" />
+                    <label for="txt_MinimumClass10Percentage">Minimum Class 10 Percentage</label>
+                    <input type="text" id="txt_MinimumClass10Percentage" name="txt_MinimumClass10Percentage" class="form-control" />
                 </div>
                 <div class="form-group col-md-4">
-                    <label for="txt_LastName">Last Name</label>
-                    <input type="text" id="txt_LastName" name="txt_LastName" class="form-control" required="required" />
+                    <label for="txt_MinimumClass12Percentage">Minimum Class 12 Percentage</label>
+                    <input type="text" id="txt_MinimumClass12Percentage" name="txt_MinimumClass12Percentage" class="form-control" required="required" />
                 </div>
             </div>
             <div class="form-row">

@@ -87,7 +87,7 @@ Gender
 Contact_No
 Email_Id
 Address
-Is_Admin (0/1)
+Is_Admin (Yes / No)
 Staff_Status (Active / De-Active)
 
 => Staff_Login
@@ -108,6 +108,7 @@ Quiz_Id
 Quiz_Name
 Quiz_Code
 Quiz_Time
+Staff_Id
 Quiz_Status
 
 => Quiz_Question

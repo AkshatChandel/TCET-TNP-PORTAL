@@ -195,6 +195,38 @@ require '../../connection.php';
             </div>
 
             <?php
+
+            $StudentId = $_GET["StudentId"];
+            $sql1 = "SELECT * FROM student_master NATURAL JOIN student_class WHERE Student_Id = " . $StudentId;
+            $result1 = $con->query($sql1);
+
+            while ($row1 = mysqli_fetch_array($result1)) {
+                $StudentClassId = $row1['Student_Class_Id'];
+                $FirstName =  $row1['First_Name'];
+                $MiddleName =  $row1['Middle_Name'];
+                $LastName =  $row1['Last_Name'];
+                $DateOfBirth =  $row1['Date_Of_Birth'];
+                $Gender =  $row1['Gender'];
+                $ContactNo =  $row1['Contact_No'];
+                $EmailId =  $row1['Email_Id'];
+                $Address =  $row1['Address'];
+
+                $Class10Percentage =  $row1['Class_10_Percentage'];
+                $Class12OrDiploma =  $row1['From_Class12_Or_Diploma'];
+                $DiplomaPercentage =  $row1['Diploma_Percentage'];
+                $Class12Percentage =  $row1['Class_12_Percentage'];
+                $JEEScore =  $row1['JEE_Marks'];
+                $JEEScoreOutOf =  $row1['JEE_Out_Of'];
+                $CETScore =  $row1['CET_Marks'];
+                $CETScoreOutOf =  $row1['CET_Out_Of'];
+                $StudentStatus = $row1['Student_Status'];
+
+                $AcademicId = $row1['Academic_Id'];
+                $BranchId = $row1['Branch_Id'];
+                $Semester = $row1['Semester'];
+                $RollNo = $row1['Roll_No'];
+            }
+
             if (isset($_POST['submit'])) {
                 $FirstName = $_POST['txt_FirstName'];
                 $MiddleName = $_POST['txt_MiddleName'];
@@ -231,21 +263,21 @@ require '../../connection.php';
                 // $StudentCollegeId = $_POST['txt_StudentCollegeId'];
                 $RollNo = $_POST['txt_RollNo'];
 
-                $StudentId = $_GET['StudentId'];
+                $sql2 = "UPDATE student_master SET First_Name = '" . $FirstName . "', Middle_Name = '" . $MiddleName . "', Last_Name = '" . $LastName . "', Date_Of_Birth = '" . $DateOfBirth . "', Gender = '" . $Gender . "', Contact_No = '" . $ContactNo . "', Email_Id = '" . $EmailId . "', Address = '" . $Address . "', Class_10_Percentage = " . $Class10Percentage . ", From_Class12_Or_Diploma = '" . $DiplomaStudent_Or_Class12 . "', Class_12_Percentage = " . $Class12Percentage . ", Diploma_Percentage = " . $DiplomaPercentage . ", JEE_Marks = " . $JEEScore . ", JEE_Out_Of = " . $JEEScoreOutOf . ", CET_Marks = " . $CETScore . ", CET_Out_Of = " . $CETScoreOutOf . ", Student_Status = '" . $StudentStatus . "' WHERE Student_Id = " . $StudentId;
 
-                $sql1 = "UPDATE student_master SET First_Name = '" . $FirstName . "', Middle_Name = '" . $MiddleName . "', Last_Name = '" . $LastName . "', Date_Of_Birth = '" . $DateOfBirth . "', Gender = '" . $Gender . "', Contact_No = '" . $ContactNo . "', Email_Id = '" . $EmailId . "', Address = '" . $Address . "', Class_10_Percentage = " . $Class10Percentage . ", From_Class12_Or_Diploma = '" . $DiplomaStudent_Or_Class12 . "', Class_12_Percentage = " . $Class12Percentage . ", Diploma_Percentage = " . $DiplomaPercentage . ", JEE_Marks = " . $JEEScore . ", JEE_Out_Of = " . $JEEScoreOutOf . ", CET_Marks = " . $CETScore . ", CET_Out_Of = " . $CETScoreOutOf . ", Student_Status = '" . $StudentStatus . "' WHERE Student_Id = " . $StudentId;
-
-                if ($con->query($sql1) === TRUE) {
+                if ($con->query($sql2) === TRUE) {
 
                     $StudentClassStatus = "Active";
 
-                    $sql2 = "INSERT INTO student_class(Student_Id, Academic_Id, Branch_Id, Semester, Roll_No, Student_Class_Status) VALUES(" . $Student_Id . "," . $AcademicId . "," . $BranchId . "," . $Semester . "," . $RollNo . ",'" . $StudentClassStatus . "')";
+                    $sql3 = "UPDATE student_class SET Student_Id = " . $StudentId . ", Academic_Id = " . $AcademicId . ", Branch_Id = " . $BranchId . ", Semester = " . $Semester . ", Roll_No = " . $RollNo . ", Student_Class_Status = '" . $StudentClassStatus . "' WHERE student_class_id = " . $StudentClassId;
 
-                    if ($con->query($sql2) === TRUE) {
+                    if ($con->query($sql3) === TRUE) {
                         echo "<script> location.href='Index.php'</script>";
+                    } else {
+                        echo "<br>error: " . $sql3 . "<br>" . $con->error;
                     }
                 } else {
-                    echo "<br>error: " . $sql . "<br>" . $con->error;
+                    echo "<br>error: " . $sql2 . "<br>" . $con->error;
                 }
             }
             ?>
@@ -260,7 +292,52 @@ require '../../connection.php';
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
 
     <script>
-        $(".diploma-form-group").hide();
+        let FirstName = "<?php echo $FirstName ?>";
+        let MiddleName = "<?php echo $MiddleName ?>";
+        let LastName = "<?php echo $LastName ?>";
+        let DateOfBirth = "<?php echo $DateOfBirth ?>";
+        let Gender = "<?php echo $Gender ?>";
+        let ContactNo = "<?php echo $ContactNo ?>";
+        let EmailId = "<?php echo $EmailId ?>";
+        let Address = "<?php echo $Address ?>";
+
+        let Class10Percentage = "<?php echo $Class10Percentage ?>";
+        let Class12OrDiploma = "<?php echo $Class12OrDiploma ?>";
+        let Class12Percentage = "<?php echo $Class12Percentage ?>";
+        let DiplomaPercentage = "<?php echo $DiplomaPercentage ?>";
+        let JEEScore = "<?php echo $JEEScore ?>";
+        let JEEScoreOutOf = "<?php echo $JEEScoreOutOf ?>";
+        let CETScore = "<?php echo $CETScore ?>";
+        let CETScoreOutOf = "<?php echo $CETScoreOutOf ?>";
+
+        let AcademicId = "<?php echo $AcademicId ?>";
+        let BranchId = "<?php echo $BranchId ?>";
+        let Semester = "<?php echo $Semester ?>";
+        let RollNo = "<?php echo $RollNo ?>";
+
+        $("#txt_FirstName").val(FirstName);
+        $("#txt_MiddleName").val(MiddleName);
+        $("#txt_LastName").val(LastName);
+        $("#txt_DateOfBirth").val(DateOfBirth);
+        $("#txt_Contact").val(ContactNo);
+        $("#txt_Email").val(EmailId);
+        $("#txt_Address").val(Address);
+
+        $("#txt_10thPercentage").val(Class10Percentage);
+
+        $("#txt_RollNo").val(RollNo);
+
+        if (Class12OrDiploma == "Class 12") {
+            $(".diploma-form-group").hide();
+            $("#txt_12thPercentage").val(Class12Percentage);
+            $("#txt_JEEScore").val(JEEScore);
+            $("#txt_JEEScoreOutOf").val(JEEScoreOutOf);
+            $("#txt_CETScore").val(CETScore);
+            $("#txt_CETScoreOutOf").val(CETScoreOutOf);
+        } else {
+            $(".class12-form-group").hide();
+            $("#txt_DiplomaPercentage").val(DiplomaPercentage);
+        }
 
         $("#select_IsDiplomaStudent").change(function() {
             let isDiplomaStudent = $("#select_IsDiplomaStudent").val();
@@ -273,6 +350,85 @@ require '../../connection.php';
                 $(".class12-form-group").show();
             }
         });
+
+        let select_Gender = document.getElementById("select_Gender");
+        let options_Gender = select_Gender.options;
+        for (let j = 0, option; option = options_Gender[j]; j++) {
+            if (option.value == Gender) {
+                select_Gender.selectedIndex = j;
+            }
+        }
+
+        let select_Class12OrDiploma = document.getElementById("select_IsDiplomaStudent");
+        let options_Class12OrDiploma = select_Class12OrDiploma.options;
+        for (let j = 0, option; option = options_Class12OrDiploma[j]; j++) {
+            if (option.value == Class12OrDiploma) {
+                select_Class12OrDiploma.selectedIndex = j;
+            }
+        }
+
+        let select_AcademicId = document.getElementById("select_Academic_Session_Id");
+        let options_AcademicId = select_AcademicId.options;
+        for (let j = 0, option; option = options_AcademicId[j]; j++) {
+            if (option.value == AcademicId) {
+                select_AcademicId.selectedIndex = j;
+            }
+        }
+
+        let select_Branch = document.getElementById("select_Branch");
+        let options_Branch = select_Branch.options;
+        for (let j = 0, option; option = options_Branch[j]; j++) {
+            if (option.value == BranchId) {
+                select_Branch.selectedIndex = j;
+            }
+        }
+
+        let select_Semester = document.getElementById("select_Semester");
+        let options_Semester = select_Semester.options;
+        for (let j = 0, option; option = options_Semester[j]; j++) {
+            if (option.value == Semester) {
+                select_Semester.selectedIndex = j;
+            }
+        }
+
+        let select_Year = document.getElementById("select_Year");
+        let options_Year = select_Year.options;
+
+        $("#select_Semester").empty();
+
+        let html = "";
+
+        if (Semester == 1 || Semester == 2) {
+            html = "<option value='1'>Semester 1</option><option value='2'>Semester 2</option>"
+            for (let j = 0, option; option = options_Year[j]; j++) {
+                if (option.value == 1) {
+                    select_Year.selectedIndex = j;
+                }
+            }
+        } else if (Semester == 3 || Semester == 4) {
+            html = "<option value='3'>Semester 3</option><option value='4'>Semester 4</option>"
+            for (let j = 0, option; option = options_Year[j]; j++) {
+                if (option.value == 2) {
+                    select_Year.selectedIndex = j;
+                }
+            }
+        } else if (Semester == 5 || Semester == 6) {
+            html = "<option value='5'>Semester 5</option><option value='6'>Semester 6</option>"
+            for (let j = 0, option; option = options_Year[j]; j++) {
+                if (option.value == 3) {
+                    select_Year.selectedIndex = j;
+                }
+            }
+        } else if (Semester == 7 || Semester == 8) {
+            html = "<option value='7'>Semester 7</option><option value='8'>Semester 8</option>"
+            for (let j = 0, option; option = options_Year[j]; j++) {
+                if (option.value == 4) {
+                    select_Year.selectedIndex = j;
+                }
+            }
+        }
+
+        $("#select_Semester").append(html);
 
         $("#select_Year").change(function() {
             let year = parseInt($("#select_Year").val());
@@ -290,7 +446,7 @@ require '../../connection.php';
                     "<option value='8'>Semester 8</option>";
                 $("#select_Semester").append(html);
             } else {
-                let html = "";
+                html = "";
                 switch (year) {
                     case 1:
                         html = "<option value='1'>Semester 1</option><option value='2'>Semester 2</option>"
@@ -312,31 +468,27 @@ require '../../connection.php';
 
         $("#select_Semester").change(function() {
 
-            let select_Year = document.getElementById("select_Year");
-            let options_Year = select_Year.options;
+            Semester = parseInt($("#select_Semester").val());
 
-            let semester = parseInt($("#select_Semester").val());
-
-            if (semester == 1 || semester == 2) {
+            if (Semester == 1 || Semester == 2) {
                 for (let j = 0, option; option = options_Year[j]; j++) {
                     if (option.value == 1) {
                         select_Year.selectedIndex = j;
                     }
                 }
-            } else if (semester == 3 || semester == 4) {
+            } else if (Semester == 3 || Semester == 4) {
                 for (let j = 0, option; option = options_Year[j]; j++) {
                     if (option.value == 2) {
                         select_Year.selectedIndex = j;
                     }
                 }
-            } else if (semester == 5 || semester == 6) {
+            } else if (Semester == 5 || Semester == 6) {
                 for (let j = 0, option; option = options_Year[j]; j++) {
                     if (option.value == 3) {
                         select_Year.selectedIndex = j;
                     }
                 }
-
-            } else if (semester == 7 || semester == 8) {
+            } else if (Semester == 7 || Semester == 8) {
                 for (let j = 0, option; option = options_Year[j]; j++) {
                     if (option.value == 4) {
                         select_Year.selectedIndex = j;
