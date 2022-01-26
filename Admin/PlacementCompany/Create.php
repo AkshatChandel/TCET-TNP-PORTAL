@@ -25,9 +25,16 @@ require '../../connection.php';
             </div>
             <hr color="grey">
             <div class="form-row mt-5">
-                <div class="form-group col-md-6">
+                <div class="form-group col-md-8">
                     <label for="txt_CompanyName">Company Name</label>
-                    <input type="text" id="txt_CompanyName" name="txt_CompanyName" class="form-control" required="required" />
+                    <input type="text" id="txt_CompanyName" name="txt_CompanyName" placeholder="Company Name" class="form-control" required="required" />
+                </div>
+                <div class="form-group col-md-4">
+                    <label for="txt_CompanyStatus">Company Status</label>
+                    <select id="txt_CompanyStatus" name="txt_CompanyStatus" class="form-control" required="required">
+                        <option value="Active">Active</option>
+                        <option value="De-Active">De-Active</option>
+                    </select>
                 </div>
                 <!-- <div class="form-group col-md-3">
                     <label for="txt_MinimumClass10Percentage">Minimum Class 10 Percentage</label>
@@ -97,7 +104,7 @@ require '../../connection.php';
                             echo "<td>" . $rowCount . "</td>";
                             echo "<td>" . $row1['Branch_Name'] . "</td>";
                             echo "<td>" . $row1['Branch_Code'] . "</td>";
-                            echo "<td><input type='checkbox' name='radio_CompanyOpenForBranchId'/></td>";
+                            echo "<td><input type='checkbox' name='checkbox_CompanyOpenForBranchId' value='" . $row1['Branch_Id'] . "'/></td>";
                             echo "</tr>";
                         }
 
@@ -119,7 +126,8 @@ require '../../connection.php';
                             <!-- <th>Sr. No.</th> -->
                             <th>Round</th>
                             <th>Date Time</th>
-                            <th>Duration</th>
+                            <th>Duration (in minutes)</th>
+                            <th>Status</th>
                             <th></th>
                         </tr>
                     </thead>
@@ -134,6 +142,59 @@ require '../../connection.php';
                 </center>
             </div>
 
+            <?php
+            if (isset($_POST['submit'])) {
+                $CompanyName = $_POST['txt_CompanyName'];
+                // $CompanyStatus = $_POST['select_CompanyStatus'];
+                $CompanyStatus = "Active";
+
+                $sql1 = "INSERT INTO placement_company(Company_Name, Placement_Company_Status) VALUES('$CompanyName', '$CompanyStatus')";
+
+                if ($con->query($sql1) === TRUE) {
+
+                    $sql2 = "SELECT max(Placement_Company_Id) as id from placement_company";
+                    $result2 = $con->query($sql2);
+                    $row2 = $result2->fetch_assoc();
+
+                    $CompanyId = $row2['id'];
+
+                    $CompanyCriterias = $_POST['txt_CompanyCriteria'];
+
+                    echo $CompanyCriterias;
+
+                    for ($i = 0; $i < count($CompanyCriterias); $i++) {
+                        $CompanyCriteria = $CompanyCriterias[$i];
+                        $sql3 = "INSERT INTO company_criteria(Company_Id, Criteria) VALUES( " . $CompanyId . ", " . $CompanyCriteria . ")";
+                        $con->query($sql3);
+                    }
+
+                    $CompanyOpenForBranches = $_POST['checkbox_CompanyOpenForBranchId'];
+                    for ($i = 0; $i < count($CompanyOpenForBranches); $i++) {
+                        $CompanyOpenForBranchId = $CompanyOpenForBranches[$i];
+                        $sql4 = "INSERT INTO company_branch(Company_Id, Branch_Id) VALUES(" . $CompanyId . ", " . $CompanyOpenForBranchId . ")";
+                        $con->query($sql4);
+                    }
+
+                    $CompanyRounds = $_POST['txt_CompanyRoundName'];
+                    $CompanyRoundDateTimes = $_POST['txt_CompanyRoundDateTime'];
+                    $CompanyRoundDurations = $_POST['txt_CompanyRoundDuration'];
+                    $CompanyRoundStatus = $_POST['select_CompanyRoundStatus'];
+                    for ($i = 0; $i < count($CompanyRounds); $i++) {
+                        $CompanyRound = $CompanyCriterias[$i];
+                        $CompanyRoundDateTime = $CompanyRoundDateTimes[$i];
+                        $CompanyRoundDuration = $CompanyRoundDurations[$i];
+                        $Status = $CompanyRoundStatus[$i];
+                        $sql5 = "INSERT INTO company_round(Company_Id, Round_Name, Round_DateTime, Round_Duration, Round_Status) VALUES( " . $CompanyId . ", " . $CompanyRound . ", " . $CompanyRoundDateTime . ", " . $CompanyRoundDuration . ", " . $Status . ")";
+                        $con->query($sql5);
+                    }
+
+                    // echo "<script> location.href='Index.php'; </script>";
+                } else {
+                    echo "<br>error: " . $sql1 . "<br>" . $con->error;
+                }
+            }
+            ?>
+
             <input type="button" value="Back To List" onclick="window.location.href='Index.php'" class="btn btn-primary">
 
         </form>
@@ -145,7 +206,7 @@ require '../../connection.php';
 
     <script>
         function addCompanyCriteriaRow() {
-            let html = "<tr><td><input type='text' class='form-control' name='txt_CompanyCriteria' /></td>" +
+            let html = "<tr><td><input type='text' class='form-control' name='txt_CompanyCriteria' required /></td>" +
                 "<td><button type='button' class='btn btn-danger btn_CompanyCriteria_RemoveRow' onclick='removeCompanyCriteriaRow(this)'>-</button></td></tr>";
             $("#company-criteria-tbody").append(html);
         }
@@ -159,7 +220,7 @@ require '../../connection.php';
         addCompanyCriteriaRow();
 
         function addCompanyRound() {
-            let html = "<tr><td><input type='text' class='form-control' name='txt_CompanyRoundName' /></td><td><input type='datetime' class='form-control' name='txt_CompanyRoundDateTime' /></td><td><input type='number' class='form-control' name='txt_CompanyRoundDuration' /></td><td><button type='button' class='btn btn-danger btn_CompanyRound_RemoveRow' onclick='removeCompanyRoundRow(this)'>-</button></td></tr>";
+            let html = "<tr><td><input type='text' class='form-control' name='txt_CompanyRoundName' required /></td><td><input type='datetime-local' class='form-control' name='txt_CompanyRoundDateTime' required /></td><td><input type='number' class='form-control' name='txt_CompanyRoundDuration' required /></td><td><select class='form-control' name='select_CompanyRoundStatus'><option value='To be held'>To be held</option><option value='In Progress'>In Progress</option><option value='Completed'>Completed</option><option>Cancelled</option></select></td><td><button type='button' class='btn btn-danger btn_CompanyRound_RemoveRow' onclick='removeCompanyRoundRow(this)'>-</button></td></tr>";
 
             $("#company-round-tbody").append(html);
         }

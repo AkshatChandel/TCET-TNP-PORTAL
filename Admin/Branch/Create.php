@@ -96,11 +96,11 @@ require '../../connection.php';
             </div>
             <?php
             if (isset($_POST['submit'])) {
-                $BranName = $_POST['txt_BranchName'];
-                $BranCode = $_POST['txt_BranchCode'];
-                $BranStatus = $_POST['select_BranchStatus'];
+                $BranchName = $_POST['txt_BranchName'];
+                $BranchCode = $_POST['txt_BranchCode'];
+                $BranchStatus = $_POST['select_BranchStatus'];
 
-                $sql = "INSERT INTO branch_master(Branch_Name,Branch_Code,Branch_Status) VALUES('$BranName','$BranCode','$BranStatus')";
+                $sql = "INSERT INTO branch_master(Branch_Name,Branch_Code,Branch_Status) VALUES('$BranchName','$BranchCode','$BranchStatus')";
 
                 if ($con->query($sql) === TRUE) {
                     echo "<script> location.href='Index.php'; </script>";
