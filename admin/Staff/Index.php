@@ -13,7 +13,7 @@ require '../../connection.php';
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
 
-    <title>Students</title>
+    <title>Staff</title>
 </head>
 
 <body>
@@ -65,7 +65,7 @@ require '../../connection.php';
     <div class="container-fluid">
         <div>
             <div class="my-4" style="color:#0041b3">
-                <h4>Student Master</h4>
+                <h4>Staff Master</h4>
             </div>
 
             <div class="my-5">
