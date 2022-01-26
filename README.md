@@ -77,11 +77,8 @@ Designation_Id
 Designation_Name
 Designation_Status (Active / De-Active)
 
-=> Staff_Master
+=> Staff_Master F
 Staff_Id
-
-<!-- Designation_Id -->
-
 First_Name
 Middle_Name
 Last_Name
@@ -106,7 +103,7 @@ Staff_Id
 Designation_Id
 Staff_Designation_Status (Active / De-Active)
 
-=> Quiz_Master
+=> Quiz_Master F
 Quiz_Id
 Quiz_Name
 Quiz_Code
