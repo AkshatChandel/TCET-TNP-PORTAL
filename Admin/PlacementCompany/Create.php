@@ -25,163 +25,106 @@ require '../../connection.php';
             </div>
             <hr color="grey">
             <div class="form-row mt-5">
-                <div class="form-group col-md-4">
+                <div class="form-group col-md-6">
                     <label for="txt_CompanyName">Company Name</label>
                     <input type="text" id="txt_CompanyName" name="txt_CompanyName" class="form-control" required="required" />
                 </div>
-                <div class="form-group col-md-4">
+                <!-- <div class="form-group col-md-3">
                     <label for="txt_MinimumClass10Percentage">Minimum Class 10 Percentage</label>
                     <input type="text" id="txt_MinimumClass10Percentage" name="txt_MinimumClass10Percentage" class="form-control" />
                 </div>
-                <div class="form-group col-md-4">
+                <div class="form-group col-md-3">
                     <label for="txt_MinimumClass12Percentage">Minimum Class 12 Percentage</label>
                     <input type="text" id="txt_MinimumClass12Percentage" name="txt_MinimumClass12Percentage" class="form-control" required="required" />
-                </div>
-            </div>
-            <div class="form-row">
-                <div class="form-group col-md-3">
-                    <label for="txt_DateOfBirth">Date Of Birth</label>
-                    <input type="date" id="txt_DateOfBirth" name="txt_DateOfBirth" class="form-control" />
-                </div>
-                <div class="form-group col-md-3">
-                    <label for="select_Gender">Gender</label>
-                    <select id="select_Gender" name="select_Gender" class="form-control">
-                        <option value="Male">Male</option>
-                        <option value="Female">Female</option>
-                    </select>
-                </div>
-                <div class="form-group col-md-3">
-                    <label for="txt_Contact">Contact</label>
-                    <input type="text" id="txt_Contact" name="txt_Contact" class="form-control" />
-                </div>
-                <div class="form-group col-md-3">
-                    <label for="txt_Email">Email ID</label>
-                    <input type="email" id="txt_Email" name="txt_Email" class="form-control" required="required" />
-                </div>
-            </div>
-            <div class="form-row">
-                <div class="form-group col-md-12">
-                    <label for="txt_Address">Address</label>
-                    <input type="text" id="txt_Address" name="txt_Address" class="form-control" />
-                </div>
-            </div>
-
-            <hr color="grey">
-            <div class="my-4" style="color:#0041b3">
-                <h5>Previous Academic Details </h5>
-            </div>
-
-            <div class="form-row">
-                <div class="form-group col-md-4">
-                    <label for="txt_10thPercentage">Class 10 Percentage</label>
-                    <input type="text" id="txt_10thPercentage" name="txt_10thPercentage" class="form-control" />
-                </div>
-                <div class="form-group col-md-4">
-                    <label for="select_IsDiplomaStudent">Are you a Diploma Student?</label>
-                    <select id="select_IsDiplomaStudent" name="select_DiplomaStudent_Or_Class12" class="form-control">
-                        <option value="Class 12">No</option>
-                        <option value="Diploma">Yes</option>
-                    </select>
-                </div>
-                <div class="form-group col-md-4 class12-form-group">
-                    <label for="txt_12thPercentage">12th Percentage</label>
-                    <input type="text" id="txt_12thPercentage" name="txt_12thPercentage" class="form-control" />
-                </div>
-                <div class="form-group col-md-4 diploma-form-group">
-                    <label for="txt_DiplomaPercentage">Diploma Percentage</label>
-                    <input type="text" id="txt_DiplomaPercentage" name="txt_DiplomaPercentage" class="form-control" />
-                </div>
-            </div>
-            <div class="form-row">
-                <div class="form-group col-md-3 class12-form-group">
-                    <label for="txt_JEEScore">JEE Score</label>
-                    <input type="text" id="txt_JEEScore" name="txt_JEEScore" class="form-control" />
-                </div>
-                <div class="form-group col-md-3 class12-form-group">
-                    <label for="txt_JEEScoreOutOf">JEE Score Out Of</label>
-                    <input type="text" id="txt_JEEScoreOutOf" name="txt_JEEScoreOutOf" class="form-control" />
-                </div>
-                <div class="form-group col-md-3 class12-form-group">
-                    <label for="txt_CETScore">CET Score</label>
-                    <input type="text" id="txt_CETScore" name="txt_CETScore" class="form-control" />
-                </div>
-                <div class="form-group col-md-3 class12-form-group">
-                    <label for="txt_CETScoreOutOf">CET Score Out Of</label>
-                    <input type="text" id="txt_CETScoreOutOf" name="txt_CETScoreOutOf" class="form-control" />
-                </div>
-            </div>
-
-            <hr color="grey">
-            <div class="my-4" style="color:#0041b3">
-                <h5>Academic Details </h5>
-            </div>
-
-            <div class="form-row">
-                <div class="form-group col-md-3">
-                    <label for="select_Academic_Session_Id">Academic Session</label>
-                    <select id="select_Academic_Session_Id" name="select_Academic_Session_Id" class="form-control">
-                        <?php
-
-                        $sql = "SELECT * FROM academic_master";
-                        $result = $con->query($sql);
-                        while ($row = $result->fetch_array()) {
-                            echo "<option value ='" . $row['Academic_Id'] . "'>" . $row['Academic_Name'] . "</option>";
-                        }
-
-                        ?>
-                    </select>
-                </div>
-                <div class="form-group col-md-3">
-                    <label for="select_Branch">Branch</label>
-                    <select id="select_Branch" name="select_Branch" class="form-control">
-                        <?php
-
-                        $sql = "SELECT * FROM branch_master WHERE branch_status = \"Active\"";
-                        $result = $con->query($sql);
-                        while ($row = $result->fetch_array()) {
-                            echo "<option value ='" . $row['Branch_Id'] . "'>" . $row['Branch_Name'] . "</option>";
-                        }
-
-                        ?>
-                    </select>
-                </div>
-                <div class="form-group col-md-3">
-                    <label for="select_Year">Year</label>
-                    <select id="select_Year" name="select_Year" class="form-control">
-                        <option value='0'>--Select--</option>
-                        <option value='1'>FE</option>
-                        <option value='2'>SE</option>
-                        <option value='3'>TE</option>
-                        <option value='4'>BE</option>
-                    </select>
-                </div>
-                <div class="form-group col-md-3">
-                    <label for="select_Semester">Semester</label>
-                    <select id="select_Semester" name="select_Semester" class="form-control">
-                        <option value='0'>--Select--</option>
-                        <option value='1'>Semester 1</option>
-                        <option value='2'>Semester 2</option>
-                        <option value='3'>Semester 3</option>
-                        <option value='4'>Semester 4</option>
-                        <option value='5'>Semester 5</option>
-                        <option value='6'>Semester 6</option>
-                        <option value='7'>Semester 7</option>
-                        <option value='8'>Semester 8</option>
-                    </select>
-                </div>
-            </div>
-
-            <div class="form-row">
-                <!-- <div class="form-group col-md-3">
-                    <label for="txt_Student_College_Id">College ID Number</label>
-                    <input type="text" id="txt_Student_College_Id" name="txt_Student_College_Id" class="form-control">
-                    </input>
                 </div> -->
+            </div>
+            <!-- <div class="form-row">
                 <div class="form-group col-md-3">
-                    <label for="txt_RollNo">Roll Number</label>
-                    <input type="number" min="1" max="120" id="txt_RollNo" name="txt_RollNo" class="form-control">
-                    </input>
+                    <label for="txt_MinimumClass10Percentage">Minimum Diploma Percentage</label>
+                    <input type="text" id="txt_MinimumClass10Percentage" name="txt_MinimumClass10Percentage" class="form-control" />
                 </div>
+                <div class="form-group col-md-3">
+                    <label for="txt_MinimumClass10Percentage">Minimum CGPA</label>
+                    <input type="text" id="txt_MinimumClass10Percentage" name="txt_MinimumClass10Percentage" class="form-control" />
+                </div>
+            </div> -->
+
+            <hr color="grey">
+            <div class="my-4" style="color:#0041b3">
+                <h5>Company Criteria</h5>
+            </div>
+
+            <div class="form-row">
+                <button class="btn btn-primary mb-3" type="button" id="btn_CompanyCriteria_AddRow" onclick="addCompanyCriteriaRow()">Add Row</button>
+                <table class="table table-hover">
+                    <thead class="table-dark">
+                        <tr>
+                            <!-- <th>Sr. No.</th> -->
+                            <th>Company Criteria</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody id="company-criteria-tbody"></tbody>
+                </table>
+            </div>
+
+            <hr color="grey">
+            <div class="my-4" style="color:#0041b3">
+                <h5>Open For Branches</h5>
+            </div>
+
+            <div class="form-row">
+                <table class="table table-striped table-hover">
+                    <thead class="table-dark">
+                        <tr>
+                            <th>Sr. No.</th>
+                            <th>Branch</th>
+                            <th>Code</th>
+                            <th><input type='checkbox' id='radio_CompanyOpenForBranchId_SelectAllBranches' /></th>
+                        </tr>
+                    </thead>
+                    <tbody id="company-branches-tbody">
+                        <?php
+
+                        $sql1 = "SELECT * FROM Branch_Master WHERE Branch_Status = 'Active'";
+                        $result1 = $con->query($sql1);
+
+                        $rowCount = 0;
+
+                        while ($row1 = mysqli_fetch_array($result1)) {
+                            $rowCount++;
+                            echo "<tr>";
+                            echo "<td>" . $rowCount . "</td>";
+                            echo "<td>" . $row1['Branch_Name'] . "</td>";
+                            echo "<td>" . $row1['Branch_Code'] . "</td>";
+                            echo "<td><input type='checkbox' name='radio_CompanyOpenForBranchId'/></td>";
+                            echo "</tr>";
+                        }
+
+                        ?>
+                    </tbody>
+                </table>
+            </div>
+
+            <hr color="grey">
+            <div class="my-4" style="color:#0041b3">
+                <h5>Company Rounds</h5>
+            </div>
+
+            <div class="form-row">
+                <button class="btn btn-primary mb-3" type="button" id="btn_AddCompanyRound" onclick="addCompanyRound()">Add Row</button>
+                <table class="table table-hover">
+                    <thead class="table-dark">
+                        <tr>
+                            <!-- <th>Sr. No.</th> -->
+                            <th>Round</th>
+                            <th>Date Time</th>
+                            <th>Duration</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody id="company-round-tbody"></tbody>
+                </table>
             </div>
 
             <div class="my-4">
@@ -191,67 +134,7 @@ require '../../connection.php';
                 </center>
             </div>
 
-            <?php
-            if (isset($_POST['submit'])) {
-                $FirstName = $_POST['txt_FirstName'];
-                $MiddleName = $_POST['txt_MiddleName'];
-                $LastName = $_POST['txt_LastName'];
-                $DateOfBirth = $_POST['txt_DateOfBirth'];
-                $Gender = $_POST['select_Gender'];
-                $ContactNo = $_POST['txt_Contact'];
-                $EmailId = $_POST['txt_Email'];
-                $Address = $_POST['txt_Address'];
-
-                $Class10Percentage = $_POST['txt_10thPercentage'];
-                $DiplomaStudent_Or_Class12 = $_POST['select_DiplomaStudent_Or_Class12'];
-                $Class12Percentage = $_POST['txt_12thPercentage'];
-                $DiplomaPercentage = $_POST['txt_DiplomaPercentage'];
-                $JEEScore = $_POST['txt_JEEScore'];
-                $JEEScoreOutOf = $_POST['txt_JEEScoreOutOf'];
-                $CETScore = $_POST['txt_CETScore'];
-                $CETScoreOutOf = $_POST['txt_CETScoreOutOf'];
-                $StudentStatus = "Active";
-
-                if ($DiplomaStudent_Or_Class12 == "Class 12") {
-                    $DiplomaPercentage = 0;
-                } else {
-                    $Class12Percentage = 0;
-                    $JEEScore = 0;
-                    $JEEScoreOutOf = 0;
-                    $CETScore = 0;
-                    $CETScoreOutOf = 0;
-                }
-
-
-                $AcademicId = $_POST['select_Academic_Session_Id'];
-                $BranchId = $_POST['select_Branch'];
-                $Semester = $_POST['select_Semester'];
-                // $StudentCollegeId = $_POST['txt_StudentCollegeId'];
-                $RollNo = $_POST['txt_RollNo'];
-
-                $sql1 = "INSERT INTO student_master(First_Name, Middle_Name, Last_Name, Date_Of_Birth, Gender, Contact_No, Email_Id, Address, Class_10_Percentage, From_Class12_Or_Diploma, Class_12_Percentage, Diploma_Percentage, JEE_Marks, JEE_Out_Of, CET_Marks, CET_Out_Of, Student_Status) VALUES('" . $FirstName . "','" . $MiddleName . "','" . $LastName . "','" . $DateOfBirth . "','" . $Gender . "','" . $ContactNo . "','" . $EmailId . "','" . $Address . "'," . $Class10Percentage . ",'" . $DiplomaStudent_Or_Class12 . "'," . $Class12Percentage . "," . $DiplomaPercentage . "," . $JEEScore . "," . $JEEScoreOutOf . "," . $CETScore . "," . $CETScoreOutOf . ",'" . $StudentStatus . "')";
-
-                if ($con->query($sql1) === TRUE) {
-
-                    $sql2 = "SELECT max(Student_Id) as id from student_master";
-                    $result2 = $con->query($sql2);
-                    $row2 = $result2->fetch_assoc();
-
-                    $Student_Id = $row2['id'];
-                    $StudentClassStatus = "Active";
-
-                    $sql3 = "INSERT INTO student_class(Student_Id, Academic_Id, Branch_Id, Semester, Roll_No, Student_Class_Status) VALUES(" . $Student_Id . "," . $AcademicId . "," . $BranchId . "," . $Semester . "," . $RollNo . ",'" . $StudentClassStatus . "')";
-
-                    if ($con->query($sql3) === TRUE) {
-                        echo "<script> location.href='Index.php'</script>";
-                    }
-                } else {
-                    echo "<br>error: " . $sql . "<br>" . $con->error;
-                }
-            }
-            ?>
-
-            <input type="button" value="Back To List" onclick="window.location.href='Index.php'" class="btn btn-primary" />
+            <input type="button" value="Back To List" onclick="window.location.href='Index.php'" class="btn btn-primary">
 
         </form>
     </div>
@@ -261,90 +144,35 @@ require '../../connection.php';
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
 
     <script>
-        $(".diploma-form-group").hide();
+        function addCompanyCriteriaRow() {
+            let html = "<tr><td><input type='text' class='form-control' name='txt_CompanyCriteria' /></td>" +
+                "<td><button type='button' class='btn btn-danger btn_CompanyCriteria_RemoveRow' onclick='removeCompanyCriteriaRow(this)'>-</button></td></tr>";
+            $("#company-criteria-tbody").append(html);
+        }
 
-        $("#select_IsDiplomaStudent").change(function() {
-            let isDiplomaStudent = $("#select_IsDiplomaStudent").val();
+        function removeCompanyCriteriaRow(btn) {
+            btn.parentNode.parentNode.remove();
+        }
 
-            if (isDiplomaStudent == "Diploma") {
-                $(".diploma-form-group").show();
-                $(".class12-form-group").hide();
-            } else {
-                $(".diploma-form-group").hide();
-                $(".class12-form-group").show();
-            }
-        });
+        addCompanyCriteriaRow();
+        addCompanyCriteriaRow();
+        addCompanyCriteriaRow();
 
-        $("#select_Year").change(function() {
-            let year = parseInt($("#select_Year").val());
-            $("#select_Semester").empty();
+        function addCompanyRound() {
+            let html = "<tr><td><input type='text' class='form-control' name='txt_CompanyRoundName' /></td><td><input type='datetime' class='form-control' name='txt_CompanyRoundDateTime' /></td><td><input type='number' class='form-control' name='txt_CompanyRoundDuration' /></td><td><button type='button' class='btn btn-danger btn_CompanyRound_RemoveRow' onclick='removeCompanyRoundRow(this)'>-</button></td></tr>";
 
-            if (year == 0) {
-                let html = "<option value='0'>--Select--</option>" +
-                    "<option value='1'>Semester 1</option>" +
-                    "<option value='2'>Semester 2</option>" +
-                    "<option value='3'>Semester 3</option>" +
-                    "<option value='4'>Semester 4</option>" +
-                    "<option value='5'>Semester 5</option>" +
-                    "<option value='6'>Semester 6</option>" +
-                    "<option value='7'>Semester 7</option>" +
-                    "<option value='8'>Semester 8</option>";
-                $("#select_Semester").append(html);
-            } else {
-                let html = "";
-                switch (year) {
-                    case 1:
-                        html = "<option value='1'>Semester 1</option><option value='2'>Semester 2</option>"
-                        break;
-                    case 2:
-                        html = "<option value='3'>Semester 3</option><option value='4'>Semester 4</option>"
-                        break;
-                    case 3:
-                        html = "<option value='5'>Semester 5</option><option value='6'>Semester 6</option>"
-                        break;
-                    case 4:
-                        html = "<option value='7'>Semester 7</option><option value='8'>Semester 8</option>"
-                        break;
-                }
+            $("#company-round-tbody").append(html);
+        }
 
-                $("#select_Semester").append(html);
-            }
-        });
+        function removeCompanyRoundRow(btn) {
+            btn.parentNode.parentNode.remove();
+        }
 
-        $("#select_Semester").change(function() {
-
-            let select_Year = document.getElementById("select_Year");
-            let options_Year = select_Year.options;
-
-            let Semester = parseInt($("#select_Semester").val());
-
-            if (Semester == 1 || Semester == 2) {
-                for (let j = 0, option; option = options_Year[j]; j++) {
-                    if (option.value == 1) {
-                        select_Year.selectedIndex = j;
-                    }
-                }
-            } else if (Semester == 3 || Semester == 4) {
-                for (let j = 0, option; option = options_Year[j]; j++) {
-                    if (option.value == 2) {
-                        select_Year.selectedIndex = j;
-                    }
-                }
-            } else if (Semester == 5 || Semester == 6) {
-                for (let j = 0, option; option = options_Year[j]; j++) {
-                    if (option.value == 3) {
-                        select_Year.selectedIndex = j;
-                    }
-                }
-            } else if (Semester == 7 || Semester == 8) {
-                for (let j = 0, option; option = options_Year[j]; j++) {
-                    if (option.value == 4) {
-                        select_Year.selectedIndex = j;
-                    }
-                }
-            }
-        });
+        addCompanyRound();
+        addCompanyRound();
+        addCompanyRound();
     </script>
+
     <script>
         function logout() {
             window.location.href = '../../Login.php';

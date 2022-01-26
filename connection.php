@@ -1,7 +1,7 @@
 <?php
-$servername = "localhost:3308";
+$servername = "localhost";
 $username = "root";
-$password = "1234";
+$password = "";
 $db = "tcet tnp";
 $con = new mysqli($servername, $username, $password, $db);
 if (!$con) {
