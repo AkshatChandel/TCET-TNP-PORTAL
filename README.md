@@ -47,7 +47,7 @@ CET_Out_Of
 Student_Resume
 Student_Status (Active / De-Active)
 
-=> Student_Login
+=> Student_Login #F
 Student_Login_Id
 Student_Id
 Student_Username
@@ -63,7 +63,7 @@ Semester
 Roll_No
 Student_Class_Status (Active / Passed / Drop)
 
-=> Student_Academics
+=> Student_Academics #F
 Student_Academics_Id
 Student_Class_Id
 Semester
@@ -90,7 +90,7 @@ Address
 Is_Admin (Yes / No)
 Staff_Status (Active / De-Active)
 
-=> Staff_Login
+=> Staff_Login #F
 Staff_Login_Id
 Staff_Id
 Staff_Username
@@ -103,7 +103,7 @@ Staff_Id
 Designation_Id
 Staff_Designation_Status (Active / De-Active)
 
-=> Quiz_Master F
+=> Quiz_Master #F
 Quiz_Id
 Quiz_Name
 Quiz_Code
