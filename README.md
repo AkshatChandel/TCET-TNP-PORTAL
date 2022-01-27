@@ -186,6 +186,7 @@ Criteria
 Company_Round_Id
 Company_Id
 Round_Name
+Round_Time
 Round_Status
 
 => Company_Student_Registration
