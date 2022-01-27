@@ -821,7 +821,7 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
                                                 <input type="checkbox" id="brand3" value="">
                                                 <label for="brand3"><span></span> libero vel elementum euismod, mauris tellus</label>
                                             </li>
-                                           <li>
+                                            <li>
                                                 <input type="checkbox" id="brand4" value="">
                                                 <label for="brand4"><span></span> Donec aliquam dolor eu augue condimentum.</label>
                                             </li>
