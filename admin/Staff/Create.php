@@ -114,11 +114,11 @@ require '../../connection.php';
 
             if ($con->query($sql1) === TRUE) {
 
-                $sql2 = "SELECT max(Student_Id) as id from student_master";
+                $sql2 = "SELECT max(Staff_Id) as id from staff_master";
                 $result2 = $con->query($sql2);
                 $row2 = $result2->fetch_assoc();
 
-                $Student_Id = $row2['id'];
+                $Staff_Id = $row2['id'];
                 $StudentClassStatus = "Active";
 
                 $sql3 = "INSERT INTO student_class(Student_Id, Academic_Id, Branch_Id, Semester, Roll_No, Student_Class_Status) VALUES(" . $Student_Id . "," . $AcademicId . "," . $BranchId . "," . $Semester . "," . $RollNo . ",'" . $StudentClassStatus . "')";
