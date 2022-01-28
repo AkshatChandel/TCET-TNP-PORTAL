@@ -138,6 +138,10 @@ Training_Lecture_Id
 Lecture_Name
 Lecture_Code
 Lecture_Status
+Lecture_Date/Time
+Lecture Link
+
+=>Student Category
 
 => Training_Lecture_Semester
 Training_Lecture_Id
