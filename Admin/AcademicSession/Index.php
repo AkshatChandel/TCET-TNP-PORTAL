@@ -51,52 +51,6 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
     <script src="../../js/custom.js"></script>
     <link href="../../css/custom.css" rel="stylesheet">
     <!--//Metis Menu -->
-    <style>
-        #chartdiv {
-            width: 100%;
-            height: 295px;
-        }
-    </style>
-    <!--pie-chart -->
-    <!-- index page sales reviews visitors pie chart -->
-    <script src="../../js/pie-chart.js" type="text/javascript"></script>
-    <script type="text/javascript">
-        $(document).ready(function() {
-            $('#demo-pie-1').pieChart({
-                barColor: '#2dde98',
-                trackColor: '#eee',
-                lineCap: 'round',
-                lineWidth: 8,
-                onStep: function(from, to, percent) {
-                    $(this.element).find('.pie-value').text(Math.round(percent) + '%');
-                }
-            });
-
-            $('#demo-pie-2').pieChart({
-                barColor: '#8e43e7',
-                trackColor: '#eee',
-                lineCap: 'butt',
-                lineWidth: 8,
-                onStep: function(from, to, percent) {
-                    $(this.element).find('.pie-value').text(Math.round(percent) + '%');
-                }
-            });
-
-            $('#demo-pie-3').pieChart({
-                barColor: '#ffc168',
-                trackColor: '#eee',
-                lineCap: 'square',
-                lineWidth: 8,
-                onStep: function(from, to, percent) {
-                    $(this.element).find('.pie-value').text(Math.round(percent) + '%');
-                }
-            });
-
-
-        });
-    </script>
-    <!-- //pie-chart -->
-    <!-- index page sales reviews visitors pie chart -->
 
     <!-- requried-jsfiles-for owl -->
     <link href="../../css/owl.carousel.css" rel="stylesheet">
@@ -529,46 +483,3 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
 </body>
 
 </html>
-
-<!-- <div>
-        <div class="my-4" style="color:#0041b3">
-            <h4>Academic Session</h4>
-        </div>
-
-        <div class="my-5">
-            <input type="button" value="Create" onclick="window.location.href='Create.php'" class="btn btn-primary" />
-            <php
-
-            echo '<div class="p-4">';
-            echo '<table class="table table-hover">';
-            echo '<thead>';
-            echo '<tr>';
-            echo '<th>Sr. No.</th>';
-            echo '<th scope="col">Academic Session Name</th>';
-            echo '<th scope="col">Academic Session Status</th>';
-            echo '<th></th>';
-            echo '</tr> ';
-            echo '</thead>';
-            echo '<tbody>';
-
-            $count = 1;
-
-            $sql = "SELECT * FROM academic_master";
-            $result = $con->query($sql);
-
-            while ($row = mysqli_fetch_array($result)) {
-                echo "<tr>";
-                echo "<td>" . $count . "</td>";
-                echo "<td>" . $row['Academic_Name'] . "</td>";
-                echo "<td>" . $row['Academic_Status'] . "</td>";
-                echo "<td><button type='button' class='btn btn-success' onclick='edit(" . $row['Academic_Id'] . ")'>Edit</button></td>";
-                echo "</tr>";
-
-                $count++;
-            }
-
-            echo '</tbody>';
-
-            ?>
-        </div>
-    </div> -->

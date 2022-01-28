@@ -2,10 +2,6 @@
 require '../../connection.php';
 ?>
 
-<?php
-require '../../connection.php';
-?>
-
 <!DOCTYPE HTML>
 <html>
 
@@ -55,52 +51,6 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
     <script src="../../js/custom.js"></script>
     <link href="../../css/custom.css" rel="stylesheet">
     <!--//Metis Menu -->
-    <style>
-        #chartdiv {
-            width: 100%;
-            height: 295px;
-        }
-    </style>
-    <!--pie-chart -->
-    <!-- index page sales reviews visitors pie chart -->
-    <script src="../../js/pie-chart.js" type="text/javascript"></script>
-    <script type="text/javascript">
-        $(document).ready(function() {
-            $('#demo-pie-1').pieChart({
-                barColor: '#2dde98',
-                trackColor: '#eee',
-                lineCap: 'round',
-                lineWidth: 8,
-                onStep: function(from, to, percent) {
-                    $(this.element).find('.pie-value').text(Math.round(percent) + '%');
-                }
-            });
-
-            $('#demo-pie-2').pieChart({
-                barColor: '#8e43e7',
-                trackColor: '#eee',
-                lineCap: 'butt',
-                lineWidth: 8,
-                onStep: function(from, to, percent) {
-                    $(this.element).find('.pie-value').text(Math.round(percent) + '%');
-                }
-            });
-
-            $('#demo-pie-3').pieChart({
-                barColor: '#ffc168',
-                trackColor: '#eee',
-                lineCap: 'square',
-                lineWidth: 8,
-                onStep: function(from, to, percent) {
-                    $(this.element).find('.pie-value').text(Math.round(percent) + '%');
-                }
-            });
-
-
-        });
-    </script>
-    <!-- //pie-chart -->
-    <!-- index page sales reviews visitors pie chart -->
 
     <!-- requried-jsfiles-for owl -->
     <link href="../../css/owl.carousel.css" rel="stylesheet">
@@ -426,53 +376,52 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
         <!-- //header-ends -->
         <div id="page-wrapper">
             <div class="main-page">
-                <div class="forms">
-                    <div class=" form-grids row form-grids-right">
-                        <div class="widget-shadow " data-example-id="basic-forms">
-                            <div class="form-title">
-                                <h4>Academic Session</h4>
-                            </div>
-                            <div class="form-body">
-                                <form class="form-horizontal" action="" method="POST">
-                                    <div class="form-group">
-                                        <label for="txt_SessionName" class="col-sm-2 control-label">Academic Session</label>
-                                        <div class="col-sm-9">
-                                            <input type="text" class="form-control" id="txt_SessionName" name="txt_SessionName" placeholder="Academic Session">
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="select_SessionStatus" class="col-sm-2 control-label">Academic Session Status</label>
-                                        <div class="col-sm-9">
-                                            <select id="select_SessionStatus" name="select_SessionStatus" class="form-control">
-                                                <option>Active</option>
-                                                <option>De-Active</option>
-                                            </select>
-                                        </div>
-                                    </div>
-                                    <div class="col-sm-offset-2">
-                                        <button type="submit" name="submit" class="btn btn-success">Submit</button>
-                                        <button type="reset" class="btn btn-warning">Reset</button>
-                                    </div>
-                                </form>
+                <div class="tables">
+                    <h2 class="title1">Company</h2>
+                    <div class="bs-example widget-shadow" data-example-id="hoverable-table">
+                        <!-- <h4>Academic Session</h4> -->
 
+                        <button type="button" onclick="window.location.href='Create.php'" class="btn btn-primary btn-flat btn-pri btn-lg"><i class="fa fa-plus" aria-hidden="true"></i>Create</button>
+
+                        <table class="table table-hover">
+                            <thead>
+                                <tr class="table-dark">
+                                    <th>Sr. No.</th>
+                                    <th>Company Name</th>
+                                    <th>Rounds</th>
+                                    <th>Company Status</th>
+                                    <th></th>
+                                </tr>
+                            </thead>
+                            <tbody>
                                 <?php
-                                if (isset($_POST['submit'])) {
-                                    $AcademicName = $_POST['txt_SessionName'];
-                                    $AcademicStatus = $_POST['select_SessionStatus'];
 
-                                    $sql1 = "INSERT INTO academic_master(Academic_Name, Academic_Status) VALUES('" . $AcademicName . "', '" . $AcademicStatus . "')";
+                                $count = 1;
 
-                                    if ($con->query($sql1) === TRUE) {
-                                        echo "<script> location.href='Index.php'; </script>";
+                                $sql = "SELECT company_master.Company_Id, Company_Name, Company_Status, COUNT(Round_Name) FROM company_master JOIN company_round ON company_master.Company_Id = company_round.Company_Id";
+                                $result = $con->query($sql);
+
+                                while ($row = mysqli_fetch_array($result)) {
+                                    $CompanyStatus = $row['Company_Status'];
+                                    echo "<tr scope='row'>";
+                                    echo "<th>" . $count . "</th>";
+                                    echo "<td>" . $row['Company_Name'] . "</td>";
+                                    echo "<td>" . $row['COUNT(Round_Name)'] . "</td>";
+                                    if ($CompanyStatus == "Active") {
+                                        echo "<td><span class='label label-success'>" . $CompanyStatus . "</span></td>";
                                     } else {
-                                        echo "<br>error: " . $sql . "<br>" . $con->error;
+                                        echo "<td><span class='label label-danger'>" . $CompanyStatus . "</span></td>";
                                     }
-                                }
-                                ?>
 
-                                <input type="button" value="Back To List" onclick="window.location.href='Index.php'" class="btn btn-primary" />
-                            </div>
-                        </div>
+                                    echo "<td><button type='button' class='btn btn-success' onclick='edit(" . $row['Company_Id'] . ")'>Edit</button></td>";
+                                    echo "</tr>";
+
+                                    $count++;
+                                }
+
+                                ?>
+                            </tbody>
+                        </table>
                     </div>
                 </div>
             </div>
@@ -523,8 +472,8 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
     <script src="../../js/bootstrap.js"> </script>
 
     <script>
-        function edit(AcademicSessionId) {
-            window.location.href = 'Edit.php?AcademicSessionId=' + AcademicSessionId;
+        function edit(CompanyId) {
+            window.location.href = 'Edit.php?CompanyId=' + CompanyId;
         }
     </script>
 

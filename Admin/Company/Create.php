@@ -430,46 +430,172 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
                     <div class=" form-grids row form-grids-right">
                         <div class="widget-shadow " data-example-id="basic-forms">
                             <div class="form-title">
-                                <h4>Academic Session</h4>
+                                <h4>Company</h4>
                             </div>
                             <div class="form-body">
                                 <form class="form-horizontal" action="" method="POST">
                                     <div class="form-group">
-                                        <label for="txt_SessionName" class="col-sm-2 control-label">Academic Session</label>
+                                        <label for="txt_SessionName" class="col-sm-2 control-label">Company Name</label>
                                         <div class="col-sm-9">
-                                            <input type="text" class="form-control" id="txt_SessionName" name="txt_SessionName" placeholder="Academic Session">
+                                            <input type="text" class="form-control" id="txt_CompanyName" name="txt_CompanyName" placeholder="Company Name">
                                         </div>
                                     </div>
                                     <div class="form-group">
-                                        <label for="select_SessionStatus" class="col-sm-2 control-label">Academic Session Status</label>
+                                        <label for="select_CompanyStatus" class="col-sm-2 control-label">Company Status</label>
                                         <div class="col-sm-9">
-                                            <select id="select_SessionStatus" name="select_SessionStatus" class="form-control">
+                                            <select id="select_CompanyStatus" name="select_CompanyStatus" class="form-control">
                                                 <option>Active</option>
                                                 <option>De-Active</option>
                                             </select>
                                         </div>
                                     </div>
-                                    <div class="col-sm-offset-2">
-                                        <button type="submit" name="submit" class="btn btn-success">Submit</button>
-                                        <button type="reset" class="btn btn-warning">Reset</button>
+
+                                    <hr color="grey">
+                                    <div class="my-4">
+                                        <h4>Company Criteria</h4>
                                     </div>
-                                </form>
+                                    <hr color="grey">
 
-                                <?php
-                                if (isset($_POST['submit'])) {
-                                    $AcademicName = $_POST['txt_SessionName'];
-                                    $AcademicStatus = $_POST['select_SessionStatus'];
+                                    <div class="form-row">
+                                        <table class="table table-hover">
+                                            <thead class="table-dark">
+                                                <tr>
+                                                    <!-- <th>Sr. No.</th> -->
+                                                    <th>Company Criteria</th>
+                                                    <th>
+                                                        <button class="btn btn-primary mb-3" type="button" id="btn_CompanyCriteria_AddRow" onclick="addCompanyCriteriaRow()">+</button>
+                                                    </th>
+                                                </tr>
+                                            </thead>
+                                            <tbody id="company-criteria-tbody"></tbody>
+                                        </table>
+                                    </div>
 
-                                    $sql1 = "INSERT INTO academic_master(Academic_Name, Academic_Status) VALUES('" . $AcademicName . "', '" . $AcademicStatus . "')";
+                                    <hr color="grey">
+                                    <div class="my-4">
+                                        <h4>Open For Branches</h4>
+                                    </div>
+                                    <hr color="grey">
 
-                                    if ($con->query($sql1) === TRUE) {
-                                        echo "<script> location.href='Index.php'; </script>";
-                                    } else {
-                                        echo "<br>error: " . $sql . "<br>" . $con->error;
+                                    <div class="form-row">
+                                        <table class="table table-striped table-hover">
+                                            <thead class="table-dark">
+                                                <tr>
+                                                    <th>Sr. No.</th>
+                                                    <th>Branch</th>
+                                                    <th>Code</th>
+                                                    <th>
+                                                        <input type='checkbox' id='radio_CompanyOpenForBranchId_SelectAllBranches' />
+                                                    </th>
+                                                </tr>
+                                            </thead>
+                                            <tbody id="company-branches-tbody">
+                                                <?php
+
+                                                $sql1 = "SELECT * FROM Branch_Master WHERE Branch_Status = 'Active'";
+                                                $result1 = $con->query($sql1);
+
+                                                $rowCount = 0;
+
+                                                while ($row1 = mysqli_fetch_array($result1)) {
+                                                    $rowCount++;
+                                                    echo "<tr>";
+                                                    echo "<td>" . $rowCount . "</td>";
+                                                    echo "<td>" . $row1['Branch_Name'] . "</td>";
+                                                    echo "<td>" . $row1['Branch_Code'] . "</td>";
+                                                    echo "<td><input type='checkbox' name='checkbox_CompanyOpenForBranchId[]' value='" . $row1['Branch_Id'] . "'/></td>";
+                                                    echo "</tr>";
+                                                }
+
+                                                ?>
+                                            </tbody>
+                                        </table>
+                                    </div>
+
+                                    <hr color="grey">
+                                    <div class="my-4">
+                                        <h4>Company Rounds</h4>
+                                    </div>
+                                    <hr color="grey">
+
+                                    <div class="form-row">
+                                        <table class="table table-hover">
+                                            <thead class="table-dark">
+                                                <tr>
+                                                    <!-- <th>Sr. No.</th> -->
+                                                    <th>Round</th>
+                                                    <th>Date Time</th>
+                                                    <th>Duration (in minutes)</th>
+                                                    <th>Status</th>
+                                                    <th><button class="btn btn-primary my-3" type="button" id="btn_AddCompanyRound" onclick="addCompanyRound()">+</button></th>
+                                                </tr>
+                                            </thead>
+                                            <tbody id="company-round-tbody"></tbody>
+                                        </table>
+                                    </div>
+                                    <div>
+                                        <center>
+                                            <button type="submit" name="submit" class="btn btn-success">Submit</button>
+                                            <button type="reset" class="btn btn-warning">Reset</button>
+                                        </center>
+                                    </div>
+
+                                    <?php
+                                    if (isset($_POST['submit'])) {
+                                        $CompanyName = $_POST['txt_CompanyName'];
+                                        $CompanyStatus = $_POST['select_CompanyStatus'];
+                                        // $CompanyStatus = "Active";
+
+                                        $CompanyCriterias = $_POST['txt_CompanyCriteria'];
+
+                                        $sql1 = "INSERT INTO company_master(Company_Name, Company_Status) VALUES('" . $CompanyName . "', '" . $CompanyStatus . "')";
+
+                                        if ($con->query($sql1) === TRUE) {
+
+                                            $sql2 = "SELECT max(Company_Id) as id from company_master";
+                                            $result2 = $con->query($sql2);
+                                            $row2 = $result2->fetch_assoc();
+
+                                            $CompanyId = $row2['id'];
+
+                                            $CompanyCriterias = $_POST['txt_CompanyCriteria'];
+
+                                            // echo $CompanyCriterias;
+
+                                            for ($i = 0; $i < count($CompanyCriterias); $i++) {
+                                                $CompanyCriteria = $CompanyCriterias[$i];
+                                                $sql3 = "INSERT INTO company_criteria(Company_Id, Criteria) VALUES(" . $CompanyId . ", '" . $CompanyCriteria . "')";
+                                                $con->query($sql3);
+                                            }
+
+                                            $CompanyOpenForBranches = $_POST['checkbox_CompanyOpenForBranchId'];
+                                            for ($i = 0; $i < count($CompanyOpenForBranches); $i++) {
+                                                $CompanyOpenForBranchId = $CompanyOpenForBranches[$i];
+                                                $sql4 = "INSERT INTO company_branch(Company_Id, Branch_Id) VALUES(" . $CompanyId . ", " . $CompanyOpenForBranchId . ")";
+                                                $con->query($sql4);
+                                            }
+
+                                            $CompanyRounds = $_POST['txt_CompanyRoundName'];
+                                            $CompanyRoundDateTimes = $_POST['txt_CompanyRoundDateTime'];
+                                            $CompanyRoundDurations = $_POST['txt_CompanyRoundDuration'];
+                                            $CompanyRoundStatus = $_POST['select_CompanyRoundStatus'];
+                                            for ($i = 0; $i < count($CompanyRounds); $i++) {
+                                                $CompanyRound = $CompanyRounds[$i];
+                                                $CompanyRoundDateTime = $CompanyRoundDateTimes[$i];
+                                                $CompanyRoundDuration = $CompanyRoundDurations[$i];
+                                                $Status = $CompanyRoundStatus[$i];
+                                                $sql5 = "INSERT INTO company_round(Company_Id, Round_Name, Round_DateTime, Round_Duration, Round_Status) VALUES(" . $CompanyId . ", '" . $CompanyRound . "', '" . $CompanyRoundDateTime . "', " . $CompanyRoundDuration . ", '" . $CompanyStatus . "')";
+                                                $con->query($sql5);
+                                            }
+
+                                            echo "<script> location.href='Index.php'; </script>";
+                                        } else {
+                                            echo "<br>error: " . $sql1 . "<br>" . $con->error;
+                                        }
                                     }
-                                }
-                                ?>
+                                    ?>
 
+                                </form>
                                 <input type="button" value="Back To List" onclick="window.location.href='Index.php'" class="btn btn-primary" />
                             </div>
                         </div>
@@ -523,9 +649,33 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
     <script src="../../js/bootstrap.js"> </script>
 
     <script>
-        function edit(AcademicSessionId) {
-            window.location.href = 'Edit.php?AcademicSessionId=' + AcademicSessionId;
+        function addCompanyCriteriaRow() {
+            let html = "<tr><td><input type='text' class='form-control' name='txt_CompanyCriteria[]' required /></td>" +
+                "<td><button type='button' class='btn btn-danger btn_CompanyCriteria_RemoveRow' onclick='removeCompanyCriteriaRow(this)'>-</button></td></tr>";
+            $("#company-criteria-tbody").append(html);
         }
+
+        function removeCompanyCriteriaRow(btn) {
+            btn.parentNode.parentNode.remove();
+        }
+
+        addCompanyCriteriaRow();
+        addCompanyCriteriaRow();
+        addCompanyCriteriaRow();
+
+        function addCompanyRound() {
+            let html = "<tr><td><input type='text' class='form-control' name='txt_CompanyRoundName[]' required /></td><td><input type='datetime-local' class='form-control' name='txt_CompanyRoundDateTime[]' required /></td><td><input type='number' class='form-control' name='txt_CompanyRoundDuration[]' required /></td><td><select class='form-control' name='select_CompanyRoundStatus[]'><option value='To be held'>To be held</option><option value='In Progress'>In Progress</option><option value='Completed'>Completed</option><option>Cancelled</option></select></td><td><button type='button' class='btn btn-danger btn_CompanyRound_RemoveRow' onclick='removeCompanyRoundRow(this)'>-</button></td></tr>";
+
+            $("#company-round-tbody").append(html);
+        }
+
+        function removeCompanyRoundRow(btn) {
+            btn.parentNode.parentNode.remove();
+        }
+
+        addCompanyRound();
+        addCompanyRound();
+        addCompanyRound();
     </script>
 
     <script>
