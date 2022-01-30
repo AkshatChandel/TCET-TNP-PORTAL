@@ -479,8 +479,8 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
     <script src="../../js/bootstrap.js"> </script>
 
     <script>
-        function edit(AcademicSessionId) {
-            window.location.href = 'Edit.php?AcademicSessionId=' + AcademicSessionId;
+        function edit(StudentId) {
+            window.location.href = 'Edit.php?StudentId=' + StudentId;
         }
     </script>
 

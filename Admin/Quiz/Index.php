@@ -2,10 +2,6 @@
 require '../../connection.php';
 ?>
 
-<?php
-require '../../connection.php';
-?>
-
 <!DOCTYPE HTML>
 <html>
 
@@ -55,52 +51,6 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
     <script src="../../js/custom.js"></script>
     <link href="../../css/custom.css" rel="stylesheet">
     <!--//Metis Menu -->
-    <style>
-        #chartdiv {
-            width: 100%;
-            height: 295px;
-        }
-    </style>
-    <!--pie-chart -->
-    <!-- index page sales reviews visitors pie chart -->
-    <script src="../../js/pie-chart.js" type="text/javascript"></script>
-    <script type="text/javascript">
-        $(document).ready(function() {
-            $('#demo-pie-1').pieChart({
-                barColor: '#2dde98',
-                trackColor: '#eee',
-                lineCap: 'round',
-                lineWidth: 8,
-                onStep: function(from, to, percent) {
-                    $(this.element).find('.pie-value').text(Math.round(percent) + '%');
-                }
-            });
-
-            $('#demo-pie-2').pieChart({
-                barColor: '#8e43e7',
-                trackColor: '#eee',
-                lineCap: 'butt',
-                lineWidth: 8,
-                onStep: function(from, to, percent) {
-                    $(this.element).find('.pie-value').text(Math.round(percent) + '%');
-                }
-            });
-
-            $('#demo-pie-3').pieChart({
-                barColor: '#ffc168',
-                trackColor: '#eee',
-                lineCap: 'square',
-                lineWidth: 8,
-                onStep: function(from, to, percent) {
-                    $(this.element).find('.pie-value').text(Math.round(percent) + '%');
-                }
-            });
-
-
-        });
-    </script>
-    <!-- //pie-chart -->
-    <!-- index page sales reviews visitors pie chart -->
 
     <!-- requried-jsfiles-for owl -->
     <link href="../../css/owl.carousel.css" rel="stylesheet">
@@ -426,53 +376,46 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
         <!-- //header-ends -->
         <div id="page-wrapper">
             <div class="main-page">
-                <div class="forms">
-                    <div class=" form-grids row form-grids-right">
-                        <div class="widget-shadow " data-example-id="basic-forms">
-                            <div class="form-title">
-                                <h4>Academic Session</h4>
-                            </div>
-                            <div class="form-body">
-                                <form class="form-horizontal" action="" method="POST">
-                                    <div class="form-group">
-                                        <label for="txt_SessionName" class="col-sm-2 control-label">Academic Session</label>
-                                        <div class="col-sm-9">
-                                            <input type="text" class="form-control" id="txt_SessionName" name="txt_SessionName" placeholder="Academic Session">
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="select_SessionStatus" class="col-sm-2 control-label">Academic Session Status</label>
-                                        <div class="col-sm-9">
-                                            <select id="select_SessionStatus" name="select_SessionStatus" class="form-control">
-                                                <option>Active</option>
-                                                <option>De-Active</option>
-                                            </select>
-                                        </div>
-                                    </div>
-                                    <div class="col-sm-offset-2">
-                                        <button type="submit" name="submit" class="btn btn-success">Submit</button>
-                                        <button type="reset" class="btn btn-warning">Reset</button>
-                                    </div>
-                                </form>
+                <div class="tables">
+                    <h2 class="title1">Quiz</h2>
+                    <div class="bs-example widget-shadow" data-example-id="hoverable-table">
+                        <!-- <h4>Academic Session</h4> -->
 
+                        <button type="button" onclick="window.location.href='Create.php'" class="btn btn-primary btn-flat btn-pri btn-lg"><i class="fa fa-plus" aria-hidden="true"></i>Create</button>
+
+                        <table class="table table-hover">
+                            <thead>
+                                <tr>
+                                    <!-- <th scope="col">Sr. No.</th> -->
+                                    <th scope="col">Quiz Name</th>
+                                    <th scope="col">Quiz Code</th>
+                                    <th scope="col">Staff</th>
+                                    <th scope="col">Quiz Time</th>
+                                    <th scope="col">Quiz Duration</th>
+                                    <th scope="col">Quiz Status</th>
+                                    <th scope="col"></th>
+                                </tr>
+                            </thead>
+                            <tbody>
                                 <?php
-                                if (isset($_POST['submit'])) {
-                                    $AcademicName = $_POST['txt_SessionName'];
-                                    $AcademicStatus = $_POST['select_SessionStatus'];
+                                $sql = "SELECT Quiz_Id, Quiz_Name, Quiz_Code, Quiz_Time, Quiz_Master.Staff_Id, Quiz_Duration, Quiz_Status, First_Name, Middle_Name, Last_Name FROM Quiz_Master JOIN Staff_Master ON Quiz_Master.Staff_Id = Staff_Master.Staff_Id";
+                                $result = $con->query($sql);
 
-                                    $sql1 = "INSERT INTO academic_master(Academic_Name, Academic_Status) VALUES('" . $AcademicName . "', '" . $AcademicStatus . "')";
+                                while ($row = mysqli_fetch_array($result)) {
 
-                                    if ($con->query($sql1) === TRUE) {
-                                        echo "<script> location.href='Index.php'; </script>";
-                                    } else {
-                                        echo "<br>error: " . $sql1 . "<br>" . $con->error;
-                                    }
+                                    echo "<tr>";
+                                    echo "<td>" . $row['Quiz_Name'] . "</td>";
+                                    echo "<td>" . $row['Quiz_Code'] . "</td>";
+                                    echo "<td>" . $row['First_Name'] . " " . $row['Middle_Name'] . " " . $row['Last_Name'] . "</td>";
+                                    echo "<td>" . $row['Quiz_Time'] . "</td>";
+                                    echo "<td>" . $row['Quiz_Duration'] . "</td>";
+                                    echo "<td>" . $row['Quiz_Status'] . "</td>";
+                                    echo "<td><button type='button' class='btn btn-success' onclick='edit(" . $row['Quiz_Id'] . ")'>Edit</button></td>";
+                                    echo "</tr>";
                                 }
                                 ?>
-
-                                <input type="button" value="Back To List" onclick="window.location.href='Index.php'" class="btn btn-primary" />
-                            </div>
-                        </div>
+                            </tbody>
+                        </table>
                     </div>
                 </div>
             </div>
@@ -521,6 +464,12 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
 
     <!-- Bootstrap Core JavaScript -->
     <script src="../../js/bootstrap.js"> </script>
+
+    <script>
+        function edit(QuizId) {
+            window.location.href = 'Edit.php?QuizId=' + QuizId;
+        }
+    </script>
 
     <script>
         function logout() {

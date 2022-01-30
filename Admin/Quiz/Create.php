@@ -430,25 +430,70 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
                     <div class=" form-grids row form-grids-right">
                         <div class="widget-shadow " data-example-id="basic-forms">
                             <div class="form-title">
-                                <h4>Academic Session</h4>
+                                <h4>Quiz</h4>
                             </div>
                             <div class="form-body">
                                 <form class="form-horizontal" action="" method="POST">
                                     <div class="form-group">
-                                        <label for="txt_SessionName" class="col-sm-2 control-label">Academic Session</label>
+                                        <label for="txt_QuizName" class="col-sm-2 control-label">Quiz Name</label>
                                         <div class="col-sm-9">
-                                            <input type="text" class="form-control" id="txt_SessionName" name="txt_SessionName" placeholder="Academic Session">
+                                            <input type="text" class="form-control" id="txt_QuizName" name="txt_QuizName" placeholder="Quiz Name" required>
                                         </div>
                                     </div>
                                     <div class="form-group">
-                                        <label for="select_SessionStatus" class="col-sm-2 control-label">Academic Session Status</label>
+                                        <label for="txt_QuizCode" class="col-sm-2 control-label">Quiz Code</label>
                                         <div class="col-sm-9">
-                                            <select id="select_SessionStatus" name="select_SessionStatus" class="form-control">
+                                            <input type="text" class="form-control" id="txt_QuizCode" name="txt_QuizCode" placeholder="Quiz Code" required>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="txt_QuizTime" class="col-sm-2 control-label">Quiz Time</label>
+                                        <div class="col-sm-9">
+                                            <input type="datetime-local" class="form-control" id="txt_QuizTime" name="txt_QuizTime" placeholder="Quiz Code" required>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="txt_QuizDuration" class="col-sm-2 control-label">Quiz Duration (in minutes)</label>
+                                        <div class="col-sm-9">
+                                            <input type="text" class="form-control" id="txt_QuizDuration" name="txt_QuizDuration" placeholder="Quiz Duration (in minutes)" required>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="select_StaffId" class="col-sm-2 control-label">Staff</label>
+                                        <div class="col-sm-9">
+                                            <select id="select_StaffId" name="select_StaffId" class="form-control">
+                                                <?php
+
+                                                $sql1 = "SELECT * FROM Staff_Master WHERE staff_status = \"Active\"";
+                                                $result = $con->query($sql1);
+                                                while ($row = $result->fetch_array()) {
+                                                    echo "<option value ='" . $row['Staff_Id'] . "'>" . $row['First_Name'] . " " . $row['Middle_Name'] . " " . $row['Last_Name'] . "</option>";
+                                                }
+
+                                                ?>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="select_QuizStatus" class="col-sm-2 control-label">Quiz Status</label>
+                                        <div class="col-sm-9">
+                                            <select id="select_QuizStatus" name="select_QuizStatus" class="form-control">
                                                 <option>Active</option>
                                                 <option>De-Active</option>
                                             </select>
                                         </div>
                                     </div>
+
+                                    <hr color="grey">
+                                    <div class="my-4">
+                                        <h4>Quiz Questions</h4>
+                                    </div>
+                                    <hr color="grey">
+
+                                    <button type="button" class="btn btn-primary" onclick="addQuizQuestion()">Add Question</button>
+
+                                    <div id="quiz-question-div"></div>
+
                                     <div class="col-sm-offset-2">
                                         <button type="submit" name="submit" class="btn btn-success">Submit</button>
                                         <button type="reset" class="btn btn-warning">Reset</button>
@@ -457,15 +502,63 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
 
                                 <?php
                                 if (isset($_POST['submit'])) {
-                                    $AcademicName = $_POST['txt_SessionName'];
-                                    $AcademicStatus = $_POST['select_SessionStatus'];
+                                    $QuizName = $_POST['txt_QuizName'];
+                                    $QuizCode = $_POST['txt_QuizCode'];
+                                    $QuizTime = $_POST['txt_QuizTime'];
+                                    $QuizDuration = $_POST['txt_QuizDuration'];
+                                    $StaffId = $_POST['select_StaffId'];
+                                    $QuizStatus = $_POST['select_QuizStatus'];
 
-                                    $sql1 = "INSERT INTO academic_master(Academic_Name, Academic_Status) VALUES('" . $AcademicName . "', '" . $AcademicStatus . "')";
+                                    $sql2 = "INSERT INTO Quiz_Master(Quiz_Name, Quiz_Code, Quiz_Time, Quiz_Duration, Staff_Id, Quiz_Status) VALUES('" . $QuizName . "', '" . $QuizCode . "', '" . $QuizTime . "', '" . $QuizDuration . "', " . $StaffId . ",'" . $QuizStatus . "')";
 
-                                    if ($con->query($sql1) === TRUE) {
-                                        echo "<script> location.href='Index.php'; </script>";
+                                    if ($con->query($sql2) === TRUE) {
+
+                                        $sql3 = "SELECT max(Quiz_Id) as id from Quiz_Master";
+                                        $result3 = $con->query($sql3);
+                                        $row3 = $result3->fetch_assoc();
+
+                                        $QuizId = $row3['id'];
+
+                                        $QuizQuestions = $_POST['txt_QuizQuestion'];
+
+                                        $QuizOptions = $_POST['txt_QuizOption'];
+                                        $IsCorrectAnswers = $_POST['select_IsCorrectAnswer'];
+
+                                        $QuizOptionCounter = 0;
+
+                                        for ($i = 0; $i < count($QuizQuestions); $i++) {
+
+                                            $QuizQuestion = $QuizQuestions[$i];
+
+                                            $sql4 = "INSERT INTO Quiz_Question(Quiz_Id, Quiz_Question) VALUES(" . $QuizId . ", '" . $QuizQuestion . "')";
+
+                                            if ($con->query($sql4) === TRUE) {
+
+                                                $sql5 = "SELECT max(Quiz_Question_Id) as id from Quiz_Question";
+                                                $result5 = $con->query($sql5);
+                                                $row5 = $result5->fetch_assoc();
+
+                                                $QuizQuestionId = $row5['id'];
+
+                                                $QuizOptionLoopEnd = $QuizOptionCounter + 4;
+
+                                                for ($j = $QuizOptionCounter; $j < $QuizOptionLoopEnd; $j++) {
+
+                                                    $QuizOption = $QuizOptions[$j];
+                                                    $IsCorrectAnswer = $IsCorrectAnswers[$j];
+
+                                                    $sql6 = "INSERT INTO Quiz_Question_Option(Quiz_Question_Id, Quiz_Option, Is_Correct_Answer) VALUES (" . $QuizQuestionId . ", '" . $QuizOption . "', '" . $IsCorrectAnswer . "')";
+
+                                                    $con->query($sql6);
+
+                                                    $QuizOptionCounter++;
+                                                }
+
+                                                // echo "<script> location.href='Index.php'; </script>";
+                                            }
+                                        }
                                     } else {
-                                        echo "<br>error: " . $sql1 . "<br>" . $con->error;
+                                        echo "<br>error: " . $sql2 . "<br>" . $con->error;
                                     }
                                 }
                                 ?>
@@ -521,6 +614,82 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
 
     <!-- Bootstrap Core JavaScript -->
     <script src="../../js/bootstrap.js"> </script>
+
+    <script>
+        function addQuizQuestion() {
+            let html = `<table class="table table-hover quiz-question-table">
+                                        <thead class="table-dark">
+                                            <tr>
+                                                <th>
+                                                    <button type="button" class="btn btn-danger" onclick="removeQuizQuestion(this)">-</button>
+                                                </th>
+                                                <th>
+                                                    <input type="text" class="form-control" name="txt_QuizQuestion[]" placeholder="Quiz Question" required>
+                                                </th>
+                                                <th>Is Correct Answer?</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody id="company-round-tbody">
+                                            <tr>
+                                                <th>1</th>
+                                                <td>
+                                                    <input type="text" class="form-control" name="txt_QuizOption[]" placeholder="Quiz Option" required>
+                                                </td>
+                                                <td>
+                                                    <select class="form-control" name="select_IsCorrectAnswer[]">
+                                                        <option value="No">No</option>
+                                                        <option value="Yes">Yes</option>
+                                                    </select>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <th>2</th>
+                                                <td>
+                                                    <input type="text" class="form-control" name="txt_QuizOption[]" placeholder="Quiz Option" required>
+                                                </td>
+                                                <td>
+                                                    <select class="form-control" name="select_IsCorrectAnswer[]">
+                                                        <option value="No">No</option>
+                                                        <option value="Yes">Yes</option>
+                                                    </select>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <th>3</th>
+                                                <td>
+                                                    <input type="text" class="form-control" name="txt_QuizOption[]" placeholder="Quiz Option" required>
+                                                </td>
+                                                <td>
+                                                    <select class="form-control" name="select_IsCorrectAnswer[]">
+                                                        <option value="No">No</option>
+                                                        <option value="Yes">Yes</option>
+                                                    </select>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <th>4</th>
+                                                <td>
+                                                    <input type="text" class="form-control" name="txt_QuizOption[]" placeholder="Quiz Option" required>
+                                                </td>
+                                                <td>
+                                                    <select class="form-control" name="select_IsCorrectAnswer[]">
+                                                        <option value="No">No</option>
+                                                        <option value="Yes">Yes</option>
+                                                    </select>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>`;
+
+            $("#quiz-question-div").append(html);
+        }
+
+        function removeQuizQuestion(btn) {
+            btn.parentNode.parentNode.parentNode.parentNode.remove();
+        }
+
+        addQuizQuestion();
+    </script>
 
     <script>
         function logout() {
