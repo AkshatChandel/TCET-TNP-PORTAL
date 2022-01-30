@@ -97,11 +97,11 @@ Staff_Username
 Staff_Password
 Staff_Login_Status (Active / De-Active)
 
-=> Staff_Designation
-Staff_Designation_Id
+=> Staff_Branch
+Staff_Branch_Id
 Staff_Id
-Designation_Id
-Staff_Designation_Status (Active / De-Active)
+Branch_Id
+Staff_Branch_Status (Active / De-Active)
 
 => Quiz_Master #F
 Quiz_Id
