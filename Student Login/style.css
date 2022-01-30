@@ -1,113 +1,133 @@
-@import url('https://fonts.googleapis.com/css2?family=Noto+Sans:wght@700&family=Poppins:wght@400;500;600&display=swap');
-*{
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  font-family: "Poppins", sans-serif;
-}
-body{
-  margin: 0;
-  padding: 0;
-  background: linear-gradient(120deg,#2980b9, #8e44ad);
-  height: 100vh;
-  overflow: hidden;
-}
-.center{
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: 400px;
-  background: white;
-  border-radius: 10px;
-  box-shadow: 10px 10px 15px rgba(0,0,0,0.05);
-}
-.center h1{
-  text-align: center;
-  padding: 20px 0;
-  border-bottom: 1px solid silver;
-}
-.center form{
-  padding: 0 40px;
-  box-sizing: border-box;
-}
-form .txt_field, .select_acc{
-  position: relative;
-  border-bottom: 2px solid #adadad;
-  margin: 30px 0;
-}
-.txt_field input{
-  width: 100%;
-  padding: 0 5px;
-  height: 40px;
-  font-size: 16px;
-  border: none;
-  background: none;
-  outline: none;
-}
-.txt_field label{
-  position: absolute;
-  top: 50%;
-  left: 5px;
-  color: #adadad;
-  transform: translateY(-50%);
-  font-size: 16px;
-  pointer-events: none;
-  transition: .5s;
-}
-.txt_field span::before{
-  content: '';
-  position: absolute;
-  top: 40px;
-  left: 0;
-  width: 0%;
-  height: 2px;
-  background: #2691d9;
-  transition: .5s;
-}
-.txt_field input:focus ~ label,
-.txt_field input:valid ~ label{
-  top: -5px;
-  color: #2691d9;
-}
-.txt_field input:focus ~ span::before,
-.txt_field input:valid ~ span::before{
-  width: 100%;
-}
-.pass{
-  margin: -5px 0 20px 5px;
-  color: #a6a6a6;
-  cursor: pointer;
-}
-.pass:hover{
-  text-decoration: underline;
-}
-input[type="submit"]{
-  width: 100%;
-  height: 50px;
-  border: 1px solid;
-  background: #2691d9;
-  border-radius: 25px;
-  font-size: 18px;
-  color: #e9f4fb;
-  font-weight: 700;
-  cursor: pointer;
-  outline: none;
-}
-input[type="submit"]:hover{
-  border-color: #2691d9;
-  transition: .5s;
-}
-.signup_link{
-  margin: 30px 0;
-  text-align: center;
-  font-size: 16px;
-  color: #666666;
-}
-.signup_link a{
-  color: #2691d9;
-  text-decoration: none;
-}
-.signup_link a:hover{
-  text-decoration: underline;
-}
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  
+  main {
+    height: 100vh;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    background-color: #f5f5f5;
+  }
+  
+  .left {
+    width: 55%;
+    height: 100%;
+    background: url("https://images.unsplash.com/photo-1643447946892-2d099c1b1718?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=386&q=80");
+    background-position: center;
+    background-size: cover;
+  }
+  
+  .right {
+    width: 45%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  
+  form {
+    display: flex;
+    flex-direction: column;
+    background: #fff;
+    height: 400px;
+    width: 400px;
+    border-radius: 10px;
+    padding: 10px 60px; 
+  }
+  
+  .formHead {
+    width: 100%; 
+    padding: 15px;
+  }
+  
+  .formHead h2 {
+    font-size: 35px;
+    text-align: center;
+  }
+  
+  .inputElements {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .dropdown {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    margin-top: 15px;
+  }
+  
+  .dropdown select {
+    width: 100%;
+    font-size: 16px;
+  }
+  
+  input {
+    width: 100%;
+    display: flex;
+    border: none;
+    border-bottom: 2px solid #eee;
+    background-color: transparent;
+    outline: none;
+    padding: 5px;
+    color: #474747;
+    margin-top: 20px;
+    font-size: 16px;
+  }
+  
+  select {
+    background-color: transparent;
+    outline: none;
+    border: none;
+    border-bottom: 2px solid #eee;
+    padding: 1px;
+    color: #474747;
+  }
+  
+  form a {
+    padding: 5px;
+    margin-left: auto;
+    text-decoration: none;
+    color: #5c5c5c;
+    margin-top: 4px;
+  }
+  
+  button {
+    padding: 5px;
+    font-size: 15px;
+    border-radius: 3px;
+    background-color: #0af529;
+    border: 1px solid #16f032;
+    margin-top: 20px;
+  }
+  
+  @media only screen and (max-width: 800px){
+    body {
+      height: 100%;
+      width: 100%;
+    }
+    
+    main {
+      display: flex;
+      flex-direction: column;
+    }
+    
+    .left {
+      width: 100%;
+    }
+    
+    .right {
+      width: 100%;
+      position: absolute;
+      padding: 0 1rem;
+    }
+    
+    .form {
+      width: 100%;
+      margin: 0 1rem;
+    }
+  }

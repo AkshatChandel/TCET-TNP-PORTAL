@@ -1,41 +1,47 @@
 <!DOCTYPE html>
-<!-- Coding By CodingNepal - youtube.com/codingnepal -->
-<html lang="en" dir="ltr">
-  <head>
-    <meta charset="utf-8">
-    <title>Login </title>
-    <link rel="stylesheet" href="style.css">
-  </head>
-  <body>
-    <div class="center">
-      <h1>Login</h1>
-      <form method="post">
-        <div class="select_acc">
-          <select id="select_acc">
-            <option value="select">Select</option>
-            <option value="select">Student</option>
-            <option value="select">Staff</option>
-            <option value="select">Admin</option>
-          </select>
-
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="style.css" rel="stylesheet">
+  <title>Document</title>
+</head>
+<body>
+  <main>
+    <div class="left">
+<!-- The image container you want to add will come here       -->
+      <div class="imgContainer">
+<!--  put image tag here and style it accordingly        -->
+      </div>
+    </div>
+    <div class="right">
+      <form action="#">
+        <div class="formHead">
+           <h2>Login</h2>
         </div>
-        <div class="txt_field">
-          <input type="text" required>
-          <span></span>
-          <label>Username</label>
+        <div class="inputElements">
+          
+          <div class="dropdown">
+<!--              <label for="cars">Role:</label> -->
+  <select id="role" name="role">
+    <option value="select" class="defaultRole">Role</option>
+    <option value="students">Student</option>
+    <option value="staff">Staff</option>
+    <option value="admin">Admin</option>
+  </select>
+          </div>
+          
+          <input type="text" name="username" placeholder="Username">
+                    <input type="password" name="password" placeholder="Password">
         </div>
-        <div class="txt_field">
-          <input type="password" required>
-          <span></span>
-          <label>Password</label>
-        </div>
-        <div class="pass">Forgot Password</div>
-        <input type="submit" value="Login">
-        <div class="signup_link">
-         <a href="#"></a>
-        </div>
+         
+        <a href="#">Forgot Password?</a>
+        
+        <button>Login</button>
+        
       </form>
     </div>
-
-  </body>
+  </main>
+</body>
 </html>
