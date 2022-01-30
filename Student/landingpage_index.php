@@ -7,9 +7,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Landing page</title>
 
-    <link href="../CSS/normalize.css" rel="stylesheet">
+    <link href="../css/normalize.css" rel="stylesheet">
 
-    <link href="../CSS/style.css" rel="stylesheet">
+    <link href="../css/student_landing_page_style.css" rel="stylesheet">
 
 </head>
 
