@@ -387,11 +387,11 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
                             <thead>
                                 <tr>
                                     <th scope="col">College ID</th>
-                                    <th scope="col">Roll Number</th>
                                     <th scope="col">Name</th>
                                     <th scope="col">Year</th>
                                     <th scope="col">Branch</th>
-                                    <th scope="col" hidden>Semester</th>
+                                    <th scope="col">Semester</th>
+                                    <th scope="col">Roll Number</th>
                                     <th scope="col"></th>
                                 </tr>
                             </thead>
@@ -404,8 +404,8 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
 
                                     $StudentId = $row['Student_Id'];
 
-                                    $CollegeId = $row['Student_College_Id'];
-                                    $BranchName = $row['Branch_Name'];
+                                    $Year = 'NA';
+
                                     if ($row['Semester'] == 1 || $row['Semester'] == 2) {
                                         $Year = "FE";
                                     } else if ($row['Semester'] == 3 || $row['Semester'] == 4) {
@@ -415,16 +415,14 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
                                     } else if ($row['Semester'] == 7 || $row['Semester'] == 8) {
                                         $Year = "BE";
                                     }
-                                    $Semester = $row['Semester'];
-                                    $RollNo = $row['Roll_No'];
 
                                     echo "<tr>";
-                                    echo "<td>" . $CollegeId . "</td>";
-                                    echo "<td>" . $RollNo . "</td>";
+                                    echo "<td>" . $row['Student_College_Id'] . "</td>";
                                     echo "<td>" . $row['First_Name'] . " " . $row['Middle_Name'] . " " . $row['Last_Name'] . "</td>";
                                     echo "<td>" . $Year . "</td>";
-                                    echo "<td>" . $BranchName . "</td>";
-                                    echo "<td hidden>" . $Semester . "</td>";
+                                    echo "<td>" . $row['Branch_Name'] . "</td>";
+                                    echo "<td>Semester " . $row['Semester'] . "</td>";
+                                    echo "<td>" . $row['Roll_No'] . "</td>";
                                     echo "<td><button type='button' class='btn btn-success' onclick='edit(" . $StudentId . ")'>Edit</button></td>";
                                     echo "</tr>";
                                 }

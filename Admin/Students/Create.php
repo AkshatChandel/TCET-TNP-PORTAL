@@ -611,6 +611,12 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
                                         </div>
                                     </div>
                                     <div class="form-group class12-form-group">
+                                        <label for="txt_CollegeId" class="col-sm-2 control-label">College ID</label>
+                                        <div class="col-sm-9">
+                                            <input type="number" min="1" max="120" class="form-control" id="txt_CollegeId" name="txt_CollegeId" placeholder="College ID">
+                                        </div>
+                                    </div>
+                                    <div class="form-group class12-form-group">
                                         <label for="txt_RollNo" class="col-sm-2 control-label">Roll Number</label>
                                         <div class="col-sm-9">
                                             <input type="number" min="1" max="120" class="form-control" id="txt_RollNo" name="txt_RollNo" placeholder="Roll Number">
@@ -628,7 +634,7 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
                                     $FirstName = $_POST['txt_FirstName'];
                                     $MiddleName = $_POST['txt_MiddleName'];
                                     $LastName = $_POST['txt_LastName'];
-                                    $StudentCollegeId = $_POST['txt_StudentCollegeId'];
+                                    $CollegeId = $_POST['txt_CollegeId'];
                                     $DateOfBirth = $_POST['txt_DateOfBirth'];
                                     $Gender = $_POST['select_Gender'];
                                     $ContactNo = $_POST['txt_Contact'];
@@ -658,10 +664,9 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
                                     $AcademicId = $_POST['select_Academic_Session_Id'];
                                     $BranchId = $_POST['select_Branch'];
                                     $Semester = $_POST['select_Semester'];
-                                    // $StudentCollegeId = $_POST['txt_StudentCollegeId'];
                                     $RollNo = $_POST['txt_RollNo'];
 
-                                    $sql1 = "INSERT INTO student_master(Student_College_Id, First_Name, Middle_Name, Last_Name, Date_Of_Birth, Gender, Contact_No, Email_Id, Address, Class_10_Percentage, From_Class12_Or_Diploma, Class_12_Percentage, Diploma_Percentage, JEE_Marks, JEE_Out_Of, CET_Marks, CET_Out_Of, Student_Status) VALUES('" . $StudentCollegeId . "', '" . $FirstName . "','" . $MiddleName . "','" . $LastName . "','" . $DateOfBirth . "','" . $Gender . "','" . $ContactNo . "','" . $EmailId . "','" . $Address . "'," . $Class10Percentage . ",'" . $DiplomaStudent_Or_Class12 . "'," . $Class12Percentage . "," . $DiplomaPercentage . "," . $JEEScore . "," . $JEEScoreOutOf . "," . $CETScore . "," . $CETScoreOutOf . ",'" . $StudentStatus . "')";
+                                    $sql1 = "INSERT INTO student_master(Student_College_Id, First_Name, Middle_Name, Last_Name, Date_Of_Birth, Gender, Contact_No, Email_Id, Address, Class_10_Percentage, From_Class12_Or_Diploma, Class_12_Percentage, Diploma_Percentage, JEE_Marks, JEE_Out_Of, CET_Marks, CET_Out_Of, Student_Status) VALUES('" . $CollegeId . "', '" . $FirstName . "','" . $MiddleName . "','" . $LastName . "','" . $DateOfBirth . "','" . $Gender . "','" . $ContactNo . "','" . $EmailId . "','" . $Address . "'," . $Class10Percentage . ",'" . $DiplomaStudent_Or_Class12 . "'," . $Class12Percentage . "," . $DiplomaPercentage . "," . $JEEScore . "," . $JEEScoreOutOf . "," . $CETScore . "," . $CETScoreOutOf . ",'" . $StudentStatus . "')";
 
                                     if ($con->query($sql1) === TRUE) {
 
@@ -669,16 +674,27 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
                                         $result2 = $con->query($sql2);
                                         $row2 = $result2->fetch_assoc();
 
-                                        $Student_Id = $row2['id'];
+                                        $StudentId = $row2['id'];
                                         $StudentClassStatus = "Active";
 
-                                        $sql3 = "INSERT INTO student_class(Student_Id, Academic_Id, Branch_Id, Semester, Roll_No, Student_Class_Status) VALUES(" . $Student_Id . "," . $AcademicId . "," . $BranchId . "," . $Semester . "," . $RollNo . ",'" . $StudentClassStatus . "')";
+                                        $sql3 = "INSERT INTO student_class(Student_Id, Academic_Id, Branch_Id, Semester, Roll_No, Student_Class_Status) VALUES(" . $StudentId . "," . $AcademicId . "," . $BranchId . "," . $Semester . "," . $RollNo . ",'" . $StudentClassStatus . "')";
+
+                                        $StudentLoginStatus = "Active";
 
                                         if ($con->query($sql3) === TRUE) {
-                                            echo "<script> location.href='Index.php'</script>";
+
+                                            $sql4 = "INSERT INTO student_login(Student_Id, Student_Username, Student_Password, Student_Login_Status) VALUES(" . $StudentId . ", 'S" . $CollegeId . "', 'S" . $CollegeId . "', '" . $StudentLoginStatus . "')";
+
+                                            if ($con->query($sql4) === TRUE) {
+                                                echo "<script> location.href='Index.php'</script>";
+                                            } else {
+                                                echo "<br>error: " . $sql4 . "<br>" . $con->error;
+                                            }
+                                        } else {
+                                            echo "<br>error: " . $sql3 . "<br>" . $con->error;
                                         }
                                     } else {
-                                        echo "<br>error: " . $sql . "<br>" . $con->error;
+                                        echo "<br>error: " . $sql1 . "<br>" . $con->error;
                                     }
                                 }
                                 ?>
