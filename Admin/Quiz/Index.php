@@ -391,7 +391,7 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
                                     <th scope="col">Quiz Code</th>
                                     <th scope="col">Staff</th>
                                     <th scope="col">Quiz Time</th>
-                                    <th scope="col">Quiz Duration</th>
+                                    <th scope="col">Quiz Duration (in minutes)</th>
                                     <th scope="col">Quiz Status</th>
                                     <th scope="col"></th>
                                 </tr>

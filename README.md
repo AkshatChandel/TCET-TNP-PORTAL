@@ -143,8 +143,10 @@ Lecture Link
 
 =>Student Category
 
-=> Training_Lecture_Semester
+=> Training_Lecture_Branch
+Training_Lecture_Branch_Id
 Training_Lecture_Id
+Branch_Id
 Semester
 
 Example: Suppose A training lecture is only available for Semester 3 and Semester 4 students. Then, there will be 2 entries in the "Training_Lecture_Semester table.
