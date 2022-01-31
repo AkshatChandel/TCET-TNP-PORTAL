@@ -234,6 +234,7 @@ CREATE TABLE `staff_login` (
   `Staff_Id` bigint(20) NOT NULL,
   `Staff_Username` varchar(100) NOT NULL,
   `Staff_Password` varchar(100) NOT NULL,
+  `Is_Admin` varchar(20) NOT NULL,
   `Staff_Login_Status` varchar(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
@@ -253,8 +254,7 @@ CREATE TABLE `staff_master` (
   `Gender` varchar(10) NOT NULL,
   `Contact_No` varchar(20) NOT NULL,
   `Email_Id` varchar(50) NOT NULL,
-  `Address` varchar(500) NOT NULL,
-  `Is_Admin` varchar(5) NOT NULL,
+  `Address` varchar(500) NOT NULL,  
   `Staff_Status` varchar(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
