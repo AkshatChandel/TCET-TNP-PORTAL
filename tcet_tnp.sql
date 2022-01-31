@@ -3,13 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 30, 2022 at 08:03 AM
+-- Generation Time: Jan 31, 2022 at 08:45 AM
 -- Server version: 10.4.22-MariaDB
 -- PHP Version: 8.1.2
-
-
-DROP DATABASE "tcet tnp";
-CREATE DATABASE "tcet tnp";
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -37,10 +33,6 @@ CREATE TABLE `academic_master` (
   `Academic_Status` varchar(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
---
--- Dumping data for table `academic_master`
---
-
 -- --------------------------------------------------------
 
 --
@@ -54,10 +46,6 @@ CREATE TABLE `branch_master` (
   `Branch_Status` varchar(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
---
--- Dumping data for table `branch_master`
---
-
 -- --------------------------------------------------------
 
 --
@@ -69,10 +57,6 @@ CREATE TABLE `company_branch` (
   `Company_Id` bigint(20) NOT NULL,
   `Branch_Id` bigint(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Dumping data for table `company_branch`
---
 
 -- --------------------------------------------------------
 
@@ -86,10 +70,6 @@ CREATE TABLE `company_criteria` (
   `Criteria` varchar(500) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
---
--- Dumping data for table `company_criteria`
---
-
 -- --------------------------------------------------------
 
 --
@@ -101,10 +81,6 @@ CREATE TABLE `company_master` (
   `Company_Name` varchar(100) NOT NULL,
   `Company_Status` varchar(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Dumping data for table `company_master`
---
 
 -- --------------------------------------------------------
 
@@ -120,10 +96,6 @@ CREATE TABLE `company_round` (
   `Round_Duration` int(11) NOT NULL,
   `Round_Status` varchar(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Dumping data for table `company_round`
---
 
 -- --------------------------------------------------------
 
@@ -171,10 +143,6 @@ CREATE TABLE `designation_master` (
   `Designation_Status` varchar(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
---
--- Dumping data for table `designation_master`
---
-
 -- --------------------------------------------------------
 
 --
@@ -211,6 +179,7 @@ CREATE TABLE `quiz_master` (
   `Quiz_Name` varchar(100) NOT NULL,
   `Quiz_Code` varchar(50) DEFAULT NULL,
   `Quiz_Time` int(11) DEFAULT NULL,
+  `Quiz_Duration` int(11) NOT NULL,
   `Staff_Id` bigint(20) NOT NULL,
   `Quiz_Status` varchar(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
@@ -254,10 +223,6 @@ CREATE TABLE `staff_branch` (
   `Staff_Branch_Status` varchar(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
---
--- Dumping data for table `staff_branch`
---
-
 -- --------------------------------------------------------
 
 --
@@ -271,10 +236,6 @@ CREATE TABLE `staff_login` (
   `Staff_Password` varchar(100) NOT NULL,
   `Staff_Login_Status` varchar(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Dumping data for table `staff_login`
---
 
 -- --------------------------------------------------------
 
@@ -296,10 +257,6 @@ CREATE TABLE `staff_master` (
   `Is_Admin` varchar(5) NOT NULL,
   `Staff_Status` varchar(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Dumping data for table `staff_master`
---
 
 -- --------------------------------------------------------
 
@@ -333,9 +290,6 @@ CREATE TABLE `student_class` (
   `Student_Class_Status` varchar(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
---
--- Dumping data for table `student_class`
---
 -- --------------------------------------------------------
 
 --
@@ -377,10 +331,6 @@ CREATE TABLE `student_master` (
   `CET_Out_Of` smallint(6) NOT NULL,
   `Student_Status` varchar(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Dumping data for table `student_master`
---
 
 -- --------------------------------------------------------
 
@@ -437,11 +387,13 @@ CREATE TABLE `training_lecture_attendance` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `training_lecture_semester`
+-- Table structure for table `training_lecture_branch`
 --
 
-CREATE TABLE `training_lecture_semester` (
+CREATE TABLE `training_lecture_branch` (
+  `Training_Lecture_Branch_Id` bigint(20) NOT NULL,
   `Training_Lecture_Id` bigint(20) NOT NULL,
+  `Branch_Id` bigint(20) NOT NULL,
   `Semester` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
@@ -606,10 +558,10 @@ ALTER TABLE `training_lecture_attendance`
   ADD PRIMARY KEY (`Training_Lecture_Attendance_Id`);
 
 --
--- Indexes for table `training_lecture_semester`
+-- Indexes for table `training_lecture_branch`
 --
-ALTER TABLE `training_lecture_semester`
-  ADD PRIMARY KEY (`Training_Lecture_Id`);
+ALTER TABLE `training_lecture_branch`
+  ADD PRIMARY KEY (`Training_Lecture_Branch_Id`);
 
 --
 -- AUTO_INCREMENT for dumped tables
@@ -619,37 +571,37 @@ ALTER TABLE `training_lecture_semester`
 -- AUTO_INCREMENT for table `academic_master`
 --
 ALTER TABLE `academic_master`
-  MODIFY `Academic_Id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `Academic_Id` bigint(20) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `branch_master`
 --
 ALTER TABLE `branch_master`
-  MODIFY `Branch_Id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `Branch_Id` bigint(20) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `company_branch`
 --
 ALTER TABLE `company_branch`
-  MODIFY `Company_Branch_Id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `Company_Branch_Id` bigint(20) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `company_criteria`
 --
 ALTER TABLE `company_criteria`
-  MODIFY `Company_Criteria_Id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `Company_Criteria_Id` bigint(20) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `company_master`
 --
 ALTER TABLE `company_master`
-  MODIFY `Company_Id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `Company_Id` bigint(20) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `company_round`
 --
 ALTER TABLE `company_round`
-  MODIFY `Company_Round_Id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `Company_Round_Id` bigint(20) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `company_round_student_selected`
@@ -673,7 +625,7 @@ ALTER TABLE `company_student_registration`
 -- AUTO_INCREMENT for table `designation_master`
 --
 ALTER TABLE `designation_master`
-  MODIFY `Designation_Id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `Designation_Id` bigint(20) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `message_draft`
@@ -709,19 +661,19 @@ ALTER TABLE `quiz_question_option`
 -- AUTO_INCREMENT for table `staff_branch`
 --
 ALTER TABLE `staff_branch`
-  MODIFY `Staff_Branch_Id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `Staff_Branch_Id` bigint(20) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `staff_login`
 --
 ALTER TABLE `staff_login`
-  MODIFY `Staff_Login_Id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `Staff_Login_Id` bigint(20) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `staff_master`
 --
 ALTER TABLE `staff_master`
-  MODIFY `Staff_Id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `Staff_Id` bigint(20) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `student_academics`
@@ -733,7 +685,7 @@ ALTER TABLE `student_academics`
 -- AUTO_INCREMENT for table `student_class`
 --
 ALTER TABLE `student_class`
-  MODIFY `Student_Class_Id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `Student_Class_Id` bigint(20) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `student_login`
@@ -745,7 +697,7 @@ ALTER TABLE `student_login`
 -- AUTO_INCREMENT for table `student_master`
 --
 ALTER TABLE `student_master`
-  MODIFY `Student_Id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `Student_Id` bigint(20) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `student_quiz`
@@ -772,10 +724,10 @@ ALTER TABLE `training_lecture_attendance`
   MODIFY `Training_Lecture_Attendance_Id` bigint(20) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT for table `training_lecture_semester`
+-- AUTO_INCREMENT for table `training_lecture_branch`
 --
-ALTER TABLE `training_lecture_semester`
-  MODIFY `Training_Lecture_Id` bigint(20) NOT NULL AUTO_INCREMENT;
+ALTER TABLE `training_lecture_branch`
+  MODIFY `Training_Lecture_Branch_Id` bigint(20) NOT NULL AUTO_INCREMENT;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
