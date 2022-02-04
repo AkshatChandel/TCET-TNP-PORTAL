@@ -18,7 +18,7 @@
       </div>
     </div>
     <div class="right">
-      <form action="#">
+      <form action="" method="POST">
         <div class="formHead">
           <h2>Login</h2>
         </div>
@@ -40,26 +40,55 @@
 
         <a href="#">Forgot Password?</a>
 
-        <button>Login</button>
+        <button type="submit">Login</button>
 
       </form>
+
+      <?php
+      if (isset($_POST['submit'])) {
+
+        $Username = $_GET["txt_Username"];
+        $Password = $_GET["txt_Password"];
+        $UserType = $_GET["select_UserType"];
+
+        if ($UserType == "Admin" || $UserType == "Staff") {
+          
+        } else if ($UserType == "Student") {
+        }
+
+        // $sql1 = "SELECT * FROM Student_Login";
+
+        $sql1 = "INSERT INTO academic_master(Academic_Name, Academic_Status) VALUES('" . $AcademicName . "', '" . $AcademicStatus . "')";
+
+        if ($con->query($sql1) === TRUE) {
+          echo "<script> location.href='Index.php'; </script>";
+        } else {
+          echo "<br>error: " . $sql1 . "<br>" . $con->error;
+        }
+      }
+      ?>
     </div>
   </main>
 </body>
 
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+
 <script>
   function setCookie(cname, cvalue, exdays) {
-    var d = new Date();
+    let d = new Date();
     d.setTime(d.getTime() + (exdays * 24 * 60 * 60 * 1000));
-    var expires = "expires=" + d.toUTCString();
+    let expires = "expires=" + d.toUTCString();
     document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
   }
 
   function getCookie(cname) {
-    var name = cname + "=";
-    var ca = document.cookie.split(';');
-    for (var i = 0; i < ca.length; i++) {
-      var c = ca[i];
+    let name = cname + "=";
+    let ca = document.cookie.split(';');
+    for (let i = 0; i < ca.length; i++) {
+      let c = ca[i];
       while (c.charAt(0) == ' ') {
         c = c.substring(1);
       }
@@ -77,7 +106,7 @@
 
     if (UserType == "select") {
       alert('Please Select The User Type')
-    } else {
+    } else if (UserType == "Admin") {
       $.ajax({
         type: "GET",
         url: 'check_login.php',
@@ -90,23 +119,74 @@
         },
         success: function(data) {
           let obj = JSON.parse(data);
-          let data = obj.success;
-          if (data == 1) {
-            let StaffId = obj.StaffId;
+          data = obj.success;
+
+          let StaffId = obj.StaffId;
+
+          if (StaffId == -1) {
+            alert("Incorrect Username or Password");
+          } else {
+            setCookie("Admin", 1, 1);
             setCookie("StaffId", StaffId, 1);
             window.location.href = "Admin/Index.php";
-          } else if (data == 2) {
-            let StaffId = obj.StaffId;
-            setCookie("StaffId", StaffId, 1);
-            window.location.href = "Staff/Dashboard/Index.php";
-          } else if (data == 3) {
-            let StudentId = obj.StudentId;
-            setCookie("StudentId", StudentId, 1);
-            window.location.href = "Student/Dashboard/Index.php";
-          } else if (data == -1) {
-            alert("Access Denied");
-          } else if (data == -2) {
+          }
+        },
+        error: function() {
+          console.log("error");
+        }
+      });
+    } else if (UserType == "Staff") {
+      $.ajax({
+        type: "GET",
+        url: 'check_login.php',
+        contentType: "application/json; charset=utf-8",
+        datatype: "Json",
+        data: {
+          UserType: UserType,
+          Username: Username,
+          Password: Password
+        },
+        success: function(data) {
+          let obj = JSON.parse(data);
+          data = obj.success;
+
+          let StaffId = obj.StaffId;
+
+          if (StaffId == -1) {
             alert("Incorrect Username or Password");
+          } else if (StaffId == 0) {
+            alert("Access Denied");
+          } else {
+            setCookie("StaffId", StaffId, 1);
+            window.location.href = "Staff/Index.php";
+          }
+        },
+        error: function() {
+          console.log("error");
+        }
+      });
+    } else if (UserType == "Student") {
+      $.ajax({
+        type: "GET",
+        url: 'check_login.php',
+        contentType: "application/json; charset=utf-8",
+        datatype: "Json",
+        data: {
+          UserType: UserType,
+          Username: Username,
+          Password: Password
+        },
+        success: function(data) {
+          let obj = JSON.parse(data);
+          data = obj.success;
+
+          let StudentId = obj.StudentId;
+
+          if (StudentId == -1) {
+            alert("Incorrect Username or Password");
+          } else {
+            setCookie("StudentId", StudentId, 1);
+            window.location.href = "Student/Index.php";
           }
         },
         error: function() {
