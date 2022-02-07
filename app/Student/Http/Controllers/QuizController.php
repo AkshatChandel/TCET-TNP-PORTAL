@@ -15,7 +15,7 @@ class QuizController extends Controller
     {
         $QuizId = 1;
         // $Quiz = DB::table('Quiz_Master')->find(3);
-        $Quiz = DB::table('Quiz_Master')->find(3);
+        // $Quiz = DB::table('Quiz_Master')->find(3);
     }
 
     public function attemptQuiz()
