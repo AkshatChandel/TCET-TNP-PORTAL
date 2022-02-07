@@ -1,0 +1,49 @@
+php artisan serve
+
+Controller
+php artisan make:controller Users
+
+public function index(){
+echo "Hello controller";
+}
+
+use App\Http\Contoller\Users;
+Routes::get("path","controller file")
+Route::get("users", [Users::class, 'index']);
+
+php artisan make:component Header
+
+@include('inner')
+
+<script>
+    var data = @json($users);
+    console.warn(data);
+</script>
+
+@if
+@elseif
+@else
+@endif
+
+@for
+@endfor
+
+@foreach
+@endforif
+
+#Database
+use Illuminate\Support\Facades\DB;
+
+DB::select("SELECT * FROM users");
+
+php artisan make:model User
+
+use App\Models\User;
+
+use Illuminate\Support\Facades\Http;
+
+function addData(Request $req){
+$member = new Member;
+$member->name = $req->name;
+return redirect("index");
+}

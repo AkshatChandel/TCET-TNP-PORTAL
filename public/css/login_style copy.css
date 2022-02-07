@@ -1,0 +1,133 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  
+  main {
+    height: 100vh;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    background-color: #f5f5f5;
+  }
+  
+  .left {
+    width: 55%;
+    height: 100%;
+    background: url("https://images.unsplash.com/photo-1643447946892-2d099c1b1718?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=386&q=80");
+    background-position: center;
+    background-size: cover;
+  }
+  
+  .right {
+    width: 45%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  
+  form {
+    display: flex;
+    flex-direction: column;
+    background: #fff;
+    height: 400px;
+    width: 400px;
+    border-radius: 10px;
+    padding: 10px 60px; 
+  }
+  
+  .formHead {
+    width: 100%; 
+    padding: 15px;
+  }
+  
+  .formHead h2 {
+    font-size: 35px;
+    text-align: center;
+  }
+  
+  .inputElements {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .dropdown {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    margin-top: 15px;
+  }
+  
+  .dropdown select {
+    width: 100%;
+    font-size: 16px;
+  }
+  
+  input {
+    width: 100%;
+    display: flex;
+    border: none;
+    border-bottom: 2px solid #eee;
+    background-color: transparent;
+    outline: none;
+    padding: 5px;
+    color: #474747;
+    margin-top: 20px;
+    font-size: 16px;
+  }
+  
+  select {
+    background-color: transparent;
+    outline: none;
+    border: none;
+    border-bottom: 2px solid #eee;
+    padding: 1px;
+    color: #474747;
+  }
+  
+  form a {
+    padding: 5px;
+    margin-left: auto;
+    text-decoration: none;
+    color: #5c5c5c;
+    margin-top: 4px;
+  }
+  
+  button {
+    padding: 5px;
+    font-size: 15px;
+    border-radius: 3px;
+    background-color: #f5540a;
+    border: 1px solid #f5540a;
+    margin-top: 20px;
+  }
+  
+  @media only screen and (max-width: 800px){
+    body {
+      height: 100%;
+      width: 100%;
+    }
+    
+    main {
+      display: flex;
+      flex-direction: column;
+    }
+    
+    .left {
+      width: 100%;
+    }
+    
+    .right {
+      width: 100%;
+      position: absolute;
+      padding: 0 1rem;
+    }
+    
+    .form {
+      width: 100%;
+      margin: 0 1rem;
+    }
+  }
