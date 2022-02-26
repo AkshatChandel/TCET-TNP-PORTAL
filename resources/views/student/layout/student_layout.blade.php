@@ -5,7 +5,8 @@
     <title>TCET</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <meta name="keywords" content="TCET" />
+    <meta name="keywords" content="Glance Design Dashboard Responsive web template, Bootstrap Web Templates, Flat Web Templates, Android Compatible web template, 
+SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, SonyEricsson, Motorola web design" />
     <script type="application/x-javascript">
         addEventListener("load", function() {
             setTimeout(hideURLbar, 0);
@@ -128,7 +129,7 @@
                                     <li><a href="media.html"><i class="fa fa-angle-right"></i> Media Css</a></li>
                                 </ul>
                             </li> -->
-                            <!-- <li class="treeview">
+                            <li class="treeview">
                                 <a href="charts.html">
                                     <i class="fa fa-pie-chart"></i>
                                     <span>Charts</span>
@@ -199,7 +200,8 @@
                             <li class="header">LABELS</li>
                             <li><a href="#"><i class="fa fa-angle-right text-red"></i> <span>Important</span></a></li>
                             <li><a href="#"><i class="fa fa-angle-right text-yellow"></i> <span>Warning</span></a></li>
-                            <li><a href="#"><i class="fa fa-angle-right text-aqua"></i> <span>Information</span></a></li> -->
+                            <li><a href="#"><i class="fa fa-angle-right text-aqua"></i> <span>Information</span></a>
+                            </li>
                         </ul>
                     </div>
                     <!-- /.navbar-collapse -->
@@ -407,7 +409,7 @@
     </div>
 
     <div class="footer">
-        <p>&copy; TCET. All Rights Reserved | Developed by <a href="https://github.com/AkshatChandel" target="_blank">Akshat Chandel</a>, <a href="https://github.com/AkshatChandel" target="_blank">Darshil</a>, <a href="https://github.com/AkshatChandel" target="_blank">Heena</a></p>
+        <p>&copy; 2018 Glance Design Dashboard. All Rights Reserved | Design by <a href="https://w3layouts.com/" target="_blank">w3layouts</a></p>
     </div>
 
     <!-- new added graphs chart js-->

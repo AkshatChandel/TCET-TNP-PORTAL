@@ -6,7 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="{{url('css/login_style.css')}}" rel="stylesheet">
-    <title>Document</title>
+    <title>TCET</title>
 </head>
 
 <body>
@@ -18,7 +18,13 @@
             </div>
         </div>
         <div class="right">
-            <form action="" method="POST">
+            <form action="index" method="POST">
+                @csrf
+                
+                @if(Session::has('fail'))
+                <div style="color: red;">{{ Session::get('fail') }}</div>
+                @endif
+
                 <div class="formHead">
                     <h2>Login</h2>
                 </div>
@@ -26,16 +32,19 @@
 
                     <div class="dropdown">
                         <!--              <label for="cars">Role:</label> -->
-                        <select id="select_UserType" name="UserType">
-                            <option value="select" class="defaultRole">Role</option>
+                        <select id="select_UserType" name="UserType" value="{{ old('UserType') }}">
+                            {{-- <option value="select" class="defaultRole">Role</option> --}}
                             <option value="Student">Student</option>
                             <option value="Staff">Staff</option>
                             <option value="Admin">Admin</option>
                         </select>
                     </div>
+                    <span style="color: red;">@error('UserType') {{ $message }} @enderror</span>
 
-                    <input type="text" name="Username" id="txt_Username" placeholder="Username">
+                    <input type="text" name="Username" id="txt_Username" placeholder="Username" value="{{ old('Username') }}">
+                    <span style="color: red;">@error('Username') {{ $message }} @enderror</span>
                     <input type="password" name="Password" id="txt_Password" placeholder="Password">
+                    <span style="color: red;">@error('Password') {{ $message }} @enderror</span>
                 </div>
 
                 <a href="#">Forgot Password?</a>

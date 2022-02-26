@@ -9,6 +9,7 @@ use App\Models\Branch_Master;
 use App\Models\Designation_Master;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
+// use Hash;
 
 class StaffController extends Controller
 {
@@ -60,6 +61,7 @@ class StaffController extends Controller
         $staff_login = new Staff_Login;
         $staff_login->Staff_Id = $StaffId;
         $staff_login->Staff_Username = "T" . $staff_master->Staff_College_Id;
+        // $staff_login->Staff_Password = Hash::make("T" . $staff_master->Staff_College_Id);
         $staff_login->Staff_Password = "T" . $staff_master->Staff_College_Id;
         $staff_login->Is_Admin = "No";
         $staff_login->Staff_Login_Status = "Active";
