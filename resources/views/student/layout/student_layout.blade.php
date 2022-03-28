@@ -109,12 +109,12 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
                                 </a>
                             </li>
                             <li class="treeview">
-                                <a href="{{url('/admin/quiz/')}}">
+                                <a href="{{url('/student/quiz/')}}">
                                     <i class="fa fa-dashboard"></i> <span>Quizzes</span>
                                 </a>
                             </li>
                             <li class="treeview">
-                                <a href="{{url('/admin/company/')}}">
+                                <a href="{{url('/student/company/')}}">
                                     <i class="fa fa-dashboard"></i> <span>Companies</span>
                                 </a>
                             </li>
@@ -129,7 +129,7 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
                                     <li><a href="media.html"><i class="fa fa-angle-right"></i> Media Css</a></li>
                                 </ul>
                             </li> -->
-                            <li class="treeview">
+                            <!-- <li class="treeview">
                                 <a href="charts.html">
                                     <i class="fa fa-pie-chart"></i>
                                     <span>Charts</span>
@@ -201,7 +201,7 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
                             <li><a href="#"><i class="fa fa-angle-right text-red"></i> <span>Important</span></a></li>
                             <li><a href="#"><i class="fa fa-angle-right text-yellow"></i> <span>Warning</span></a></li>
                             <li><a href="#"><i class="fa fa-angle-right text-aqua"></i> <span>Information</span></a>
-                            </li>
+                            </li> -->
                         </ul>
                     </div>
                     <!-- /.navbar-collapse -->

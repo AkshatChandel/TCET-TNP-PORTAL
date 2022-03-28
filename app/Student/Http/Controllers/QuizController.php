@@ -2,10 +2,10 @@
 
 namespace App\Student\Http\Controllers;
 
-use App\Models\Student_Class;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
+use App\Models\Student_Class;
 use App\Models\Student_Quiz;
 use App\Models\Student_Quiz_Answer;
 
@@ -27,7 +27,12 @@ class QuizController extends Controller
             // ->where('Quiz_Time', '<=', '')
             ->get();
 
-        return view("admin.quiz.index", ['quizzes' => $data]);
+        // $data = DB::table('Quiz_Master')
+        // ->join('Staff_Master', 'Staff_Master.Staff_Id', '=', 'Quiz_Master.Staff_Id')
+        // ->select('Staff_Master.Staff_Id', 'Staff_Master.Staff_College_Id', 'Staff_Master.First_Name', 'Staff_Master.Middle_Name', 'Staff_Master.Last_Name', 'Staff_Master.Date_Of_Birth', 'Staff_Master.Gender', 'Staff_Master.Contact_No', 'Staff_Master.Email_Id', 'Quiz_Master.Quiz_Id', 'Quiz_Master.Quiz_Name', 'Quiz_Master.Quiz_Code', 'Quiz_Master.Quiz_Time', 'Quiz_Master.Quiz_Duration', 'Quiz_Master.Quiz_Status')
+        // ->get();
+
+        return view("student.quiz.index", ['quizzes' => $data]);
     }
 
     public function attempt($QuizId)
@@ -57,7 +62,7 @@ class QuizController extends Controller
 
 
         // return $StudentClass;
-        $StudentClassId = $StudentClass[0] -> Student_Class_Id;
+        $StudentClassId = $StudentClass[0]->Student_Class_Id;
 
         $student_quiz = new Student_Quiz();
         $student_quiz->Student_Class_Id = $StudentClassId;
@@ -81,6 +86,6 @@ class QuizController extends Controller
             $student_quiz_answer->save();
         }
 
-        return redirect("index");
+        return redirect("student/quiz");
     }
 }

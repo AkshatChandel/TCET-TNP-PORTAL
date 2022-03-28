@@ -92,4 +92,6 @@ Route::group(['middleware' => ['studentAuthenticate']], function () {
     Route::get("student/quiz", [App\Student\Http\Controllers\QuizController::class, 'index']);
     Route::get("student/quiz/attempt/{quizid}", [App\Student\Http\Controllers\QuizController::class, 'attempt']);
     Route::post("student/quiz/attempt", [App\Student\Http\Controllers\QuizController::class, 'attemptQuiz']);
+
+    Route::get("student/company", [App\Student\Http\Controllers\CompanyController::class, 'index']);
 });

@@ -20,7 +20,7 @@
                 @php
                 $count = 0;
                 $score = 0;
-                $srno = 0;
+                $SrNo = 0;
                 @endphp
 
                 @foreach($studentsData as $student)
@@ -30,20 +30,20 @@
                 @endphp
 
                 @php
-                
+
                 $markedOption = $student->Quiz_Question_Option_Id;
 
                 foreach($quizCorrectAnswers as $quizCorrectAnswer){
-                    if($markedOption == $quizCorrectAnswer->Quiz_Question_Option_Id){
-                        $score++;
-                    }
+                if($markedOption == $quizCorrectAnswer->Quiz_Question_Option_Id){
+                $score++;
+                }
                 }
                 @endphp
 
                 @if($count % count($quizCorrectAnswers) == 0)
 
                 @php
-                $srno++;
+                $SrNo++;
                 @endphp
 
                 <tr>
@@ -52,6 +52,8 @@
                     <td>{{$score}} / {{ count($quizCorrectAnswers) }}</td>
                     <td><button type="button" onclick="checkQuizOptions('{{$student->Student_Class_Id}}', '{{$quizData[0]->Quiz_Id}}')">Check Answers</button></td>
                 </tr>
+
+                $score = 0;
 
                 @endif
 
@@ -62,11 +64,9 @@
 </div>
 
 <script>
-
-    function checkQuizOptions(StudentClassId, QuizId){
+    function checkQuizOptions(StudentClassId, QuizId) {
         window.location.href = "{{url('admin/quiz/checkquizoptions/')}}" + "/" + QuizId + "?studentclassid=" + StudentClassId;
     }
-
 </script>
 
 @stop
