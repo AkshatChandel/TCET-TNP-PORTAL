@@ -30,9 +30,9 @@ class QuizController extends Controller
         return view("admin.quiz.index", ['quizzes' => $data]);
     }
 
-    public function attempt()
+    public function attempt($QuizId)
     {
-        $QuizId = 1;
+        // $QuizId = 1;
         // $Quiz = DB::table('Quiz_Master')->find(3);
         $quiz = DB::table('Quiz_Master')
             ->join('Quiz_Question', 'Quiz_Question.Quiz_Id', '=', 'Quiz_Master.Quiz_Id')
@@ -50,10 +50,14 @@ class QuizController extends Controller
         $QuizId = 1;
         $StudentId = 1;
 
-        $StudentClassId = Student_Class::select('Student_Class_Id')
+        $StudentClass = Student_Class::select('Student_Class_Id')
             ->where('Student_Id', '=', $StudentId)
             ->where('Student_Class_Status', '=', 'Active')
             ->get();
+
+
+        // return $StudentClass;
+        $StudentClassId = $StudentClass[0] -> Student_Class_Id;
 
         $student_quiz = new Student_Quiz();
         $student_quiz->Student_Class_Id = $StudentClassId;
@@ -72,6 +76,8 @@ class QuizController extends Controller
             $student_quiz_answer->Student_Quiz_Id = $StudentQuizId;
             $student_quiz_answer->Quiz_Question_Id = $QuizQuestions[$i]->Quiz_Question_Id;
             $student_quiz_answer->Quiz_Question_Option_Id = $request->$OptionName;
+
+            // return $student_quiz_answer;
             $student_quiz_answer->save();
         }
 

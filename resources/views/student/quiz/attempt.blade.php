@@ -8,7 +8,7 @@
                 <h4>Quiz - {{$quiz[0]->Quiz_Name}} - {{$quiz[0]->Quiz_Code}} - {{$quiz[0]->First_Name . " " . $quiz[0]->Last_Name}}</h4>
             </div>
             <div class="form-body">
-                <form class="form-horizontal" action="create" method="POST">
+                <form class="form-horizontal" action="attempt" method="POST">
                     @csrf
 
                     @for ($i = 0; $i < count($quiz); $i = $i +  4)
@@ -20,7 +20,8 @@
                             <div class="panel-body">
 
                                 @php 
-                                $radioButtonName =  "Question" . $quiz[$i]->Quiz_Question_Id
+                                $radioButtonName =  "Question" . $quiz[$i]->Quiz_Question_Id;
+                                
                                 @endphp
 
                                 @for($j = 0; $j < 4; $j++)
@@ -28,7 +29,7 @@
                                 <div class="form-group">
                                     <div class="input-group">
                                         <div class="input-group-addon">
-                                            <input type="radio" name="{{ $radioButtonName }}">
+                                            <input type="radio" name="{{ $radioButtonName }}" value="{{ $quiz[$i + $j]->Quiz_Question_Option_Id }}">
                                         </div>
                                         <label class="form-control1">{{ $quiz[$i + $j]->Quiz_Option }}</label>
                                         {{-- <input type="text" class="form-control1"> --}}

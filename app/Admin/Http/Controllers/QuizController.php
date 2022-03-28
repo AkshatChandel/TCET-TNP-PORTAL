@@ -69,4 +69,62 @@ class QuizController extends Controller
 
         return redirect('/admin/quiz/');
     }
+
+    public function checkQuiz($QuizId){
+
+        $quizData = DB::table('Quiz_Master')
+            ->where('Quiz_Master.Quiz_Id','=',$QuizId)
+            ->select('Quiz_Master.Quiz_Id', 'Quiz_Master.Quiz_Code', 'Quiz_Master.Quiz_Name')
+            ->get();
+
+        $studentsData = DB::table('Student_Quiz')
+            ->join('Quiz_Master', 'Quiz_Master.Quiz_Id', '=', 'Student_Quiz.Quiz_Id')
+            ->join('Student_Class', 'Student_Class.Student_Class_Id', '=', 'Student_Quiz.Student_Class_Id')
+            ->join('Student_Master', 'Student_Master.Student_Id', '=', 'Student_Class.Student_Id')
+            ->join('Branch_Master', 'Branch_Master.Branch_Id', '=', 'Student_Class.Branch_Id')
+            ->join('Student_Quiz_Answer', 'Student_Quiz_Answer.Student_Quiz_Id', 'Student_Quiz.Student_Quiz_Id')
+            ->select('Student_Master.Student_Id', 'Student_Class.Student_Class_Id', 'Student_Master.First_Name', 'Student_Master.Middle_Name', 'Student_Master.Last_Name', 'Branch_Master.Branch_Name', 'Student_Quiz_Answer.Quiz_Question_Option_Id')
+            ->get();
+
+        $quizCorrectAnswers = DB::Table("Quiz_Question")
+            ->join('Quiz_Question_Option', 'Quiz_Question_Option.Quiz_Question_Id', '=', 'Quiz_Question.Quiz_Question_Id')
+            ->where('Quiz_Question.Quiz_Id', '=', $QuizId)
+            ->where('Quiz_Question_Option.Is_Correct_Answer', '=', 'Yes')
+            ->select('Quiz_Question_Option.Quiz_Question_Id', 'Quiz_Question_Option.Quiz_Question_Option_Id')
+            ->get();
+
+        return view("admin.quiz.checkquiz", ['quizData' => $quizData, 'studentsData' => $studentsData, 'quizCorrectAnswers' => $quizCorrectAnswers]);
+    }
+
+    public function checkQuizOptions($QuizId, Request $request){
+
+        $quiz = DB::table('Quiz_Master')
+            ->join('Quiz_Question', 'Quiz_Question.Quiz_Id', '=', 'Quiz_Master.Quiz_Id')
+            ->join('Quiz_Question_Option', 'Quiz_Question_Option.Quiz_Question_Id', '=', 'Quiz_Question.Quiz_Question_Id')
+            ->join('Staff_Master', 'Staff_Master.Staff_Id', '=', 'Quiz_Master.Staff_Id')
+            ->where('Quiz_Master.Quiz_Id', '=', $QuizId)
+            ->get();
+
+        // $quizData = DB::table('Quiz_Master')
+        //     ->where('Quiz_Id','=',$QuizId);
+
+        $StudentClassId = $request->studentclassid;
+
+        $studentsData = DB::table('Student_Quiz')
+            ->join('Quiz_Master', 'Quiz_Master.Quiz_Id', '=', 'Student_Quiz.Quiz_Id')
+            ->join('Student_Class', 'Student_Class.Student_Class_Id', '=', 'Student_Quiz.Student_Class_Id')
+            ->join('Student_Master', 'Student_Master.Student_Id', '=', 'Student_Class.Student_Id')
+            ->join('Branch_Master', 'Branch_Master.Branch_Id', '=', 'Student_Class.Branch_Id')
+            ->join('Student_Quiz_Answer', 'Student_Quiz_Answer.Student_Quiz_Id', 'Student_Quiz.Student_Quiz_Id')
+            ->where('Student_Class.Student_Class_Id', '=', $StudentClassId)
+            ->select('Student_Master.Student_Id', 'Student_Master.First_Name', 'Student_Master.Middle_Name', 'Student_Master.Last_Name', 'Branch_Master.Branch_Name', 'Student_Quiz_Answer.Quiz_Question_Id', 'Student_Quiz_Answer.Quiz_Question_Option_Id')
+            ->get();
+
+        // $quizCorrectAnswers = DB::Table("Quiz_Master")
+        //     ->join('Quiz_Question', 'Quiz_Question.Quiz_Id', '=', 'Quiz_Master.Quiz_Id')
+        //     ->join('Quiz_Question_Option', 'Quiz_Question_Option.Quiz_Question_Id', '=', 'Quiz_Question.Quiz_Question_Id')
+        //     ->where('Quiz_Question_Option.Is_Correct_Answer', '=', 'Yes');
+
+        return view("admin.quiz.checkquizoptions", ['quiz' => $quiz, 'studentsData' => $studentsData]);
+    }
 }

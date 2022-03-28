@@ -72,6 +72,9 @@ Route::group(['middleware' => ['adminAuthenticate']], function () {
     Route::get("admin/quiz", [App\Admin\Http\Controllers\QuizController::class, 'index']);
     Route::get("admin/quiz/create", [App\Admin\Http\Controllers\QuizController::class, 'create']);
     Route::post("admin/quiz/create", [App\Admin\Http\Controllers\QuizController::class, 'createQuiz']);
+    Route::get("admin/quiz/checkquiz/{quizid}", [App\Admin\Http\Controllers\QuizController::class, 'checkQuiz']);
+    Route::get("admin/quiz/checkquizoptions/{quizid}", [App\Admin\Http\Controllers\QuizController::class, 'checkQuizOptions']);
+
 
     Route::get("admin/company", [App\Admin\Http\Controllers\CompanyController::class, 'index']);
     Route::get("admin/company/create", [App\Admin\Http\Controllers\CompanyController::class, 'create']);
@@ -87,6 +90,6 @@ Route::group(['middleware' => ['studentAuthenticate']], function () {
     Route::get("student/dashboard", [App\Student\Http\Controllers\StudentController::class, 'dashboard']);
 
     Route::get("student/quiz", [App\Student\Http\Controllers\QuizController::class, 'index']);
-    Route::get("student/quiz/attempt", [App\Student\Http\Controllers\QuizController::class, 'attempt']);
+    Route::get("student/quiz/attempt/{quizid}", [App\Student\Http\Controllers\QuizController::class, 'attempt']);
     Route::post("student/quiz/attempt", [App\Student\Http\Controllers\QuizController::class, 'attemptQuiz']);
 });

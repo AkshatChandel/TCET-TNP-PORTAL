@@ -18,6 +18,7 @@
                     <th scope="col">Quiz Duration (in minutes)</th>
                     <th scope="col">Quiz Status</th>
                     <th scope="col"></th>
+                    <th scope="col"></th>
                 </tr>
             </thead>
             <tbody>
@@ -41,6 +42,7 @@
                     <td>{{$quiz->Quiz_Duration}}</td>
                     <td>{{$quiz->Quiz_Status}}</td>
                     <td><button type="button" onclick="edit('{{$quiz->Quiz_Id}}')">Edit</button></td>
+                    <td><button type="button" onclick="checkQuiz('{{$quiz->Quiz_Id}}')">Check Quiz</button></td>
                 </tr>
 
                 @endforeach
@@ -54,8 +56,12 @@
         window.location.href = "{{url('admin/quiz/create')}}";
     }
 
-    function edit(QuizId) {
-        window.location.href = "Edit.php?QuizId=" + QuizId;
+    // function edit(QuizId) {
+    //     window.location.href = "Edit.php?QuizId=" + QuizId;
+    // }
+
+    function checkQuiz(QuizId) {
+        window.location.href = "{{url('admin/quiz/checkquiz/')}}" + "/" + QuizId;
     }
 </script>
 
