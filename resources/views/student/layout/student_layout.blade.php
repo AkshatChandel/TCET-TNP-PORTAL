@@ -89,26 +89,6 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
                                 </a>
                             </li>
                             <li class="treeview">
-                                <a href="{{url('/admin/academicsession/')}}">
-                                    <i class="fa fa-dashboard"></i> <span>Academic Session</span>
-                                </a>
-                            </li>
-                            <li class="treeview">
-                                <a href="{{url('/admin/designation/')}}">
-                                    <i class="fa fa-dashboard"></i> <span>Designation</span>
-                                </a>
-                            </li>
-                            <li class="treeview">
-                                <a href="{{url('/admin/staff/')}}">
-                                    <i class="fa fa-dashboard"></i> <span>Staff Master</span>
-                                </a>
-                            </li>
-                            <li class="treeview">
-                                <a href="{{url('/admin/student/')}}">
-                                    <i class="fa fa-dashboard"></i> <span>Student Master</span>
-                                </a>
-                            </li>
-                            <li class="treeview">
                                 <a href="{{url('/student/quiz/')}}">
                                     <i class="fa fa-dashboard"></i> <span>Quizzes</span>
                                 </a>

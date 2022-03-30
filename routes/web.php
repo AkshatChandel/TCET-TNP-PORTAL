@@ -79,6 +79,7 @@ Route::group(['middleware' => ['adminAuthenticate']], function () {
     Route::get("admin/company", [App\Admin\Http\Controllers\CompanyController::class, 'index']);
     Route::get("admin/company/create", [App\Admin\Http\Controllers\CompanyController::class, 'create']);
     Route::post("admin/company/create", [App\Admin\Http\Controllers\CompanyController::class, 'createCompany']);
+    Route::get("admin/company/view/{companyid}", [App\Admin\Http\Controllers\CompanyController::class, 'viewCompanyDetails']);
 });
 
 Route::group(['middleware' => ['staffAuthenticate']], function () {

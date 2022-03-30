@@ -1,4 +1,4 @@
-@extends('student.layout.student_layout')
+@extends('admin.layout.admin_layout')
 
 @section('main_content')
 <div class="tables">
@@ -107,36 +107,7 @@
                 </tbody>
             </table>
         </div>
-
-        <div>
-            <center><button type="button" name="submit" onclick="registerForCompany('{{$companyDetails->Company_Id}}')" class="btn btn-success">Register</button></center>
-        </div>
     </div>
 </div>
-
-<script>
-    function registerForCompany(CompanyId) {
-
-        $.ajax({
-            type: "GET",
-            url: "{{url('/student/company/registerForCompany/')}}",
-            contentType: "application/json; charset=utf-8",
-            datatype: "Json",
-            data: {
-                CompanyId: CompanyId
-            },
-            success: function(data) {
-                if (data == "success") {
-                    alert("Registered!");
-                    window.location.href = "{{url('student/company  /')}}";
-                }
-            },
-            error: function() {
-                alert("Unable to register");
-            }
-        });
-
-    }
-</script>
 
 @stop

@@ -71,4 +71,34 @@ class CompanyController extends Controller
 
         return redirect("/admin/company/");
     }
+
+    public function viewCompanyDetails($CompanyId)
+    {
+        $companyDetails = $this->getCompanyDetails($CompanyId);
+        return view("admin.company.view", ['companyDetails' => $companyDetails[0], 'companyBranches' => $companyDetails[1], 'companyCriterias' => $companyDetails[2], 'companyRounds' => $companyDetails[3]]);
+    }
+
+    public function getCompanyDetails($CompanyId)
+    {
+        // $CompanyId = (int) $request->CompanyId;
+
+        $company = DB::Table('Company_Master')
+            ->where('Company_Master.Company_Id', '=', $CompanyId)
+            ->get();
+
+        $companyBranches = DB::Table('Company_Branch')
+            ->join('Branch_Master', 'Branch_Master.Branch_Id', '=', 'Company_Branch.Branch_Id')
+            ->where('Company_Branch.Company_Id', '=', $CompanyId)
+            ->get();
+
+        $companyCriterias = DB::Table('Company_Criteria')
+            ->where('Company_Criteria.Company_Id', '=', $CompanyId)
+            ->get();
+
+        $companyRounds = DB::Table('Company_Round')
+            ->where('Company_Round.Company_Id', '=', $CompanyId)
+            ->get();
+
+        return [$company[0], $companyBranches, $companyCriterias, $companyRounds];
+    }
 }
