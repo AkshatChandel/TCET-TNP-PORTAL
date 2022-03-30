@@ -13,13 +13,6 @@ class QuizController extends Controller
 {
     public function index()
     {
-        // $StudentId = 1;
-
-        // $StudentClass = DB::table('Student_Class')
-        //     ->where('Student_Id', '=', $StudentId)
-        //     ->where('Student_Class_Status', '=', 'Active')
-        //     ->get();
-
         $data = DB::table('Quiz_Master')
             ->join('Staff_Master', 'Staff_Master.Staff_Id', '=', 'Quiz_Master.Staff_Id')
             ->select('Staff_Master.Staff_Id', 'Staff_Master.Staff_College_Id', 'Staff_Master.First_Name', 'Staff_Master.Middle_Name', 'Staff_Master.Last_Name', 'Staff_Master.Date_Of_Birth', 'Staff_Master.Gender', 'Staff_Master.Contact_No', 'Staff_Master.Email_Id', 'Quiz_Master.Quiz_Id', 'Quiz_Master.Quiz_Name', 'Quiz_Master.Quiz_Code', 'Quiz_Master.Quiz_Time', 'Quiz_Master.Quiz_Duration', 'Quiz_Master.Quiz_Status')
@@ -37,7 +30,6 @@ class QuizController extends Controller
 
     public function attempt($QuizId)
     {
-        // $QuizId = 1;
         // $Quiz = DB::table('Quiz_Master')->find(3);
         $quiz = DB::table('Quiz_Master')
             ->join('Quiz_Question', 'Quiz_Question.Quiz_Id', '=', 'Quiz_Master.Quiz_Id')
@@ -46,22 +38,19 @@ class QuizController extends Controller
             ->where('Quiz_Master.Quiz_Id', '=', $QuizId)
             ->get();
 
-        // return $quiz;
         return view("student.quiz.attempt", ["quiz" => $quiz]);
     }
 
     public function attemptQuiz(Request $request)
     {
-        $QuizId = 1;
-        $StudentId = 1;
+        $QuizId = $request->QuizId;
+        $StudentId = session()->get('UserId');
 
         $StudentClass = Student_Class::select('Student_Class_Id')
             ->where('Student_Id', '=', $StudentId)
             ->where('Student_Class_Status', '=', 'Active')
             ->get();
 
-
-        // return $StudentClass;
         $StudentClassId = $StudentClass[0]->Student_Class_Id;
 
         $student_quiz = new Student_Quiz();
@@ -81,8 +70,6 @@ class QuizController extends Controller
             $student_quiz_answer->Student_Quiz_Id = $StudentQuizId;
             $student_quiz_answer->Quiz_Question_Id = $QuizQuestions[$i]->Quiz_Question_Id;
             $student_quiz_answer->Quiz_Question_Option_Id = $request->$OptionName;
-
-            // return $student_quiz_answer;
             $student_quiz_answer->save();
         }
 

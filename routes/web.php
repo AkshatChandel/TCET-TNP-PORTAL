@@ -94,4 +94,7 @@ Route::group(['middleware' => ['studentAuthenticate']], function () {
     Route::post("student/quiz/attempt", [App\Student\Http\Controllers\QuizController::class, 'attemptQuiz']);
 
     Route::get("student/company", [App\Student\Http\Controllers\CompanyController::class, 'index']);
+    Route::get("student/company/view/{companyid}", [App\Student\Http\Controllers\CompanyController::class, 'viewCompanyDetails']);
+    Route::get("student/company/registerForCompany", [App\Student\Http\Controllers\CompanyController::class, 'registerForCompany']);
+    Route::get("student/company/getCompanyDetails", [App\Student\Http\Controllers\CompanyController::class, 'getCompanyDetails']);
 });

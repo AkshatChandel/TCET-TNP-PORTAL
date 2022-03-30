@@ -10,6 +10,7 @@
             <div class="form-body">
                 <form class="form-horizontal" action="../attempt" method="POST">
                     @csrf
+                    <input type="hidden" name="QuizId" value="{{$quiz[0]->Quiz_Id}}" />
 
                     @for ($i = 0; $i < count($quiz); $i=$i + 4) <div class="col-md-12 panel-grids">
                         <div class="panel panel-info">
@@ -38,42 +39,16 @@
                         </div>
             </div>
         </div>
-        {{-- <div>                                                
-                        <div class="form-group">
-                            <label class="col-sm-2"></label>
-                        </div>                        
-                        <div>
-                            <div class="col-sm-6">
-                                <label class="col-sm-2">{{ $quiz[$i]->Quiz_Option }}</label>
-    </div>
-    <div class="col-sm-6">
-        <label class="col-sm-2">{{ $quiz[$i + 1]->Quiz_Option }}</label>
-    </div>
-    <div class="col-sm-6">
-        <label class="col-sm-2">{{ $quiz[$i + 2]->Quiz_Option }}</label>
-    </div>
-    <div class="col-sm-6">
-        <input type="radio" value="{{ $quiz[$i + 3]->Quiz_Question_Option_Id }}" />{{ $quiz[$i + 3]->Quiz_Option }}
-    </div>
-</div>
-</div> --}}
-@endfor
+        @endfor
 
-<!-- <div class="form-group">
-                        <label for="txt_QuizName" class="col-sm-2 control-label">Quiz Name</label>
-                        <div class="col-sm-9">
-                            <input type="text" class="form-control" id="txt_QuizName" name="Quiz_Name" placeholder="Quiz Name" required>
-                        </div>
-                    </div> -->
+        <div class="col-sm-offset-2">
+            <button type="submit" name="submit" class="btn btn-success">Submit</button>
+            <button type="reset" class="btn btn-warning">Reset</button>
+        </div>
+        </form>
 
-<div class="col-sm-offset-2">
-    <button type="submit" name="submit" class="btn btn-success">Submit</button>
-    <button type="reset" class="btn btn-warning">Reset</button>
-</div>
-</form>
-
-<input type="button" value="Back To List" onclick="backToList()" class="btn btn-primary" />
-</div>
+        <input type="button" value="Back To List" onclick="backToList()" class="btn btn-primary" />
+    </div>
 </div>
 </div>
 @stop

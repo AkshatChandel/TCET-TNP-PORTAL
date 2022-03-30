@@ -39,7 +39,7 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
     <!--//webfonts-->
 
     <!-- chart -->
-    <script src="{{url('js/Chart.js')}}"></script>
+    <!-- <script src="{{url('js/Chart.js')}}"></script> -->
     <!-- //chart -->
 
     <!-- Metis Menu -->
@@ -49,9 +49,9 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
     <!--//Metis Menu -->
 
     <!-- requried-jsfiles-for owl -->
-    <link href="{{url('css/owl.carousel.css')}}" rel="stylesheet">
-    <script src="{{url('js/owl.carousel.js')}}"></script>
-    <script>
+    <!-- <link href="{{url('css/owl.carousel.css')}}" rel="stylesheet">
+    <script src="{{url('js/owl.carousel.js')}}"></script> -->
+    <!-- <script>
         $(document).ready(function() {
             $("#owl-demo").owlCarousel({
                 items: 3,
@@ -61,7 +61,7 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
                 nav: true,
             });
         });
-    </script>
+    </script> -->
     <!-- //requried-jsfiles-for owl -->
 </head>
 
@@ -414,10 +414,10 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
 
     <!-- new added graphs chart js-->
 
-    <script src="{{url('js/Chart.bundle.js')}}"></script>
+    <!-- <script src="{{url('js/Chart.bundle.js')}}"></script> -->
     <script src="{{url('js/utils.js')}}"></script>
 
-    <script>
+    <!-- <script>
         var MONTHS = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
         var color = Chart.helpers.color;
         var barChartData = {
@@ -532,7 +532,7 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
 
             window.myBar.update();
         });
-    </script>
+    </script> -->
     <!-- new added graphs chart js-->
 
     <!-- Classie -->
@@ -573,7 +573,7 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
     <!-- //side nav js -->
 
     <!-- for index page weekly sales java script -->
-    <script src="{{url('js/SimpleChart.js')}}"></script>
+    <!-- <script src="{{url('js/SimpleChart.js')}}"></script>
     <script>
         var graphdata1 = {
             linecolor: "#CCA300",
@@ -1117,7 +1117,7 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
                 yaxislabel: 'Profit in $'
             });
         });
-    </script>
+    </script> -->
     <!-- //for index page weekly sales java script -->
 
 
