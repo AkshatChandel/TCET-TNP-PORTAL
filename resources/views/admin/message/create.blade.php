@@ -18,8 +18,9 @@
                     </div>
                     <div class="form-group">
                         <label for="txt_MessageContent" class="col-sm-2 control-label">Message Content</label>
-                        <div class="col-sm-8"><textarea name="Message_Content" id="txt_MessageContent" cols="50" rows="4" class="form-control1"></textarea></div>
+                        <div class="col-sm-8"><textarea name="Message_Content" maxlength="2000" minlength="5" id="txt_MessageContent" rows="10" placeholder="Message Content" class="form-control"></textarea></div>
                     </div>
+
                     <div class="col-sm-offset-2">
                         <button type="submit" name="submit" class="btn btn-success">Submit</button>
                         <button type="reset" class="btn btn-warning">Reset</button>

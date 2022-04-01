@@ -11,6 +11,8 @@
         <table class="table table-hover">
             <thead>
                 <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Academic Session</th>
                     <th scope="col">College ID</th>
                     <th scope="col">Name</th>
                     <th scope="col">Year</th>
@@ -21,9 +23,20 @@
                 </tr>
             </thead>
             <tbody>
+
+                @php
+                $count = 0;
+                @endphp
+
                 @foreach($students as $student)
 
+                @php
+                $count++;
+                @endphp
+
                 <tr>
+                    <td>{{$count}}</td>
+                    <td>{{$student->Academic_Session_Name}}</td>
                     <td>{{$student->Student_College_Id}}</td>
                     <td>{{$student->First_Name . " " . $student->Middle_Name . " " . $student->Last_Name}}</td>
 

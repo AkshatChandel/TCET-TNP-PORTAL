@@ -32,6 +32,7 @@
                     <td>{{$count}}</td>
                     <td>{{$messageDraft->Message_Draft_Head}}</td>
                     <td><button type="button" onclick="view('{{$messageDraft->Message_Draft_Id}}')">View</button></td>
+                    <td><button class="btn btn-success" type="button" onclick="sendMessage('{{$messageDraft->Message_Draft_Id}}')">Send Message</button></td>
                 </tr>
 
                 @endforeach
@@ -45,8 +46,12 @@
         window.location.href = "{{url('admin/message/create')}}";
     }
 
-    function view(CompanyId) {
-        window.location.href = "{{url('admin/message/view')}}" + "/" + CompanyId;
+    function view(MessageDraftId) {
+        window.location.href = "{{url('admin/message/view')}}" + "/" + MessageDraftId;
+    }
+
+    function sendMessage(MessageDraftId) {
+        window.location.href = "{{url('admin/message/send')}}" + "/" + MessageDraftId;
     }
 
     // function edit(CompanyId) {

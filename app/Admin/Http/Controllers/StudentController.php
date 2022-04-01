@@ -22,6 +22,8 @@ class StudentController extends Controller
             ->join('Academic_Session_Master', 'Academic_Session_Master.Academic_Session_Id', '=', 'Student_Class.Academic_Session_Id')
             ->join('Branch_Master', 'Branch_Master.Branch_Id', '=', 'Student_Class.Branch_Id')
             ->select('Student_Master.Student_Id', 'Student_Master.Student_College_Id', 'Student_Master.First_Name', 'Student_Master.Middle_Name', 'Student_Master.Last_Name', 'Student_Master.Date_Of_Birth', 'Student_Master.Gender', 'Student_Master.Contact_No', 'Student_Master.Email_Id', 'Student_Class.Semester', 'Student_Class.Roll_No', 'Academic_Session_Master.Academic_Session_Name', 'Branch_Master.Branch_Name')
+            // ->orderBy('Student_Class.Roll_No')
+            ->groupBy('Branch_Master.Branch_Id', 'Student_Master.Student_Id', 'Student_Master.Student_College_Id', 'Student_Master.First_Name', 'Student_Master.Middle_Name', 'Student_Master.Last_Name', 'Student_Master.Date_Of_Birth', 'Student_Master.Gender', 'Student_Master.Contact_No', 'Student_Master.Email_Id', 'Student_Class.Semester', 'Student_Class.Roll_No', 'Academic_Session_Master.Academic_Session_Name', 'Branch_Master.Branch_Name')
             ->get();
 
         return view("admin.student.index", ['students' => $students]);
