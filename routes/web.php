@@ -84,6 +84,7 @@ Route::group(['middleware' => ['adminAuthenticate']], function () {
     Route::get("admin/message", [App\Admin\Http\Controllers\MessageController::class, 'index']);
     Route::get("admin/message/create", [App\Admin\Http\Controllers\MessageController::class, 'create']);
     Route::post("admin/message/create", [App\Admin\Http\Controllers\MessageController::class, 'createMessageDraft']);
+    Route::get("admin/message/view/{messagedraftid}", [App\Admin\Http\Controllers\MessageController::class, 'view']);
     Route::get("admin/message/send/{messagedraftid}", [App\Admin\Http\Controllers\MessageController::class, 'send']);
     // Route::post("admin/message/send", [App\Admin\Http\Controllers\MessageController::class, 'sendMessage']);
     Route::get("admin/message/searchStudents", [App\Admin\Http\Controllers\MessageController::class, 'searchStudents']);

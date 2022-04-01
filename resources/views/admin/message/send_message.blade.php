@@ -65,6 +65,7 @@
                 <thead>
                     <tr class="active">
                         <th scope="col">#</th>
+                        <th scope="col">Academic Session</th>
                         <th scope="col">College ID</th>
                         <th scope="col">Student Name</th>
                         <th scope="col">Branch Name</th>
@@ -106,6 +107,7 @@
                 for (let i = 0; i < students.length; i++) {
                     html += "<tr id='tr_student" + students[i].Student_Id + "'>";
                     html += "<td>" + (i + 1) + "</td>";
+                    html += "<td>" + students[i].Academic_Session_Name + "</td>";
                     html += "<td>" + students[i].Student_College_Id + "</td>";
                     html += "<td>" + students[i].First_Name + " " + students[i].Middle_Name + " " + students[i].Last_Name + "</td>";
                     html += "<td>" + students[i].Branch_Name + "</td>";

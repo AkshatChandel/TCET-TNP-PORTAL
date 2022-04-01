@@ -103,4 +103,22 @@ class MessageController extends Controller
 
         return "success";
     }
+
+    public function view($MessageDraftId)
+    {
+        $messageDraft = DB::Table('Message_Draft')
+            ->where('Message_Draft.Message_Draft_Id', '=', $MessageDraftId)
+            ->get();
+
+        $messageSentTo = DB::Table('Message_Sent')
+            ->join('Student_Master', 'Student_Master.Student_Id', '=', 'Message_Sent.Person_Id')
+            ->join('Student_Class', 'Student_Class.Student_Id', '=', 'Student_Master.Student_Id')
+            ->join('Branch_Master', 'Branch_Master.Branch_Id', '=', 'Student_Class.Branch_Id')
+            ->join('Academic_Session_Master', 'Academic_Session_Master.Academic_Session_Id', '=', 'Student_Class.Academic_Session_Id')
+            ->where('Message_Sent.Message_Draft_Id', '=', $MessageDraftId)
+            ->where('Message_Sent.Send_To', '=', "Student")
+            ->get();
+
+        return view("admin.message.view", ["messageDraft" => $messageDraft[0], "messageSentTo" => $messageSentTo]);
+    }
 }
