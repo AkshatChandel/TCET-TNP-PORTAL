@@ -25,6 +25,16 @@
                             </select>
                         </div>
                     </div>
+                    <div class="form-group">
+                        <label for="select_AcademicSessionId" class="col-sm-2 control-label">Academic Session</label>
+                        <div class="col-sm-9">
+                            <select id="select_AcademicSessionId" name="Academic_Session_Id" class="form-control">
+                                @foreach($AcademicSessions as $AcademicSession)
+                                <option value="{{$AcademicSession->Academic_Session_Id}}">{{$AcademicSession->Academic_Session_Name}}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                    </div>
 
                     <hr color="grey">
                     <div class="my-4">

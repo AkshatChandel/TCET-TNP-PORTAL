@@ -128,7 +128,7 @@
             success: function(data) {
                 if (data == "success") {
                     alert("Registered!");
-                    window.location.href = "{{url('student/company  /')}}";
+                    window.location.href = "{{url('student/company/')}}";
                 }
             },
             error: function() {

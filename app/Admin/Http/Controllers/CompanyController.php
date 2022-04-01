@@ -2,6 +2,7 @@
 
 namespace App\Admin\Http\Controllers;
 
+use App\Models\Academic_Session_Master;
 use App\Models\Branch_Master;
 use App\Models\Company_Branch;
 use App\Models\Company_Master;
@@ -16,8 +17,9 @@ class CompanyController extends Controller
     {
         $data = DB::table('Company_Master')
             ->join('Company_Round', 'Company_Round.Company_Id', '=', 'Company_Master.Company_Id')
-            ->select(DB::raw('Company_Master.Company_Id, Company_Master.Company_Name, COUNT(Round_Name) as Number_Of_Rounds, Company_Status'))
-            ->groupBy('Company_Master.Company_Id', 'Company_Master.Company_Name', 'Company_Master.Company_Status')
+            ->join('Academic_Session_Master', 'Academic_Session_Master.Academic_Session_Id', '=', 'Company_Master.Academic_Session_Id')
+            ->select(DB::raw('Company_Master.Company_Id, Company_Master.Company_Name, COUNT(Round_Name) as Number_Of_Rounds, Company_Status, Academic_Session_Master.Academic_Session_Name'))
+            ->groupBy('Company_Master.Company_Id', 'Company_Master.Company_Name', 'Company_Master.Company_Status', 'Academic_Session_Master.Academic_Session_Name')
             ->get();
 
         return view("admin.company.index", ["companies" => $data]);
@@ -26,7 +28,9 @@ class CompanyController extends Controller
     public function create()
     {
         $branches = Branch_Master::where('Branch_Status', 'Active')->get();
-        return view("admin.company.create", ["branches" => $branches]);
+        $AcademicSessions = Academic_Session_Master::where('Academic_Session_Status', 'Active')->get();
+
+        return view("admin.company.create", ["branches" => $branches, "AcademicSessions" => $AcademicSessions]);
     }
 
     public function createCompany(Request $request)
@@ -34,6 +38,7 @@ class CompanyController extends Controller
         $company_master = new Company_Master;
         $company_master->Company_Name = $request->Company_Name;
         $company_master->Company_Status = $request->Company_Status;
+        $company_master->Academic_Session_Id = $request->Academic_Session_Id;
         $company_master->save();
 
         $CompanyId = $company_master->id;
@@ -75,7 +80,16 @@ class CompanyController extends Controller
     public function viewCompanyDetails($CompanyId)
     {
         $companyDetails = $this->getCompanyDetails($CompanyId);
-        return view("admin.company.view", ['companyDetails' => $companyDetails[0], 'companyBranches' => $companyDetails[1], 'companyCriterias' => $companyDetails[2], 'companyRounds' => $companyDetails[3]]);
+
+        $registeredStudents = DB::Table('Company_Student_Registration')
+            ->join('Company_Master', 'Company_Master.Company_Id', '=', 'Company_Student_Registration.Company_Id')
+            ->join('Student_Class', 'Student_Class.Student_Class_Id', '=', 'Company_Student_Registration.Student_Class_Id')
+            ->join('Student_Master', 'Student_Master.Student_Id', '=', 'Student_Class.Student_Id')
+            ->join('Branch_Master', 'Branch_Master.Branch_Id', '=', 'Student_Class.Branch_Id')
+            ->where('Company_Master.Company_Id', '=', $CompanyId)
+            ->get();
+
+        return view("admin.company.view", ['companyDetails' => $companyDetails[0], 'companyBranches' => $companyDetails[1], 'companyCriterias' => $companyDetails[2], 'companyRounds' => $companyDetails[3], 'registeredStudents' => $registeredStudents]);
     }
 
     public function getCompanyDetails($CompanyId)
@@ -100,5 +114,23 @@ class CompanyController extends Controller
             ->get();
 
         return [$company[0], $companyBranches, $companyCriterias, $companyRounds];
+    }
+
+    public function updateCompanyStudentRegistrationStatus(Request $request)
+    {
+        $CompanyStudentRegistrationId = (int) $request->CompanyStudentRegistrationId;
+        $CompanyStudentRegistrationStatus = $request->CompanyStudentRegistrationStatus;
+
+        $rowsAffected = DB::table('Company_Student_Registration')
+            ->where('Company_Student_Registration_Id', $CompanyStudentRegistrationId)
+            ->update(['Company_Student_Registration_Status' => $CompanyStudentRegistrationStatus]);
+
+        if ($rowsAffected == 1) {
+            return "success";
+        } else if ($rowsAffected > 1) {
+            return "error";
+        } else {
+            return "error";
+        }
     }
 }

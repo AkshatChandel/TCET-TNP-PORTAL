@@ -75,11 +75,14 @@ Route::group(['middleware' => ['adminAuthenticate']], function () {
     Route::get("admin/quiz/checkquiz/{quizid}", [App\Admin\Http\Controllers\QuizController::class, 'checkQuiz']);
     Route::get("admin/quiz/checkquizoptions/{quizid}", [App\Admin\Http\Controllers\QuizController::class, 'checkQuizOptions']);
 
-
     Route::get("admin/company", [App\Admin\Http\Controllers\CompanyController::class, 'index']);
     Route::get("admin/company/create", [App\Admin\Http\Controllers\CompanyController::class, 'create']);
     Route::post("admin/company/create", [App\Admin\Http\Controllers\CompanyController::class, 'createCompany']);
     Route::get("admin/company/view/{companyid}", [App\Admin\Http\Controllers\CompanyController::class, 'viewCompanyDetails']);
+    Route::get("admin/company/updateCompanyStudentRegistrationStatus", [App\Admin\Http\Controllers\CompanyController::class, 'updateCompanyStudentRegistrationStatus']);
+
+    Route::get("admin/message", [App\Admin\Http\Controllers\MessageController::class, 'index']);
+    Route::get("admin/message/create", [App\Admin\Http\Controllers\MessageController::class, 'create']);
 });
 
 Route::group(['middleware' => ['staffAuthenticate']], function () {
