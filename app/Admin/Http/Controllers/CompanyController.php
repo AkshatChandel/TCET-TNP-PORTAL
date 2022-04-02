@@ -8,6 +8,9 @@ use App\Models\Company_Branch;
 use App\Models\Company_Master;
 use App\Models\Company_Criteria;
 use App\Models\Company_Round;
+use App\Models\Company_Student_Registration;
+use App\Models\Company_Round_Student_Selected;
+use App\Models\Company_Student_Hired;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -79,7 +82,12 @@ class CompanyController extends Controller
 
     public function viewCompanyDetails($CompanyId)
     {
-        $companyDetails = $this->getCompanyDetails($CompanyId);
+        $company = $this->getCompanyDetails($CompanyId);
+
+        $companyDetails = $company[0];
+        $companyBranches = $company[1];
+        $companyCriterias = $company[2];
+        $companyRounds = $company[3];
 
         $registeredStudents = DB::Table('Company_Student_Registration')
             ->join('Company_Master', 'Company_Master.Company_Id', '=', 'Company_Student_Registration.Company_Id')
@@ -89,7 +97,7 @@ class CompanyController extends Controller
             ->where('Company_Master.Company_Id', '=', $CompanyId)
             ->get();
 
-        return view("admin.company.view", ['companyDetails' => $companyDetails[0], 'companyBranches' => $companyDetails[1], 'companyCriterias' => $companyDetails[2], 'companyRounds' => $companyDetails[3], 'registeredStudents' => $registeredStudents]);
+        return view("admin.company.view", ['companyDetails' => $companyDetails, 'companyBranches' => $companyBranches, 'companyCriterias' => $companyCriterias, 'companyRounds' => $companyRounds, 'registeredStudents' => $registeredStudents]);
     }
 
     public function getCompanyDetails($CompanyId)
@@ -132,5 +140,79 @@ class CompanyController extends Controller
         } else {
             return "error";
         }
+    }
+
+    public function updateCompany($CompanyId)
+    {
+        $company = $this->getCompanyDetails($CompanyId);
+
+        $companyDetails = $company[0];
+        $companyBranches = $company[1];
+        $companyCriterias = $company[2];
+        $companyRounds = $company[3];
+
+        $registeredStudents = DB::Table('Company_Student_Registration')
+            ->join('Company_Master', 'Company_Master.Company_Id', '=', 'Company_Student_Registration.Company_Id')
+            ->join('Student_Class', 'Student_Class.Student_Class_Id', '=', 'Company_Student_Registration.Student_Class_Id')
+            ->join('Student_Master', 'Student_Master.Student_Id', '=', 'Student_Class.Student_Id')
+            ->join('Branch_Master', 'Branch_Master.Branch_Id', '=', 'Student_Class.Branch_Id')
+            ->where('Company_Master.Company_Id', '=', $CompanyId)
+            ->get();
+
+        // $companyRoundSelectedStudents = DB::Table('Company_Round_Student_Selected')
+        //     ->join('Company_Round', 'Company_Round.Company_Round_Id', '=', 'Company_Round_Student_Selected.Company_Round_Id')
+        //     ->join('Company_Master', 'Company_Master.Company_Id', '=', 'Company_Round.Company_Id')
+        //     ->join('Student_Class', 'Student_Class.Student_Class_Id', '=', 'Company_Round_Student_Selected.Student_Class_Id')
+        //     ->join('Student_Master', 'Student_Master.Student_Id', '=', 'Student_Class.Student_Id')
+        //     ->join('Branch_Master', 'Branch_Master.Branch_Id', '=', 'Student_Class.Branch_Id')
+        //     ->where('Company_Master.Company_Id', '=', $CompanyId)
+        //     ->get();
+
+        $companyRoundsStudentWiseData = array();
+
+        for ($i = 0; $i < count($companyRounds); $i++) {
+
+            $CompanyRoundId = $companyRounds[$i]->Company_Round_Id;
+
+            $companyRoundSelectedStudents = DB::Table('Company_Round_Student_Selected')
+                ->join('Company_Round', 'Company_Round.Company_Round_Id', '=', 'Company_Round_Student_Selected.Company_Round_Id')
+                ->join('Company_Master', 'Company_Master.Company_Id', '=', 'Company_Round.Company_Id')
+                ->join('Student_Class', 'Student_Class.Student_Class_Id', '=', 'Company_Round_Student_Selected.Student_Class_Id')
+                ->join('Student_Master', 'Student_Master.Student_Id', '=', 'Student_Class.Student_Id')
+                ->join('Branch_Master', 'Branch_Master.Branch_Id', '=', 'Student_Class.Branch_Id')
+                ->where('Company_Round_Student_Selected.Company_Round_Id', '=', $CompanyRoundId)
+                ->get();
+
+            array_push($companyRoundsStudentWiseData, $companyRoundSelectedStudents);
+        }
+
+        return view("admin.company.update_company", ['companyDetails' => $companyDetails, 'companyBranches' => $companyBranches, 'companyCriterias' => $companyCriterias, 'companyRounds' => $companyRounds, 'registeredStudents' => $registeredStudents, 'companyRoundsStudentWiseData' => $companyRoundsStudentWiseData]);
+    }
+
+    public function promoteStudentTo(Request $request)
+    {
+        $CompanyRoundId = $request->CompanyRoundId;
+        $StudentClassId = $request->StudentClassId;
+
+        $companyRoundStudentSelected = new Company_Round_Student_Selected();
+        $companyRoundStudentSelected->Company_Round_Id = $CompanyRoundId;
+        $companyRoundStudentSelected->Student_Class_Id = $StudentClassId;
+        $companyRoundStudentSelected->Company_Round_Student_Selected_Status = "Not Selected";
+        $companyRoundStudentSelected->save();
+
+        return "success";
+    }
+
+    public function hireStudent(Request $request)
+    {
+        $CompanyId = $request->CompanyId;
+        $StudentClassId = $request->StudentClassId;
+
+        $companyStudentsHired = new Company_Student_Hired();
+        $companyStudentsHired->Company_Id = $CompanyId;
+        $companyStudentsHired->Student_Class_Id = $StudentClassId;
+        $companyStudentsHired->save();
+
+        return "success";
     }
 }

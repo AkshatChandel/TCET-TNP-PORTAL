@@ -80,6 +80,8 @@ Route::group(['middleware' => ['adminAuthenticate']], function () {
     Route::post("admin/company/create", [App\Admin\Http\Controllers\CompanyController::class, 'createCompany']);
     Route::get("admin/company/view/{companyid}", [App\Admin\Http\Controllers\CompanyController::class, 'viewCompanyDetails']);
     Route::get("admin/company/updateCompanyStudentRegistrationStatus", [App\Admin\Http\Controllers\CompanyController::class, 'updateCompanyStudentRegistrationStatus']);
+    Route::get("admin/company/update/{companyid}", [App\Admin\Http\Controllers\CompanyController::class, 'updateCompany']);
+    Route::get("admin/company/promoteStudentTo", [App\Admin\Http\Controllers\CompanyController::class, 'promoteStudentTo']);
 
     Route::get("admin/message", [App\Admin\Http\Controllers\MessageController::class, 'index']);
     Route::get("admin/message/create", [App\Admin\Http\Controllers\MessageController::class, 'create']);

@@ -17,6 +17,7 @@
                     <th scope="col">Company Status</th>
                     <th scope="col"></th>
                     <th scope="col"></th>
+                    <th scope="col"></th>
                 </tr>
             </thead>
             <tbody>
@@ -39,6 +40,7 @@
                     <td>{{$company->Company_Status}}</td>
                     <td><button type="button" onclick="edit('{{$company->Company_Id}}')">Edit</button></td>
                     <td><button type="button" onclick="view('{{$company->Company_Id}}')">View</button></td>
+                    <td><button type="button" onclick="updateCompany('{{$company->Company_Id}}')">Update</button></td>
                 </tr>
 
                 @endforeach
@@ -54,6 +56,10 @@
 
     function view(CompanyId) {
         window.location.href = "{{url('admin/company/view')}}" + "/" + CompanyId;
+    }
+
+    function updateCompany(CompanyId) {
+        window.location.href = "{{url('admin/company/update')}}" + "/" + CompanyId;
     }
 
     // function edit(CompanyId) {
