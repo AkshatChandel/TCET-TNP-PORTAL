@@ -209,13 +209,15 @@
                                 <div class="form-group">
                                     <label for="select_promoteToRoundg" class="col-sm-3 control-label">Promote selected students to</label>
                                     <div class="col-sm-4">
-                                        <select id="select_promoteToRoundg" class="form-control">
+                                        <select id="select_promoteToRoundFrom{{$companyRoundsStudentWiseData[$i][0]->Company_Round_Id}}" class="form-control">
                                             @foreach($companyRounds as $round)
+                                            @if($round->Company_Round_Id > $companyRoundsStudentWiseData[$i][0]->Company_Round_Id)
                                             <option value="{{$round->Company_Round_Id}}">{{$round->Round_Name}}</option>
+                                            @endif
                                             @endforeach
                                         </select>
                                     </div>
-                                    <button type="button" class="btn btn-success">Promote</button>
+                                    <button type="button" class="btn btn-success" onclick="promoteSelectedRoundStudents('{{$companyRoundsStudentWiseData[$i][0]->Company_Round_Id}}')">Promote</button>
                                 </div>
                             </form>
                         </div>
@@ -232,6 +234,7 @@
                             <th scope="col">Class 12 Percentage</th>
                             <th scope="col">Diploma Percentage</th>
                             <th scope="col">Status</th>
+                            <th scope="col"></th>
                             <th scope="col"></th>
                         </tr>
                     </thead>
@@ -257,8 +260,9 @@
                             <td>{{$student->Class_10_Percentage}}</td>
                             <td>{{$student->Class_12_Percentage}}</td>
                             <td>{{$student->Diploma_Percentage}}</td>
-                            <td>{{$student->Company_Round_Student_Selected_Status}}</td>
-                            <td><button class="btn btn-danger">Reject</button></td>
+                            <td id="td_CompanyRoundStudentSelectedStatus{{$student->Company_Round_Student_Selected_Id}}">{{$student->Company_Round_Student_Selected_Status}}</td>
+                            <td id="td_btn_CompanyRoundStudentSelected{{$student->Company_Round_Student_Selected_Id}}"><button id="btn_CompanyRoundStudentSelected{{$student->Company_Round_Student_Selected_Id}}" class="btn btn-danger" onclick="updateCompanyRoundStudentSelectedStatus('{{$student->Company_Round_Student_Selected_Id}}', 'Not Selected')">Reject</button></td>
+                            <td id="td_btn_CompanyRoundStudentSelectedHire{{$student->Company_Round_Student_Selected_Id}}"><button id="btn_CompanyRoundStudentSelectedHire{{$student->Company_Round_Student_Selected_Id}}" class="btn btn-success" onclick="hireStudent('{{$student->Company_Round_Student_Selected_Id}}', 'Hired')">Hire</button></td>
                         </tr>
 
                         @elseif($student->Company_Round_Student_Selected_Status == "Not Selected")
@@ -271,13 +275,43 @@
                             <td>{{$student->Class_10_Percentage}}</td>
                             <td>{{$student->Class_12_Percentage}}</td>
                             <td>{{$student->Diploma_Percentage}}</td>
-                            <td>{{$student->Company_Round_Student_Selected_Status}}</td>
-                            <td><button class="btn btn-success">Select</button></td>
+                            <td id="td_CompanyRoundStudentSelectedStatus{{$student->Company_Round_Student_Selected_Id}}">{{$student->Company_Round_Student_Selected_Status}}</td>
+                            <td id="td_btn_CompanyRoundStudentSelected{{$student->Company_Round_Student_Selected_Id}}"><button id="btn_CompanyRoundStudentSelected{{$student->Company_Round_Student_Selected_Id}}" class="btn btn-success" onclick="updateCompanyRoundStudentSelectedStatus('{{$student->Company_Round_Student_Selected_Id}}', 'Selected')">Select</button></td>
+                            <td></td>
                         </tr>
 
-                        @endif
+                        @elseif($student->Company_Round_Student_Selected_Status == "Selected and Promoted")
 
-                        @endforeach
+                        <tr id="tr_CompanyRoundStudentSelected{{$student->Company_Round_Student_Selected_Id}}" class="warning">
+                            <td>{{$count}}</td>
+                            <td>{{$student->Student_College_Id}}</td>
+                            <td>{{$student->First_Name . " " . $student->Middle_Name . " " . $student->Last_Name}}</td>
+                            <td>{{$student->Branch_Name}}</td>
+                            <td>{{$student->Class_10_Percentage}}</td>
+                            <td>{{$student->Class_12_Percentage}}</td>
+                            <td>{{$student->Diploma_Percentage}}</td>
+                            <td id="td_CompanyRoundStudentSelectedStatus{{$student->Company_Round_Student_Selected_Id}}">{{$student->Company_Round_Student_Selected_Status}}</td>
+                            <td id="td_btn_CompanyRoundStudentSelected{{$student->Company_Round_Student_Selected_Id}}"></td>
+                            <td></td>
+                        </tr>
+
+                        @elseif($student->Company_Round_Student_Selected_Status == "Hired")
+
+                        <tr id="tr_CompanyRoundStudentSelected{{$student->Company_Round_Student_Selected_Id}}" class="warning">
+                            <td>{{$count}}</td>
+                            <td>{{$student->Student_College_Id}}</td>
+                            <td>{{$student->First_Name . " " . $student->Middle_Name . " " . $student->Last_Name}}</td>
+                            <td>{{$student->Branch_Name}}</td>
+                            <td>{{$student->Class_10_Percentage}}</td>
+                            <td>{{$student->Class_12_Percentage}}</td>
+                            <td>{{$student->Diploma_Percentage}}</td>
+                            <td id="td_CompanyRoundStudentSelectedStatus{{$student->Company_Round_Student_Selected_Id}}">{{$student->Company_Round_Student_Selected_Status}}</td>
+                            <td id="td_btn_CompanyRoundStudentSelected{{$student->Company_Round_Student_Selected_Id}}"></td>
+                            <td></td>
+
+                            @endif
+
+                            @endforeach
                     </tbody>
                 </table>
             </div>
@@ -285,6 +319,56 @@
             @endif
 
             @endfor
+        </div>
+
+        @endif
+
+        @if($hiredStudents != null)
+        <hr />
+        <div>
+            <h2>Hired Students</h2>
+            <hr />
+            <table class="table table-hover table-bordered">
+                <thead>
+                    <tr class="active">
+                        <th scope="col">#</th>
+                        <th scope="col">College ID</th>
+                        <th scope="col">Student Name</th>
+                        <th scope="col">Branch</th>
+                        <th scope="col">Class 10 Percentage</th>
+                        <th scope="col">Class 12 Percentage</th>
+                        <th scope="col">Diploma Percentage</th>
+                        <!-- <th scope="col">Status</th> -->
+                        <!-- <th scope="col"></th> -->
+                    </tr>
+                </thead>
+                <tbody>
+
+                    @php
+                    $count = 0;
+                    @endphp
+
+                    @foreach($hiredStudents as $student)
+
+                    @php
+                    $count++;
+                    @endphp
+
+                    <tr class="success">
+                        <td>{{$count}}</td>
+                        <td>{{$student->Student_College_Id}}</td>
+                        <td>{{$student->First_Name . " " . $student->Middle_Name . " " . $student->Last_Name}}</td>
+                        <td>{{$student->Branch_Name}}</td>
+                        <td>{{$student->Class_10_Percentage}}</td>
+                        <td>{{$student->Class_12_Percentage}}</td>
+                        <td>{{$student->Diploma_Percentage}}</td>
+                        <!-- <td></td>   -->
+                    </tr>
+
+                    @endforeach
+
+                </tbody>
+            </table>
         </div>
 
         @endif
@@ -320,6 +404,102 @@
                 }
             });
         }
+    }
+
+    function updateCompanyRoundStudentSelectedStatus(CompanyRoundStudentSelectedId, CompanyRoundStudentSelectedStatus) {
+
+        CompanyRoundStudentSelectedId = parseInt(CompanyRoundStudentSelectedId);
+
+        $.ajax({
+            type: "GET",
+            url: "{{url('/admin/company/updateCompanyRoundStudentSelectedStatus/')}}",
+            contentType: "application/json; charset=utf-8",
+            datatype: "Json",
+            data: {
+                CompanyRoundStudentSelectedId: CompanyRoundStudentSelectedId,
+                CompanyRoundStudentSelectedStatus: CompanyRoundStudentSelectedStatus
+            },
+            success: function(data) {
+                if (data == "success") {
+
+                    let btnId = "btn_CompanyRoundStudentSelected" + CompanyRoundStudentSelectedId;
+                    let tdBtnId = "td_btn_CompanyRoundStudentSelected" + CompanyRoundStudentSelectedId;
+                    let tdStatusId = "td_CompanyRoundStudentSelectedStatus" + CompanyRoundStudentSelectedId;
+                    let trId = "tr_CompanyRoundStudentSelected" + CompanyRoundStudentSelectedId;
+
+                    let btn = document.getElementById(btnId);
+                    let tdBtn = document.getElementById(tdBtnId);
+                    let tdStatus = document.getElementById(tdStatusId);
+                    let tr = document.getElementById(trId);
+
+                    if (CompanyRoundStudentSelectedStatus == "Selected") {
+                        $(btn).remove();
+                        let html = `<button id="` + btnId + `" class="btn btn-danger" onclick="updateCompanyRoundStudentSelectedStatus('` + CompanyRoundStudentSelectedId + `', 'Not Selected')">Reject</button>`;
+                        $(tdBtn).append(html);
+                        tdStatus.innerHTML = "Selected";
+                        tr.className = "success";
+                    } else {
+                        $(btn).remove();
+                        let html = `<button id="` + btnId + `" class="btn btn-success" onclick="updateCompanyRoundStudentSelectedStatus('` + CompanyRoundStudentSelectedId + `', 'Selected')">Select</button>`;
+                        $(tdBtn).append(html);
+                        tdStatus.innerHTML = "Not Selected";
+                        tr.className = "danger";
+                    }
+                }
+            },
+            error: function() {
+                alert("Unable to update");
+            }
+        });
+    }
+
+    function promoteSelectedRoundStudents(FromCompanyRoundId) {
+
+        FromCompanyRoundId = parseInt(FromCompanyRoundId);
+        let selectRoundId = "select_promoteToRoundFrom" + FromCompanyRoundId;
+        let ToCompanyRoundId = document.getElementById(selectRoundId).value;
+
+        $.ajax({
+            type: "GET",
+            url: "{{url('/admin/company/promoteSelectedRoundStudents/')}}",
+            contentType: "application/json; charset=utf-8",
+            datatype: "Json",
+            data: {
+                FromCompanyRoundId: FromCompanyRoundId,
+                ToCompanyRoundId: ToCompanyRoundId
+            },
+            success: function(data) {
+                if (data == "success") {
+                    location.reload();
+                }
+            },
+            error: function() {
+                alert("Unable to update");
+            }
+        });
+    }
+
+    function hireStudent(CompanyRoundStudentSelectedId) {
+
+        CompanyRoundStudentSelectedId = parseInt(CompanyRoundStudentSelectedId);
+
+        $.ajax({
+            type: "GET",
+            url: "{{url('/admin/company/hireStudent/')}}",
+            contentType: "application/json; charset=utf-8",
+            datatype: "Json",
+            data: {
+                CompanyRoundStudentSelectedId: CompanyRoundStudentSelectedId
+            },
+            success: function(data) {
+                if (data == "success") {
+                    location.reload();
+                }
+            },
+            error: function() {
+                alert("Unable to update data");
+            }
+        });
     }
 </script>
 

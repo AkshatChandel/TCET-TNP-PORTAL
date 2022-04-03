@@ -15,7 +15,7 @@
                     <th scope="col">Company Name</th>
                     <th scope="col">Rounds</th>
                     <th scope="col">Company Status</th>
-                    <th scope="col"></th>
+                    <!-- <th scope="col"></th> -->
                     <th scope="col"></th>
                     <th scope="col"></th>
                 </tr>
@@ -38,9 +38,9 @@
                     <td>{{$company->Company_Name}}</td>
                     <td>{{$company->Number_Of_Rounds}}</td>
                     <td>{{$company->Company_Status}}</td>
-                    <td><button type="button" onclick="edit('{{$company->Company_Id}}')">Edit</button></td>
-                    <td><button type="button" onclick="view('{{$company->Company_Id}}')">View</button></td>
-                    <td><button type="button" onclick="updateCompany('{{$company->Company_Id}}')">Update</button></td>
+                    <!-- <td><button type="button" onclick="edit('{{$company->Company_Id}}')">Edit</button></td> -->
+                    <td><button type="button" class="btn btn-success" onclick="view('{{$company->Company_Id}}')">View</button></td>
+                    <td><button type="button" class="btn btn-success" onclick="updateCompany('{{$company->Company_Id}}')">Update</button></td>
                 </tr>
 
                 @endforeach

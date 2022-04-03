@@ -186,7 +186,14 @@ class CompanyController extends Controller
             array_push($companyRoundsStudentWiseData, $companyRoundSelectedStudents);
         }
 
-        return view("admin.company.update_company", ['companyDetails' => $companyDetails, 'companyBranches' => $companyBranches, 'companyCriterias' => $companyCriterias, 'companyRounds' => $companyRounds, 'registeredStudents' => $registeredStudents, 'companyRoundsStudentWiseData' => $companyRoundsStudentWiseData]);
+        $hiredStudents = DB::Table('Company_Student_Hired')
+            ->join('Student_Class', 'Student_Class.Student_Class_Id', '=', 'Company_Student_Hired.Student_Class_Id')
+            ->join('Student_Master', 'Student_Master.Student_Id', '=', 'Student_Class.Student_Id')
+            ->join('Branch_Master', 'Branch_Master.Branch_Id', '=', 'Student_Class.Branch_Id')
+            ->where('Company_Student_Hired.Company_Id', '=', $CompanyId)
+            ->get();
+
+        return view("admin.company.update_company", ['companyDetails' => $companyDetails, 'companyBranches' => $companyBranches, 'companyCriterias' => $companyCriterias, 'companyRounds' => $companyRounds, 'registeredStudents' => $registeredStudents, 'companyRoundsStudentWiseData' => $companyRoundsStudentWiseData, 'hiredStudents' => $hiredStudents]);
     }
 
     public function promoteStudentTo(Request $request)
@@ -203,10 +210,70 @@ class CompanyController extends Controller
         return "success";
     }
 
+    public function promoteSelectedRoundStudents(Request $request)
+    {
+        $FromCompanyRoundId = $request->FromCompanyRoundId;
+        $ToCompanyRoundId = $request->ToCompanyRoundId;
+
+        $selectedRoundStudents = DB::Table('Company_Round_Student_Selected')
+            ->where('Company_Round_Student_Selected.Company_Round_Id', '=', $FromCompanyRoundId)
+            ->where('Company_Round_Student_Selected.Company_Round_Student_Selected_Status', '=', 'Selected')
+            ->get();
+
+        foreach ($selectedRoundStudents as $selectedRoundStudent) {
+            $companyRoundStudentSelected = new Company_Round_Student_Selected();
+            $companyRoundStudentSelected->Company_Round_Id = $ToCompanyRoundId;
+            $companyRoundStudentSelected->Student_Class_Id = $selectedRoundStudent->Student_Class_Id;
+            $companyRoundStudentSelected->Company_Round_Student_Selected_Status = "Not Selected";
+            $companyRoundStudentSelected->save();
+        }
+
+        $OldCompanyRoundStudentSelectedStatus = "Selected and Promoted";
+
+        $rowsAffected = DB::Table('Company_Round_Student_Selected')
+            ->where('Company_Round_Id', $FromCompanyRoundId)
+            ->update(['Company_Round_Student_Selected_Status' => $OldCompanyRoundStudentSelectedStatus]);
+
+        if ($rowsAffected >= 1) {
+            return "success";
+        } else {
+            return "error";
+        }
+    }
+
+    public function updateCompanyRoundStudentSelectedStatus(Request $request)
+    {
+        $CompanyRoundStudentSelectedId = $request->CompanyRoundStudentSelectedId;
+        $CompanyRoundStudentSelectedStatus = $request->CompanyRoundStudentSelectedStatus;
+
+        $rowsAffected = DB::Table('Company_Round_Student_Selected')
+            ->where('Company_Round_Student_Selected_Id', $CompanyRoundStudentSelectedId)
+            ->update(['Company_Round_Student_Selected_Status' => $CompanyRoundStudentSelectedStatus]);
+
+        if ($rowsAffected == 1) {
+            return "success";
+        } else if ($rowsAffected > 1) {
+            return "error";
+        } else {
+            return "error";
+        }
+    }
+
     public function hireStudent(Request $request)
     {
-        $CompanyId = $request->CompanyId;
-        $StudentClassId = $request->StudentClassId;
+        $CompanyRoundStudentSelectedId = $request->CompanyRoundStudentSelectedId;
+
+        $data = DB::Table('Company_Round_Student_Selected')
+            ->join('Company_Round', 'Company_Round.Company_Round_Id', '=', 'Company_Round_Student_Selected.Company_Round_Id')
+            ->where('Company_Round_Student_Selected_Id', $CompanyRoundStudentSelectedId)
+            ->get();
+
+        $rowsAffected = DB::Table('Company_Round_Student_Selected')
+            ->where('Company_Round_Student_Selected_Id', $CompanyRoundStudentSelectedId)
+            ->update(['Company_Round_Student_Selected_Status' => 'Hired']);
+
+        $StudentClassId = $data[0]->Student_Class_Id;
+        $CompanyId = $data[0]->Company_Id;
 
         $companyStudentsHired = new Company_Student_Hired();
         $companyStudentsHired->Company_Id = $CompanyId;

@@ -82,6 +82,9 @@ Route::group(['middleware' => ['adminAuthenticate']], function () {
     Route::get("admin/company/updateCompanyStudentRegistrationStatus", [App\Admin\Http\Controllers\CompanyController::class, 'updateCompanyStudentRegistrationStatus']);
     Route::get("admin/company/update/{companyid}", [App\Admin\Http\Controllers\CompanyController::class, 'updateCompany']);
     Route::get("admin/company/promoteStudentTo", [App\Admin\Http\Controllers\CompanyController::class, 'promoteStudentTo']);
+    Route::get("admin/company/promoteSelectedRoundStudents", [App\Admin\Http\Controllers\CompanyController::class, 'promoteSelectedRoundStudents']);
+    Route::get("admin/company/updateCompanyRoundStudentSelectedStatus", [App\Admin\Http\Controllers\CompanyController::class, 'updateCompanyRoundStudentSelectedStatus']);
+    Route::get("admin/company/hireStudent", [App\Admin\Http\Controllers\CompanyController::class, 'hireStudent']);
 
     Route::get("admin/message", [App\Admin\Http\Controllers\MessageController::class, 'index']);
     Route::get("admin/message/create", [App\Admin\Http\Controllers\MessageController::class, 'create']);

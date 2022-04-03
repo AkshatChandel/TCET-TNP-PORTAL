@@ -31,7 +31,7 @@
                 <tr>
                     <td>{{$count}}</td>
                     <td>{{$messageDraft->Message_Draft_Head}}</td>
-                    <td><button type="button" onclick="view('{{$messageDraft->Message_Draft_Id}}')">View</button></td>
+                    <td><button class="btn btn-success" type="button" onclick="view('{{$messageDraft->Message_Draft_Id}}')">View</button></td>
                     <td><button class="btn btn-success" type="button" onclick="sendMessage('{{$messageDraft->Message_Draft_Id}}')">Send Message</button></td>
                 </tr>
 
