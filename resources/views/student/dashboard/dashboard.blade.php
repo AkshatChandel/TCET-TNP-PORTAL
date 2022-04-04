@@ -1,7 +1,7 @@
 @extends('student.layout.student_layout')
 
 @section('main_content')
-<div class="col_3">
+<!-- <div class="col_3">
     <div class="col-md-3 widget widget1">
         <div class="r3_counter_box">
             <i class="pull-left fa fa-dollar icon-rounded"></i>
@@ -167,24 +167,24 @@
 
     <div class="clearfix"> </div>
 </div>
-
+ -->
 
 <!-- for amcharts js -->
-<script src="{{url('js/amcharts.js')}}"></script>
+<!-- <script src="{{url('js/amcharts.js')}}"></script>
 <script src="{{url('js/serial.js')}}"></script>
 <script src="{{url('js/export.min.js')}}"></script>
 <link rel="stylesheet" href="{{url('css/export.css')}}" type="text/css" media="all" />
-<script src="{{url('js/light.js')}}"></script>
+<script src="{{url('js/light.js')}}"></script> -->
 <!-- for amcharts js -->
 
-<script src="{{url('js/index1.js')}}"></script>
+<!-- <script src="{{url('js/index1.js')}}"></script>
 
 <div class="charts">
     <div class="mid-content-top charts-grids">
         <div class="middle-content">
-            <h4 class="title">Carousel Slider</h4>
+            <h4 class="title">Carousel Slider</h4> -->
             <!-- start content_slider -->
-            <div id="owl-demo" class="owl-carousel text-center">
+            <!-- <div id="owl-demo" class="owl-carousel text-center">
                 <div class="item">
                     <img class="lazyOwl img-responsive" data-src="images/slider1.jpg" alt="name">
                 </div>
@@ -208,9 +208,9 @@
                 </div>
 
             </div>
-        </div>
+        </div> -->
         <!--//sreen-gallery-cursual---->
-    </div>
+    <!-- </div>
 </div>
 
 <div class="col_1">
@@ -285,8 +285,8 @@
                     </div>
                     <div class="clearfix"> </div>
                 </div>
-            </div>
-            <form action="#" method="post">
+            </div> -->
+            <!-- <form action="#" method="post">
                 <input type="text" value="Enter your text" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Enter your text';}" required="">
                 <input type="submit" value="Submit" />
             </form>
@@ -418,5 +418,5 @@
     </div>
     <div class="clearfix"> </div>
 
-</div>
+</div> -->
 @stop

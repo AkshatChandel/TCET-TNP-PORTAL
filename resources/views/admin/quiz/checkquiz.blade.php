@@ -50,7 +50,7 @@
                             @endphp
 
                             <tr>
-                                <td>{{$srno}}</td>
+                                <td>{{$SrNo}}</td>
                                 <td>{{$student->First_Name}}</td>
                                 <td>{{$score}} / {{ count($quizCorrectAnswers) }}</td>
                                 <td><button type="button" onclick="checkQuizOptions('{{$student->Student_Class_Id}}', '{{$quizData[0]->Quiz_Id}}')">Check Answers</button></td>

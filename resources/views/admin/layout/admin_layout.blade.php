@@ -411,9 +411,9 @@
         </div>
     </div>
 
-    <div class="footer">
+    <!-- <div class="footer">
         <p>&copy; TCET. All Rights Reserved | Developed by <a href="https://github.com/AkshatChandel" target="_blank">Akshat Chandel</a>, <a href="https://github.com/AkshatChandel" target="_blank">Darshil</a>, <a href="https://github.com/AkshatChandel" target="_blank">Heena</a></p>
-    </div>
+    </div> -->
 
     <!-- new added graphs chart js-->
 

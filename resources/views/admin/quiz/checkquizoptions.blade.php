@@ -32,8 +32,8 @@
                                             <input type="radio" name="{{ $radioButtonName }}" value="{{ $quiz[$i + $j]->Quiz_Question_Option_Id }}">
                                         </div>
 
-                                        @for($studentsData as $student)
-                                        @endfor
+                                        @foreach($studentsData as $student)
+                                        @endforeach
 
                                         @if($quiz[$i + $j]->Is_Correct_Answer == "Yes")
                                             <label class="form-control1" style="background-color: #40ff00">{{ $quiz[$i + $j]->Quiz_Option }}</label>

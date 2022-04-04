@@ -86,6 +86,7 @@ class CompanyController extends Controller
         $companyStudentRegistration = new Company_Student_Registration();
         $companyStudentRegistration->Company_Id = $CompanyId;
         $companyStudentRegistration->Student_Class_Id = $StudentClassId;
+        $companyStudentRegistration->Company_Student_Registration_Status = "Approved";
         $companyStudentRegistration->save();
 
         return "success";

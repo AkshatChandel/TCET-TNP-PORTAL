@@ -1,15 +1,15 @@
 @extends('admin.layout.admin_layout')
 
 @section('main_content')
-<div class="col_3">
+<!-- <div class="col_3">
     <div class="col-md-3 widget widget1">
         <div class="r3_counter_box">
             <i class="pull-left fa fa-dollar icon-rounded"></i>
             <div class="stats">
                 <h5><strong>$452</strong></h5>
                 <span>Total Revenue</span>
-            </div>
-        </div>
+            </div> -->
+        <!-- </div>
     </div>
     <div class="col-md-3 widget widget1">
         <div class="r3_counter_box">
@@ -48,9 +48,9 @@
         </div>
     </div>
     <div class="clearfix"> </div>
-</div>
+</div> -->
 
-<div class="row-one widgettable">
+<!-- <div class="row-one widgettable">
     <div class="col-md-7 content-top-2 card">
         <div class="agileinfo-cdr">
             <div class="card-header">
@@ -167,24 +167,30 @@
 
     <div class="clearfix"> </div>
 </div>
+ -->
 
-
-<!-- for amcharts js -->
+<!-- for amcharts js
 <script src="{{url('js/amcharts.js')}}"></script>
 <script src="{{url('js/serial.js')}}"></script>
 <script src="{{url('js/export.min.js')}}"></script>
 <link rel="stylesheet" href="{{url('css/export.css')}}" type="text/css" media="all" />
-<script src="{{url('js/light.js')}}"></script>
+<script src="{{url('js/light.js')}}"></script> -->
 <!-- for amcharts js -->
 
-<script src="{{url('js/index1.js')}}"></script>
+<!-- <script src="{{url('js/index1.js')}}"></script>
 
 <div class="charts">
     <div class="mid-content-top charts-grids">
         <div class="middle-content">
-            <h4 class="title">Carousel Slider</h4>
+            <h4 class="title">Carousel Slider</h4> -->
             <!-- start content_slider -->
-            <div id="owl-demo" class="owl-carousel text-center">
+            <!-- 1:30 PM</h6>
+                    </div>
+                    <div class="clearfix"> </div>
+                </div>
+                <div class="activity-row">
+                    <div class="col-xs-3 activity-img"><img src='images/2.jpg' class="img-responsive" alt="" /></div>
+                    <div class="col<div id="owl-demo" class="owl-carousel text-center">
                 <div class="item">
                     <img class="lazyOwl img-responsive" data-src="images/slider1.jpg" alt="name">
                 </div>
@@ -208,9 +214,9 @@
                 </div>
 
             </div>
-        </div>
+        </div> -->
         <!--//sreen-gallery-cursual---->
-    </div>
+    <!-- </div>
 </div>
 
 <div class="col_1">
@@ -224,8 +230,8 @@
                         <h5><a href="#">Michael Chris</a></h5>
                         <p>Hey ! There I'm available.</p>
                     </div>
-                    <div class="col-xs-2 activity-desc1">
-                        <h6>12:05 PM</h6>
+                    <div class="col-xs-2 activity-desc1"> -->
+                        <!-- <h6>12:05 PM</h6>
                     </div>
                     <div class="clearfix"> </div>
                 </div>
@@ -247,13 +253,7 @@
                         <p>Hey ! There I'm available.</p>
                     </div>
                     <div class="col-xs-2 activity-desc1">
-                        <h6>01:30 PM</h6>
-                    </div>
-                    <div class="clearfix"> </div>
-                </div>
-                <div class="activity-row">
-                    <div class="col-xs-3 activity-img"><img src='images/2.jpg' class="img-responsive" alt="" /></div>
-                    <div class="col-xs-7 activity-desc">
+                        <h6>0-xs-7 activity-desc">
                         <h5><a href="#">Jackson Jacob</a></h5>
                         <p>Hey ! There I'm available.</p>
                     </div>
@@ -262,8 +262,8 @@
                     </div>
                     <div class="clearfix"> </div>
                 </div>
-                <div class="activity-row">
-                    <div class="col-xs-3 activity-img"><img src='images/1.jpg' class="img-responsive" alt="" /></div>
+                <div class="activity-row"> -->
+                    <!-- <div class="col-xs-3 activity-img"><img src='images/1.jpg' class="img-responsive" alt="" /></div>
                     <div class="col-xs-7 activity-desc">
                         <h5><a href="#">David Samuel</a></h5>
                         <p>Hey ! There I'm available.</p>
@@ -310,8 +310,8 @@
                 <div class="activity-row activity-row1">
                     <div class="col-xs-2 activity-desc1"></div>
                     <div class="col-xs-7 activity-img2">
-                        <div class="activity-desc-sub1">
-                            <h5>Alexander</h5>
+                        <div class="activity-desc-sub1"> -->
+                            <!-- <h5>Alexander</h5>
                             <p>Hi,How are you ? What about our next meeting?</p>
                         </div>
                     </div>
@@ -350,8 +350,8 @@
     <div class="col-md-4 span_8">
         <div class="activity_box activity_box2">
             <h3>todo</h3>
-            <div class="scrollbar" id="style-2">
-                <div class="activity-row activity-row1">
+            <div class="scrollbar" id="style-2"> -->
+                <!-- <div class="activity-row activity-row1">
                     <div class="single-bottom">
                         <ul>
                             <li>
@@ -418,5 +418,5 @@
     </div>
     <div class="clearfix"> </div>
 
-</div>
+</div> -->
 @stop
