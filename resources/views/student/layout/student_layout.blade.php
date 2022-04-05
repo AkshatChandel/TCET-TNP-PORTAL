@@ -1,3 +1,17 @@
+@php
+
+$StudentId = session()->get('UserId');
+
+$messages = DB::Table('Message_Sent')
+->join('Message_Draft', 'Message_Draft.Message_Draft_Id', '=', 'Message_Sent.Message_Draft_Id')
+->where('Message_Sent.Send_To', '=', 'Student')
+->where('Message_Sent.Person_Id', '=', $StudentId)
+->where('Message_Sent.Message_Sent_Status', '=', 'Sent')
+->orderByDesc('Message_Sent.Message_Sent_Id')
+->get();
+
+@endphp
+
 <!DOCTYPE HTML>
 <html>
 
@@ -201,14 +215,49 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
                     <!--notifications of menu start -->
                     <ul class="nofitications-dropdown">
                         <li class="dropdown head-dpdn">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><i class="fa fa-envelope"></i><span class="badge">4</span></a>
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+                                <i class="fa fa-envelope"></i>
+                                @if($messages != null && count($messages) != 0)
+                                <span class="badge">{{count($messages)}}</span>
+                                @endif
+                            </a>
                             <ul class="dropdown-menu">
+                                @if($messages != null && count($messages) != 0)
                                 <li>
                                     <div class="notification_header">
-                                        <h3>You have 3 new messages</h3>
+                                        <h3>You have {{count($messages)}} new messages</h3>
                                     </div>
                                 </li>
-                                <li><a href="#">
+                                @endif
+
+                                @if($messages != null && count($messages) != 0)
+
+                                @for($i = 0; $i < count($messages) && $i < 4; $i++)
+
+                                <li>
+                                    <a href="{{url('/student/message/view/' . $messages[$i]->Message_Sent_Id)}}">
+                                        <div class="user_img"><img src="{{url('images/1.jpg')}}" alt=""></div>
+                                        <div class="notification_desc" style="word-wrap: break-word;">
+                                            @if(strlen($messages[$i]->Message_Draft_Head) <= 23) 
+                                                <p>{{$messages[$i]->Message_Draft_Head}}</p>
+                                            @else
+                                                <p>{{substr($messages[$i]->Message_Draft_Head, 0, 23)}}...</p>
+                                            @endif
+                                                <!-- <p><span>1 hour ago</span></p> -->
+                                        </div>
+                                        <div class="clearfix"></div>
+                                    </a>
+                                </li>
+
+                                @endfor
+
+                                @else
+
+                                <li>No messages</li>
+
+                                @endif
+
+                                <!-- <li><a href="#">
                                         <div class="user_img"><img src="{{url('images/1.jpg')}}" alt=""></div>
                                         <div class="notification_desc">
                                             <p>Lorem ipsum dolor amet</p>
@@ -231,10 +280,10 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
                                             <p><span>1 hour ago</span></p>
                                         </div>
                                         <div class="clearfix"></div>
-                                    </a></li>
+                                    </a></li> -->
                                 <li>
                                     <div class="notification_bottom">
-                                        <a href="#">See all messages</a>
+                                        <a href="{{url('/student/message/')}}">See all messages</a>
                                     </div>
                                 </li>
                             </ul>

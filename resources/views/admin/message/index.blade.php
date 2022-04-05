@@ -14,6 +14,7 @@
                     <th scope="col">Message Draft Head</th>
                     <!-- <th scope="col">Sent To (No. of students)</th> -->
                     <th scope="col"></th>
+                    <th scope="col"></th>
                 </tr>
             </thead>
             <tbody>

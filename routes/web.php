@@ -112,4 +112,7 @@ Route::group(['middleware' => ['studentAuthenticate']], function () {
     Route::get("student/company/view/{companyid}", [App\Student\Http\Controllers\CompanyController::class, 'viewCompanyDetails']);
     Route::get("student/company/registerForCompany", [App\Student\Http\Controllers\CompanyController::class, 'registerForCompany']);
     Route::get("student/company/getCompanyDetails", [App\Student\Http\Controllers\CompanyController::class, 'getCompanyDetails']);
+
+    Route::get("student/message", [App\Student\Http\Controllers\MessageController::class, 'index']);
+    Route::get("student/message/view/{messagesentid}", [App\Student\Http\Controllers\MessageController::class, 'viewMessage']);
 });
