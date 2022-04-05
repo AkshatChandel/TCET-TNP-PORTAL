@@ -2,6 +2,10 @@
 
 $StudentId = session()->get('UserId');
 
+$student = DB::Table('Student_Master')
+->where('Student_Master.Student_Id', '=', $StudentId)
+->first();
+
 $messages = DB::Table('Message_Sent')
 ->join('Message_Draft', 'Message_Draft.Message_Draft_Id', '=', 'Message_Sent.Message_Draft_Id')
 ->where('Message_Sent.Send_To', '=', 'Student')
@@ -232,63 +236,35 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
 
                                 @if($messages != null && count($messages) != 0)
 
-                                @for($i = 0; $i < count($messages) && $i < 4; $i++)
-
-                                <li>
+                                @for($i = 0; $i < count($messages) && $i < 4; $i++) <li>
                                     <a href="{{url('/student/message/view/' . $messages[$i]->Message_Sent_Id)}}">
                                         <div class="user_img"><img src="{{url('images/1.jpg')}}" alt=""></div>
                                         <div class="notification_desc" style="word-wrap: break-word;">
-                                            @if(strlen($messages[$i]->Message_Draft_Head) <= 23) 
-                                                <p>{{$messages[$i]->Message_Draft_Head}}</p>
-                                            @else
+                                            @if(strlen($messages[$i]->Message_Draft_Head) <= 23) <p>{{$messages[$i]->Message_Draft_Head}}</p>
+                                                @else
                                                 <p>{{substr($messages[$i]->Message_Draft_Head, 0, 23)}}...</p>
-                                            @endif
+                                                @endif
                                                 <!-- <p><span>1 hour ago</span></p> -->
                                         </div>
                                         <div class="clearfix"></div>
                                     </a>
-                                </li>
-
-                                @endfor
-
-                                @else
-
-                                <li>No messages</li>
-
-                                @endif
-
-                                <!-- <li><a href="#">
-                                        <div class="user_img"><img src="{{url('images/1.jpg')}}" alt=""></div>
-                                        <div class="notification_desc">
-                                            <p>Lorem ipsum dolor amet</p>
-                                            <p><span>1 hour ago</span></p>
-                                        </div>
-                                        <div class="clearfix"></div>
-                                    </a></li>
-                                <li class="odd"><a href="#">
-                                        <div class="user_img"><img src="{{url('images/4.jpg')}}" alt=""></div>
-                                        <div class="notification_desc">
-                                            <p>Lorem ipsum dolor amet </p>
-                                            <p><span>1 hour ago</span></p>
-                                        </div>
-                                        <div class="clearfix"></div>
-                                    </a></li>
-                                <li><a href="#">
-                                        <div class="user_img"><img src="{{url('images/3.jpg')}}" alt=""></div>
-                                        <div class="notification_desc">
-                                            <p>Lorem ipsum dolor amet </p>
-                                            <p><span>1 hour ago</span></p>
-                                        </div>
-                                        <div class="clearfix"></div>
-                                    </a></li> -->
-                                <li>
-                                    <div class="notification_bottom">
-                                        <a href="{{url('/student/message/')}}">See all messages</a>
-                                    </div>
-                                </li>
-                            </ul>
                         </li>
-                        <li class="dropdown head-dpdn">
+
+                        @endfor
+
+                        @else
+
+                        <li>No messages</li>
+
+                        @endif
+                        <li>
+                            <div class="notification_bottom">
+                                <a href="{{url('/student/message/')}}">See all messages</a>
+                            </div>
+                        </li>
+                    </ul>
+                    </li>
+                    <!-- <li class="dropdown head-dpdn">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><i class="fa fa-bell"></i><span class="badge blue">4</span></a>
                             <ul class="dropdown-menu">
                                 <li>
@@ -377,7 +353,7 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
                                     </div>
                                 </li>
                             </ul>
-                        </li>
+                        </li> -->
                     </ul>
                     <div class="clearfix"> </div>
                 </div>
@@ -385,30 +361,15 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
                 <div class="clearfix"> </div>
             </div>
             <div class="header-right">
-
-
-                <!--search-box-->
-                <div class="search-box">
-                    <form class="input">
-                        <input class="sb-search-input input__field--madoka" placeholder="Search..." type="search" id="input-31" />
-                        <label class="input__label" for="input-31">
-                            <svg class="graphic" width="100%" height="100%" viewBox="0 0 404 77" preserveAspectRatio="none">
-                                <path d="m0,0l404,0l0,77l-404,0l0,-77z" />
-                            </svg>
-                        </label>
-                    </form>
-                </div>
-                <!--//end-search-box-->
-
                 <div class="profile_details">
                     <ul>
                         <li class="dropdown profile_details_drop">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
                                 <div class="profile_img">
-                                    <span class="prfil-img"><img src="images/2.jpg" alt=""> </span>
+                                    <span class="prfil-img"><img src="{{url('images/2.jpg')}}" alt=""> </span>
                                     <div class="user-name">
-                                        <p>Admin Name</p>
-                                        <span>Administrator</span>
+                                        <p>{{$student->First_Name . ' ' . $student->Last_Name}}</p>
+                                        <span>Student</span>
                                     </div>
                                     <i class="fa fa-angle-down lnr"></i>
                                     <i class="fa fa-angle-up lnr"></i>
@@ -416,10 +377,10 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
                                 </div>
                             </a>
                             <ul class="dropdown-menu drp-mnu">
-                                <li> <a href="#"><i class="fa fa-cog"></i> Settings</a> </li>
-                                <li> <a href="#"><i class="fa fa-user"></i> My Account</a> </li>
+                                <!-- <li> <a href="#"><i class="fa fa-cog"></i> Settings</a> </li> -->
+                                <!-- <li> <a href="#"><i class="fa fa-user"></i> My Account</a> </li> -->
                                 <li> <a href="#"><i class="fa fa-suitcase"></i> Profile</a> </li>
-                                <li> <a href="#"><i class="fa fa-sign-out"></i> Logout</a> </li>
+                                <li> <a href="{{url('/logout/')}}"><i class="fa fa-sign-out"></i> Logout</a> </li>
                             </ul>
                         </li>
                     </ul>
