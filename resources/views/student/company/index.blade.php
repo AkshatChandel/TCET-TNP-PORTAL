@@ -28,52 +28,65 @@
                 $NoOfRounds = 0;
                 @endphp
 
-                @for($i = 0; $i < count($companies); $i++) @php $currentCompanyId=$companies[$i]->Company_Id;
-
+                @for($i = 0; $i < count($companies); $i++) 
+                    
+                    @php 
+                        $currentCompanyId = $companies[$i]->Company_Id;
                     @endphp
 
                     @if($i == 0)
 
-                    @php
+                        @php
 
-                    $previousCompanyId = $currentCompanyId;
+                            $previousCompanyId = $currentCompanyId;
 
-                    @endphp
+                        @endphp
 
                     @endif
 
                     @php
 
-                    $NoOfRounds++;
+                        $NoOfRounds++;
 
                     @endphp
 
                     @if($currentCompanyId != $previousCompanyId || $i == (count($companies) - 1))
 
-                    @php
+                        @if($i == (count($companies) - 1))
+                            @php
+                                $NoOfRounds++;
+                            @endphp
+                        @endif
 
-                    $SrNo++;
+                        @php
+                            
+                            $SrNo++;
+                            $NoOfRounds--;
 
-                    @endphp
+                        @endphp
 
-                    <tr>
-                        <td>{{$SrNo}}</td>
-                        <td>{{$companies[$i - 1]->Company_Name}}</td>
-                        <td>{{$NoOfRounds}}</td>
-                        <td>{{$companies[$i - 1]->Company_Status}}</td>
-                        <td><button type="button" onclick="viewCompanyDetails('{{$companies[$i]->Company_Id}}')">View Details</button></td>
-                        <!-- <td><button type="button" onclick="registerForCompany('{{$companies[$i]->Company_Id}}')">Register</button></td> -->
-                    </tr>
+                        <tr>
+                            <td>{{$SrNo}}</td>
+                            <td>{{$companies[$i - 1]->Company_Name}}</td>
+                            <td>{{$NoOfRounds}}</td>
+                            <td>{{$companies[$i - 1]->Company_Status}}</td>
+                            <td><button type="button" onclick="viewCompanyDetails('{{$companies[$i]->Company_Id}}')">View Details</button></td>
+                            <!-- <td><button type="button" onclick="registerForCompany('{{$companies[$i]->Company_Id}}')">Register</button></td> -->
+                        </tr>
+
+                        @php
+                            $NoOfRounds = 1;
+                        @endphp
 
                     @endif
 
                     @php
 
-                    $previousCompanyId = $currentCompanyId;
+                        $previousCompanyId = $currentCompanyId;
 
                     @endphp
 
-                    @endfor
+                @endfor
             </tbody>
         </table>
     </div>
