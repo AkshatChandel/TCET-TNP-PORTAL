@@ -70,6 +70,7 @@
                         <td>{{$sent->Roll_No}}</td>
                         <td>{{$sent->Message_Sent_Status}}</td>
                     </tr>
+
                     @endforeach
                 </tbody>
             </table>

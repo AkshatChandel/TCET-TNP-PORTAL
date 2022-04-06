@@ -24,9 +24,9 @@ class CompanyController extends Controller
             ->join('Branch_Master', 'Branch_Master.Branch_Id', '=', 'Student_Class.Branch_Id')
             ->where('Student_Class.Student_Id', '=', $StudentId)
             ->select('Student_Class.Student_Class_Id', 'Branch_Master.Branch_Id')
-            ->get();
+            ->first();
 
-        $BranchId = $student[0]->Branch_Id;
+        $BranchId = $student->Branch_Id;
 
         $companies = DB::Table('Company_Master')
             ->join('Company_Branch', 'Company_Branch.Company_Id', '=', 'Company_Master.Company_Id')
@@ -52,7 +52,7 @@ class CompanyController extends Controller
 
         $company = DB::Table('Company_Master')
             ->where('Company_Master.Company_Id', '=', $CompanyId)
-            ->get();
+            ->first();
 
         $companyBranches = DB::Table('Company_Branch')
             ->join('Branch_Master', 'Branch_Master.Branch_Id', '=', 'Company_Branch.Branch_Id')
@@ -67,7 +67,7 @@ class CompanyController extends Controller
             ->where('Company_Round.Company_Id', '=', $CompanyId)
             ->get();
 
-        return [$company[0], $companyBranches, $companyCriterias, $companyRounds];
+        return [$company, $companyBranches, $companyCriterias, $companyRounds];
     }
 
     public function registerForCompany(Request $request)
@@ -79,9 +79,9 @@ class CompanyController extends Controller
         $StudentClass = Student_Class::select('Student_Class_Id')
             ->where('Student_Id', '=', $StudentId)
             ->where('Student_Class_Status', '=', 'Active')
-            ->get();
+            ->first();
 
-        $StudentClassId = $StudentClass[0]->Student_Class_Id;
+        $StudentClassId = $StudentClass->Student_Class_Id;
 
         $companyStudentRegistration = new Company_Student_Registration();
         $companyStudentRegistration->Company_Id = $CompanyId;

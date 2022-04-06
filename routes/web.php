@@ -41,25 +41,25 @@ Route::get('logout', function () {
 });
 
 Route::group(['middleware' => ['adminAuthenticate']], function () {
-    Route::get("admin", [AdminController::class, 'dashboard']);
+    Route::get("admin", [App\Admin\Http\Controllers\AdminController::class, 'dashboard']);
+    Route::get("admin/dashboard", [App\Admin\Http\Controllers\AdminController::class, 'dashboard']);
+    Route::get("admin/profile", [App\Admin\Http\Controllers\AdminController::class, 'profile']);
 
-    Route::get("admin/dashboard", [AdminController::class, 'dashboard']);
+    Route::get("admin/academicsession", [App\Admin\Http\Controllers\AcademicSessionController::class, 'index']);
+    Route::get("admin/academicsession/create", [App\Admin\Http\Controllers\AcademicSessionController::class, 'create']);
+    Route::post("admin/academicsession/create", [App\Admin\Http\Controllers\AcademicSessionController::class, 'createAcademicSession']);
 
-    Route::get("admin/academicsession", [AcademicSessionController::class, 'index']);
-    Route::get("admin/academicsession/create", [AcademicSessionController::class, 'create']);
-    Route::post("admin/academicsession/create", [AcademicSessionController::class, 'createAcademicSession']);
+    Route::get("admin/AcademicSession", [App\Admin\Http\Controllers\AcademicSessionController::class, 'index']);
+    Route::get("admin/AcademicSession/create", [App\Admin\Http\Controllers\AcademicSessionController::class, 'create']);
+    Route::post("admin/AcademicSession/create", [App\Admin\Http\Controllers\AcademicSessionController::class, 'createAcademicSession']);
 
-    Route::get("admin/AcademicSession", [AcademicSessionController::class, 'index']);
-    Route::get("admin/AcademicSession/create", [AcademicSessionController::class, 'create']);
-    Route::post("admin/AcademicSession/create", [AcademicSessionController::class, 'createAcademicSession']);
+    Route::get("admin/branch", [App\Admin\Http\Controllers\BranchController::class, 'index']);
+    Route::get("admin/branch/create", [App\Admin\Http\Controllers\BranchController::class, 'create']);
+    Route::post("admin/branch/create", [App\Admin\Http\Controllers\BranchController::class, 'createBranch']);
 
-    Route::get("admin/branch", [BranchController::class, 'index']);
-    Route::get("admin/branch/create", [BranchController::class, 'create']);
-    Route::post("admin/branch/create", [BranchController::class, 'createBranch']);
-
-    Route::get("admin/designation", [DesignationController::class, 'index']);
-    Route::get("admin/designation/create", [DesignationController::class, 'create']);
-    Route::post("admin/designation/create", [DesignationController::class, 'createDesignation']);
+    Route::get("admin/designation", [App\Admin\Http\Controllers\DesignationController::class, 'index']);
+    Route::get("admin/designation/create", [App\Admin\Http\Controllers\DesignationController::class, 'create']);
+    Route::post("admin/designation/create", [App\Admin\Http\Controllers\DesignationController::class, 'createDesignation']);
 
     Route::get("admin/student", [App\Admin\Http\Controllers\StudentController::class, 'index']);
     Route::get("admin/student/create", [App\Admin\Http\Controllers\StudentController::class, 'create']);
@@ -94,6 +94,11 @@ Route::group(['middleware' => ['adminAuthenticate']], function () {
     // Route::post("admin/message/send", [App\Admin\Http\Controllers\MessageController::class, 'sendMessage']);
     Route::get("admin/message/searchStudents", [App\Admin\Http\Controllers\MessageController::class, 'searchStudents']);
     Route::get("admin/message/sendMessageTo", [App\Admin\Http\Controllers\MessageController::class, 'sendMessageTo']);
+
+    Route::get("admin/announcement", [App\Admin\Http\Controllers\AnnouncementController::class, 'index']);
+    Route::get("admin/announcement/create", [App\Admin\Http\Controllers\AnnouncementController::class, 'create']);
+    Route::post("admin/announcement/create", [App\Admin\Http\Controllers\AnnouncementController::class, 'createAnnouncement']);
+    Route::get("admin/announcement/view/{announcementid}", [App\Admin\Http\Controllers\AnnouncementController::class, 'viewAnnouncementDetails']);
 });
 
 Route::group(['middleware' => ['staffAuthenticate']], function () {
@@ -101,8 +106,8 @@ Route::group(['middleware' => ['staffAuthenticate']], function () {
 
 Route::group(['middleware' => ['studentAuthenticate']], function () {
     Route::get("student", [App\Student\Http\Controllers\StudentController::class, 'dashboard']);
-
     Route::get("student/dashboard", [App\Student\Http\Controllers\StudentController::class, 'dashboard']);
+    Route::get("student/profile", [App\Student\Http\Controllers\StudentController::class, 'profile']);
 
     Route::get("student/quiz", [App\Student\Http\Controllers\QuizController::class, 'index']);
     Route::get("student/quiz/attempt/{quizid}", [App\Student\Http\Controllers\QuizController::class, 'attempt']);

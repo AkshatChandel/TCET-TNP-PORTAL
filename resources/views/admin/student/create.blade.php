@@ -174,13 +174,13 @@
                             </select>
                         </div>
                     </div>
-                    <div class="form-group class12-form-group">
+                    <div class="form-group">
                         <label for="txt_CollegeId" class="col-sm-2 control-label">College ID</label>
                         <div class="col-sm-9">
                             <input type="text" class="form-control" id="txt_CollegeId" name="Student_College_Id" placeholder="College ID" required>
                         </div>
                     </div>
-                    <div class="form-group class12-form-group">
+                    <div class="form-group">
                         <label for="txt_RollNo" class="col-sm-2 control-label">Roll Number</label>
                         <div class="col-sm-9">
                             <input type="number" min="1" max="120" class="form-control" id="Roll_No" name="Roll_No" placeholder="Roll Number" required>

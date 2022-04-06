@@ -1,6 +1,61 @@
 @extends('student.layout.student_layout')
 
 @section('main_content')
+
+@if($announcements != null && count($announcements) != 0)
+
+<div class="panel-group tool-tips widget-shadow" id="announcement" role="tablist" aria-multiselectable="true">
+    <h4 class="title2">Announcements :</h4>
+
+    @for($i = 0; $i
+    < count($announcements); $i++) <!-- <hr /> -->
+
+    @php
+    $announcement = $announcements[$i];
+    @endphp
+
+    @if($i == 0)
+
+    <div class="panel panel-default">
+        <div class="panel-heading" role="tab" id="heading{{$announcement->Announcement_Id}}">
+            <h4 class="panel-title">
+                <a role="button" data-toggle="collapse" data-parent="#announcement" href="#collapse{{$announcement->Announcement_Id}}" aria-expanded="true" aria-controls="collapse{{$announcement->Announcement_Id}}">
+                    {{$announcement->Announcement_Head}}
+                </a>
+            </h4>
+        </div>
+        <div id="collapse{{$announcement->Announcement_Id}}" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="heading{{$announcement->Announcement_Id}}">
+            <div class="panel-body">
+                {{$announcement->Announcement_Content}}
+            </div>
+        </div>
+    </div>
+
+    @else
+
+    <div class="panel panel-default">
+        <div class="panel-heading" role="tab" id="heading{{$announcement->Announcement_Id}}">
+            <h4 class="panel-title">
+                <a class="collapsed" role="button" data-toggle="collapse" data-parent="#announcement" href="#collapse{{$announcement->Announcement_Id}}" aria-expanded="true" aria-controls="collapse{{$announcement->Announcement_Id}}">
+                    {{$announcement->Announcement_Head}}
+                </a>
+            </h4>
+        </div>
+        <div id="collapse{{$announcement->Announcement_Id}}" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading{{$announcement->Announcement_Id}}">
+            <div class="panel-body">
+                {{$announcement->Announcement_Content}}
+            </div>
+        </div>
+    </div>
+
+    @endif
+
+    @endfor
+
+</div>
+
+@endif
+
 <!-- <div class="col_3">
     <div class="col-md-3 widget widget1">
         <div class="r3_counter_box">
@@ -183,8 +238,8 @@
     <div class="mid-content-top charts-grids">
         <div class="middle-content">
             <h4 class="title">Carousel Slider</h4> -->
-            <!-- start content_slider -->
-            <!-- <div id="owl-demo" class="owl-carousel text-center">
+<!-- start content_slider -->
+<!-- <div id="owl-demo" class="owl-carousel text-center">
                 <div class="item">
                     <img class="lazyOwl img-responsive" data-src="images/slider1.jpg" alt="name">
                 </div>
@@ -209,8 +264,8 @@
 
             </div>
         </div> -->
-        <!--//sreen-gallery-cursual---->
-    <!-- </div>
+<!--//sreen-gallery-cursual---->
+<!-- </div>
 </div>
 
 <div class="col_1">
@@ -286,7 +341,7 @@
                     <div class="clearfix"> </div>
                 </div>
             </div> -->
-            <!-- <form action="#" method="post">
+<!-- <form action="#" method="post">
                 <input type="text" value="Enter your text" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Enter your text';}" required="">
                 <input type="submit" value="Submit" />
             </form>
