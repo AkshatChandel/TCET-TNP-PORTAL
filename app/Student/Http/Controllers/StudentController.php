@@ -27,7 +27,11 @@ class StudentController extends Controller
             ->where('Announcement_Branch.Branch_Id', '=', $BranchId)
             ->get();
 
-        return view("student.dashboard.dashboard", ["announcements" => $announcements]);
+        $lectures = DB::Table('Training_Lecture')
+            ->where('Training_Lecture.Lecture_DateTime', '>=', date("y-m-d h:i:s"))
+            ->get();
+
+        return view("student.dashboard.dashboard", ["announcements" => $announcements, "lectures" => $lectures]);
     }
 
     public function profile()

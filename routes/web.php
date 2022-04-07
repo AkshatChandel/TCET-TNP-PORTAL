@@ -99,9 +99,53 @@ Route::group(['middleware' => ['adminAuthenticate']], function () {
     Route::get("admin/announcement/create", [App\Admin\Http\Controllers\AnnouncementController::class, 'create']);
     Route::post("admin/announcement/create", [App\Admin\Http\Controllers\AnnouncementController::class, 'createAnnouncement']);
     Route::get("admin/announcement/view/{announcementid}", [App\Admin\Http\Controllers\AnnouncementController::class, 'viewAnnouncementDetails']);
+
+    Route::get("admin/lecture", [App\Admin\Http\Controllers\TrainingController::class, 'index']);
+    Route::get("admin/lecture/create", [App\Admin\Http\Controllers\TrainingController::class, 'create']);
+    Route::post("admin/lecture/create", [App\Admin\Http\Controllers\TrainingController::class, 'createLecture']);
+    Route::get("admin/lecture/view/{traininglectureid}", [App\Admin\Http\Controllers\TrainingController::class, 'viewLectureDetails']);
 });
 
 Route::group(['middleware' => ['staffAuthenticate']], function () {
+    Route::get("staff", [App\Staff\Http\Controllers\StaffController::class, 'dashboard']);
+    Route::get("staff/dashboard", [App\Staff\Http\Controllers\StaffController::class, 'dashboard']);
+    Route::get("staff/profile", [App\Staff\Http\Controllers\StaffController::class, 'profile']);
+
+    Route::get("staff/quiz", [App\Staff\Http\Controllers\QuizController::class, 'index']);
+    Route::get("staff/quiz/create", [App\Staff\Http\Controllers\QuizController::class, 'create']);
+    Route::post("staff/quiz/create", [App\Staff\Http\Controllers\QuizController::class, 'createQuiz']);
+    Route::get("staff/quiz/checkquiz/{quizid}", [App\Staff\Http\Controllers\QuizController::class, 'checkQuiz']);
+    Route::get("staff/quiz/checkquizoptions/{quizid}", [App\Staff\Http\Controllers\QuizController::class, 'checkQuizOptions']);
+
+    Route::get("staff/company", [App\Staff\Http\Controllers\CompanyController::class, 'index']);
+    Route::get("staff/company/create", [App\Staff\Http\Controllers\CompanyController::class, 'create']);
+    Route::post("staff/company/create", [App\Staff\Http\Controllers\CompanyController::class, 'createCompany']);
+    Route::get("staff/company/view/{companyid}", [App\Staff\Http\Controllers\CompanyController::class, 'viewCompanyDetails']);
+    Route::get("staff/company/updateCompanyStudentRegistrationStatus", [App\Staff\Http\Controllers\CompanyController::class, 'updateCompanyStudentRegistrationStatus']);
+    Route::get("staff/company/update/{companyid}", [App\Staff\Http\Controllers\CompanyController::class, 'updateCompany']);
+    Route::get("staff/company/promoteStudentTo", [App\Staff\Http\Controllers\CompanyController::class, 'promoteStudentTo']);
+    Route::get("staff/company/promoteSelectedRoundStudents", [App\Staff\Http\Controllers\CompanyController::class, 'promoteSelectedRoundStudents']);
+    Route::get("staff/company/updateCompanyRoundStudentSelectedStatus", [App\Staff\Http\Controllers\CompanyController::class, 'updateCompanyRoundStudentSelectedStatus']);
+    Route::get("staff/company/hireStudent", [App\Staff\Http\Controllers\CompanyController::class, 'hireStudent']);
+
+    Route::get("staff/message", [App\Staff\Http\Controllers\MessageController::class, 'index']);
+    Route::get("staff/message/create", [App\Staff\Http\Controllers\MessageController::class, 'create']);
+    Route::post("staff/message/create", [App\Staff\Http\Controllers\MessageController::class, 'createMessageDraft']);
+    Route::get("staff/message/view/{messagedraftid}", [App\Staff\Http\Controllers\MessageController::class, 'view']);
+    Route::get("staff/message/send/{messagedraftid}", [App\Staff\Http\Controllers\MessageController::class, 'send']);
+    // Route::post("staff/message/send", [App\Staff\Http\Controllers\MessageController::class, 'sendMessage']);
+    Route::get("staff/message/searchStudents", [App\Staff\Http\Controllers\MessageController::class, 'searchStudents']);
+    Route::get("staff/message/sendMessageTo", [App\Staff\Http\Controllers\MessageController::class, 'sendMessageTo']);
+
+    Route::get("staff/announcement", [App\Staff\Http\Controllers\AnnouncementController::class, 'index']);
+    Route::get("staff/announcement/create", [App\Staff\Http\Controllers\AnnouncementController::class, 'create']);
+    Route::post("staff/announcement/create", [App\Staff\Http\Controllers\AnnouncementController::class, 'createAnnouncement']);
+    Route::get("staff/announcement/view/{announcementid}", [App\Staff\Http\Controllers\AnnouncementController::class, 'viewAnnouncementDetails']);
+
+    Route::get("staff/lecture", [App\Staff\Http\Controllers\TrainingController::class, 'index']);
+    Route::get("staff/lecture/create", [App\Staff\Http\Controllers\TrainingController::class, 'create']);
+    Route::post("staff/lecture/create", [App\Staff\Http\Controllers\TrainingController::class, 'createLecture']);
+    Route::get("staff/lecture/view/{traininglectureid}", [App\Staff\Http\Controllers\TrainingController::class, 'viewLectureDetails']);
 });
 
 Route::group(['middleware' => ['studentAuthenticate']], function () {
@@ -120,4 +164,7 @@ Route::group(['middleware' => ['studentAuthenticate']], function () {
 
     Route::get("student/message", [App\Student\Http\Controllers\MessageController::class, 'index']);
     Route::get("student/message/view/{messagesentid}", [App\Student\Http\Controllers\MessageController::class, 'viewMessage']);
+
+    Route::get("student/lecture", [App\Student\Http\Controllers\TrainingController::class, 'index']);
+    Route::get("student/lecture/view/{traininglectureid}", [App\Student\Http\Controllers\TrainingController::class, 'viewLectureDetails']);
 });

@@ -1,4 +1,4 @@
-@extends('admin.layout.admin_layout')
+@extends('staff.layout.staff_layout')
 
 @section('main_content')
 <div class="forms">
@@ -150,7 +150,7 @@
     }
 
     function backToList() {
-        window.location.href = "{{url('admin/quiz/')}}";
+        window.location.href = "{{url('staff/quiz/')}}";
     }
 
     addQuizQuestion();

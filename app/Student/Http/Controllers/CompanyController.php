@@ -16,9 +16,9 @@ use App\Models\Student_Class;
 
 class CompanyController extends Controller
 {
-    public function index(Request $request)
+    public function index()
     {
-        $StudentId = $request->session()->get('UserId');
+        $StudentId = session()->get('UserId');
 
         $student = DB::table('Student_Class')
             ->join('Branch_Master', 'Branch_Master.Branch_Id', '=', 'Student_Class.Branch_Id')

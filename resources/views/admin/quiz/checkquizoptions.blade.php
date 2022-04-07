@@ -113,7 +113,7 @@
             </div>
             </form>
 
-            <input type="button" value="Back To List" onclick="backToList()" class="btn btn-primary" />
+            <!-- <input type="button" value="Back To List" onclick="backToList()" class="btn btn-primary" /> -->
         </div>
     </div>
 </div>

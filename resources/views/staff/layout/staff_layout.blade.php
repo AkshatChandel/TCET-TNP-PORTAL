@@ -1,3 +1,21 @@
+@php
+
+$StaffId = session()->get('UserId');
+
+$staff = DB::Table('Staff_Master')
+->where('Staff_Master.Staff_Id', '=', $StaffId)
+->first();
+
+$messages = DB::Table('Message_Sent')
+->join('Message_Draft', 'Message_Draft.Message_Draft_Id', '=', 'Message_Sent.Message_Draft_Id')
+->where('Message_Sent.Send_To', '=', 'Staff')
+->where('Message_Sent.Person_Id', '=', $StaffId)
+->where('Message_Sent.Message_Sent_Status', '=', 'Sent')
+->orderByDesc('Message_Sent.Message_Sent_Id')
+->get();
+
+@endphp
+
 <!DOCTYPE HTML>
 <html>
 
@@ -77,56 +95,43 @@
                             <span class="icon-bar"></span>
                             <span class="icon-bar"></span>
                         </button>
-                        <a class="navbar-brand" href="{{url('/admin/')}}"><span class="fa fa-area-chart"></span> TCET<span class="dashboard_text">Training and Placement</span></a>
+                        <a class="navbar-brand" href="{{url('/staff/')}}"><span class="fa fa-area-chart"></span> TCET<span class="dashboard_text">Training and Placement</span></a>
                     </div>
                     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                         <ul class="sidebar-menu">
                             <li class="header">MAIN NAVIGATION</li>
                             <li class="treeview">
-                                <a href="{{url('/admin/')}}">
+                                <a href="{{url('/staff/')}}">
                                     <i class="fa fa-dashboard"></i> <span>Dashboard</span>
                                 </a>
                             </li>
                             <li class="treeview">
-                                <a href="#">
-                                    <i class="fa fa-laptop"></i>
-                                    <span>Institute Management</span>
-                                    <i class="fa fa-angle-left pull-right"></i>
-                                </a>
-                                <ul class="treeview-menu">
-                                    <li><a href="{{url('/admin/academicsession/')}}"><i class="fa fa-angle-right"></i>Academic Session</a></li>
-                                    <li><a href="{{url('/admin/designation/')}}"><i class="fa fa-angle-right"></i>Designation</a></li>
-                                    <li><a href="{{url('/admin/staff/')}}"><i class="fa fa-angle-right"></i>Staff Master</a></li>
-                                    <li><a href="{{url('/admin/student/')}}"><i class="fa fa-angle-right"></i>Student Master</a></li>
-                                </ul>
-                            </li>
-                            <li class="treeview">
-                                <a href="{{url('/admin/quiz/')}}">
+                                <a href="{{url('/staff/quiz/')}}">
                                     <i class="fa fa-question-circle"></i> <span>Quizzes</span>
                                 </a>
                             </li>
                             <li class="treeview">
-                                <a href="{{url('/admin/company/')}}">
+                                <a href="{{url('/staff/company/')}}">
                                     <i class="fa fa-list-alt"></i> <span>Companies</span>
                                 </a>
                             </li>
                             <li class="treeview">
-                                <a href="{{url('/admin/announcement/')}}">
+                                <a href="{{url('/staff/announcement/')}}">
                                     <i class="fa fa-bell-o"></i> <span>Announcement</span>
                                 </a>
                             </li>
                             <li class="treeview">
-                                <a href="{{url('/admin/message/')}}">
+                                <a href="{{url('/staff/message/')}}">
                                     <i class="fa fa-envelope"></i> <span>Message</span>
                                 </a>
                             </li>
                             <li class="treeview">
-                                <a href="{{url('/admin/lecture/')}}">
+                                <a href="{{url('/staff/lecture/')}}">
                                     <i class="fa fa-youtube-play"></i> <span>Lectures</span>
                                 </a>
                             </li>
                             <!-- <li class="treeview">
-                                <a href="{{url('/student/company/')}}">
+                                <a href="{{url('/staff/company/')}}">
                                     <i class="fa fa-bar-chart-o"></i> <span>Reports</span>
                                 </a>
                             </li> -->
@@ -149,43 +154,48 @@
                     <!--notifications of menu start -->
                     <ul class="nofitications-dropdown">
                         <li class="dropdown head-dpdn">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><i class="fa fa-envelope"></i><span class="badge">4</span></a>
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+                                <i class="fa fa-envelope"></i>
+                                @if($messages != null && count($messages) != 0)
+                                <span class="badge">{{count($messages)}}</span>
+                                @endif
+                            </a>
                             <ul class="dropdown-menu">
+                                @if($messages != null && count($messages) != 0)
                                 <li>
                                     <div class="notification_header">
-                                        <h3>You have 3 new messages</h3>
+                                        <h3>You have {{count($messages)}} new messages</h3>
                                     </div>
                                 </li>
-                                <li><a href="#">
+                                @endif
+
+                                @if($messages != null && count($messages) != 0)
+
+                                @for($i = 0; $i < count($messages) && $i < 4; $i++) <li>
+                                    <a href="{{url('/student/message/view/' . $messages[$i]->Message_Sent_Id)}}">
                                         <div class="user_img"><img src="{{url('images/1.jpg')}}" alt=""></div>
-                                        <div class="notification_desc">
-                                            <p>Lorem ipsum dolor amet</p>
-                                            <p><span>1 hour ago</span></p>
+                                        <div class="notification_desc" style="word-wrap: break-word;">
+                                            @if(strlen($messages[$i]->Message_Draft_Head) <= 23) <p>{{$messages[$i]->Message_Draft_Head}}</p>
+                                                @else
+                                                <p>{{substr($messages[$i]->Message_Draft_Head, 0, 23)}}...</p>
+                                                @endif
+                                                <!-- <p><span>1 hour ago</span></p> -->
                                         </div>
                                         <div class="clearfix"></div>
-                                    </a></li>
-                                <li class="odd"><a href="#">
-                                        <div class="user_img"><img src="{{url('images/4.jpg')}}" alt=""></div>
-                                        <div class="notification_desc">
-                                            <p>Lorem ipsum dolor amet </p>
-                                            <p><span>1 hour ago</span></p>
-                                        </div>
-                                        <div class="clearfix"></div>
-                                    </a></li>
-                                <li><a href="#">
-                                        <div class="user_img"><img src="{{url('images/3.jpg')}}" alt=""></div>
-                                        <div class="notification_desc">
-                                            <p>Lorem ipsum dolor amet </p>
-                                            <p><span>1 hour ago</span></p>
-                                        </div>
-                                        <div class="clearfix"></div>
-                                    </a></li>
-                                <li>
-                                    <div class="notification_bottom">
-                                        <a href="#">See all messages</a>
-                                    </div>
-                                </li>
-                            </ul>
+                                    </a>
+                        </li>
+
+                        @endfor
+
+                        @else
+
+                        <li>No messages</li>
+
+                        @endif
+                        <li>
+                            <div class="notification_bottom">
+                                <a href="{{url('/student/message/')}}">See all messages</a>
+                            </div>
                         </li>
                     </ul>
                     <div class="clearfix"> </div>
@@ -201,8 +211,8 @@
                                 <div class="profile_img">
                                     <span class="prfil-img"><img src="{{url('images/2.jpg')}}" alt=""> </span>
                                     <div class="user-name">
-                                        <p>Admin Name</p>
-                                        <span>Administrator</span>
+                                        <p>{{$staff->First_Name . ' ' . $staff->Last_Name}}</p>
+                                        <span>Staff</span>
                                     </div>
                                     <i class="fa fa-angle-down lnr"></i>
                                     <i class="fa fa-angle-up lnr"></i>

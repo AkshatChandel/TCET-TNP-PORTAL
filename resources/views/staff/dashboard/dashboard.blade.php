@@ -1,134 +1,6 @@
-@extends('student.layout.student_layout')
-
-@section('head_content')
-<!-- calendar -->
-<link rel="stylesheet" href="{{url('css/monthly.css')}}">
-<!-- //calendar -->
-@stop
+@extends('staff.layout.staff_layout')
 
 @section('main_content')
-
-@if($announcements != null && count($announcements) != 0)
-
-<div class="panel-group tool-tips widget-shadow" id="announcement" role="tablist" aria-multiselectable="true">
-    <h4 class="title2">Announcements :</h4>
-
-    @for($i = 0; $i
-    < count($announcements); $i++) <!-- <hr /> -->
-
-    @php
-    $announcement = $announcements[$i];
-    @endphp
-
-    @if($i == 0)
-
-    <div class="panel panel-default">
-        <div class="panel-heading" role="tab" id="heading{{$announcement->Announcement_Id}}">
-            <h4 class="panel-title">
-                <a role="button" data-toggle="collapse" data-parent="#announcement" href="#collapse{{$announcement->Announcement_Id}}" aria-expanded="true" aria-controls="collapse{{$announcement->Announcement_Id}}">
-                    {{$announcement->Announcement_Head}}
-                </a>
-            </h4>
-        </div>
-        <div id="collapse{{$announcement->Announcement_Id}}" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="heading{{$announcement->Announcement_Id}}">
-            <div class="panel-body">
-                {{$announcement->Announcement_Content}}
-            </div>
-        </div>
-    </div>
-
-    @else
-
-    <div class="panel panel-default">
-        <div class="panel-heading" role="tab" id="heading{{$announcement->Announcement_Id}}">
-            <h4 class="panel-title">
-                <a class="collapsed" role="button" data-toggle="collapse" data-parent="#announcement" href="#collapse{{$announcement->Announcement_Id}}" aria-expanded="true" aria-controls="collapse{{$announcement->Announcement_Id}}">
-                    {{$announcement->Announcement_Head}}
-                </a>
-            </h4>
-        </div>
-        <div id="collapse{{$announcement->Announcement_Id}}" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading{{$announcement->Announcement_Id}}">
-            <div class="panel-body">
-                {{$announcement->Announcement_Content}}
-            </div>
-        </div>
-    </div>
-
-    @endif
-
-    @endfor
-
-    <!-- calendar start -->
-    <!-- <div id="page-wrapper">
-        <div class="main-page"> -->
-    <div class="elements">
-        <div class="agil-info-calendar">
-            <div class="col-md-4 agile-calendar">
-                <div class="calendar-widget">
-                    <header class="widget-header">
-                        <h4 class="widget-title">Calender widget</h4>
-                    </header>
-                    <hr class="widget-separator">
-                    <!-- grids -->
-                    <div class="agile-calendar-grid">
-                        <div class="page">
-
-                            <div class="w3l-calendar-left">
-                                <div class="calendar-heading">
-
-                                </div>
-                                <div class="monthly" id="mycalendar"></div>
-                            </div>
-
-                            <div class="clearfix"> </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- </div>
-    </div> -->
-
-    <!-- calendar end -->
-
-    <!-- calendar -->
-    <script type="text/javascript" src="js/monthly.js"></script>
-    <script type="text/javascript">
-        $(window).load(function() {
-
-            $('#mycalendar').monthly({
-                mode: 'event',
-
-            });
-
-            $('#mycalendar2').monthly({
-                mode: 'picker',
-                target: '#mytarget',
-                setWidth: '250px',
-                startHidden: true,
-                showTrigger: '#mytarget',
-                stylePast: true,
-                disablePast: true
-            });
-
-            switch (window.location.protocol) {
-                case 'http:':
-                case 'https:':
-                    // running on a server, should be good.
-                    break;
-                case 'file:':
-                    alert('Just a heads-up, events will not work when run locally.');
-            }
-
-        });
-    </script>
-    <!-- //calendar -->
-
-</div>
-
-@endif
-
 <!-- <div class="col_3">
     <div class="col-md-3 widget widget1">
         <div class="r3_counter_box">
@@ -136,8 +8,8 @@
             <div class="stats">
                 <h5><strong>$452</strong></h5>
                 <span>Total Revenue</span>
-            </div>
-        </div>
+            </div> -->
+<!-- </div>
     </div>
     <div class="col-md-3 widget widget1">
         <div class="r3_counter_box">
@@ -176,9 +48,9 @@
         </div>
     </div>
     <div class="clearfix"> </div>
-</div>
+</div> -->
 
-<div class="row-one widgettable">
+<!-- <div class="row-one widgettable">
     <div class="col-md-7 content-top-2 card">
         <div class="agileinfo-cdr">
             <div class="card-header">
@@ -297,8 +169,8 @@
 </div>
  -->
 
-<!-- for amcharts js -->
-<!-- <script src="{{url('js/amcharts.js')}}"></script>
+<!-- for amcharts js
+<script src="{{url('js/amcharts.js')}}"></script>
 <script src="{{url('js/serial.js')}}"></script>
 <script src="{{url('js/export.min.js')}}"></script>
 <link rel="stylesheet" href="{{url('css/export.css')}}" type="text/css" media="all" />
@@ -312,7 +184,13 @@
         <div class="middle-content">
             <h4 class="title">Carousel Slider</h4> -->
 <!-- start content_slider -->
-<!-- <div id="owl-demo" class="owl-carousel text-center">
+<!-- 1:30 PM</h6>
+                    </div>
+                    <div class="clearfix"> </div>
+                </div>
+                <div class="activity-row">
+                    <div class="col-xs-3 activity-img"><img src='images/2.jpg' class="img-responsive" alt="" /></div>
+                    <div class="col<div id="owl-demo" class="owl-carousel text-center">
                 <div class="item">
                     <img class="lazyOwl img-responsive" data-src="images/slider1.jpg" alt="name">
                 </div>
@@ -352,8 +230,8 @@
                         <h5><a href="#">Michael Chris</a></h5>
                         <p>Hey ! There I'm available.</p>
                     </div>
-                    <div class="col-xs-2 activity-desc1">
-                        <h6>12:05 PM</h6>
+                    <div class="col-xs-2 activity-desc1"> -->
+<!-- <h6>12:05 PM</h6>
                     </div>
                     <div class="clearfix"> </div>
                 </div>
@@ -375,13 +253,7 @@
                         <p>Hey ! There I'm available.</p>
                     </div>
                     <div class="col-xs-2 activity-desc1">
-                        <h6>01:30 PM</h6>
-                    </div>
-                    <div class="clearfix"> </div>
-                </div>
-                <div class="activity-row">
-                    <div class="col-xs-3 activity-img"><img src='images/2.jpg' class="img-responsive" alt="" /></div>
-                    <div class="col-xs-7 activity-desc">
+                        <h6>0-xs-7 activity-desc">
                         <h5><a href="#">Jackson Jacob</a></h5>
                         <p>Hey ! There I'm available.</p>
                     </div>
@@ -390,8 +262,8 @@
                     </div>
                     <div class="clearfix"> </div>
                 </div>
-                <div class="activity-row">
-                    <div class="col-xs-3 activity-img"><img src='images/1.jpg' class="img-responsive" alt="" /></div>
+                <div class="activity-row"> -->
+<!-- <div class="col-xs-3 activity-img"><img src='images/1.jpg' class="img-responsive" alt="" /></div>
                     <div class="col-xs-7 activity-desc">
                         <h5><a href="#">David Samuel</a></h5>
                         <p>Hey ! There I'm available.</p>
@@ -413,8 +285,8 @@
                     </div>
                     <div class="clearfix"> </div>
                 </div>
-            </div> -->
-<!-- <form action="#" method="post">
+            </div>
+            <form action="#" method="post">
                 <input type="text" value="Enter your text" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Enter your text';}" required="">
                 <input type="submit" value="Submit" />
             </form>
@@ -438,8 +310,8 @@
                 <div class="activity-row activity-row1">
                     <div class="col-xs-2 activity-desc1"></div>
                     <div class="col-xs-7 activity-img2">
-                        <div class="activity-desc-sub1">
-                            <h5>Alexander</h5>
+                        <div class="activity-desc-sub1"> -->
+<!-- <h5>Alexander</h5>
                             <p>Hi,How are you ? What about our next meeting?</p>
                         </div>
                     </div>
@@ -478,8 +350,8 @@
     <div class="col-md-4 span_8">
         <div class="activity_box activity_box2">
             <h3>todo</h3>
-            <div class="scrollbar" id="style-2">
-                <div class="activity-row activity-row1">
+            <div class="scrollbar" id="style-2"> -->
+<!-- <div class="activity-row activity-row1">
                     <div class="single-bottom">
                         <ul>
                             <li>

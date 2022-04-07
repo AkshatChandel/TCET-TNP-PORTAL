@@ -81,6 +81,8 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
         });
     </script> -->
     <!-- //requried-jsfiles-for owl -->
+
+    @yield('head_content')
 </head>
 
 <body class="cbp-spmenu-push">
@@ -96,13 +98,13 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
                             <span class="icon-bar"></span>
                             <span class="icon-bar"></span>
                         </button>
-                        <a class="navbar-brand" href="index.html"><span class="fa fa-area-chart"></span> TCET<span class="dashboard_text">Design Dashboard</span></a>
+                        <a class="navbar-brand" href="{{url('/student/')}}"><span class="fa fa-area-chart"></span> TCET<span class="dashboard_text">Training and Placement</span></a>
                     </div>
                     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                         <ul class="sidebar-menu">
                             <li class="header">MAIN NAVIGATION</li>
                             <li class="treeview">
-                                <a href="{{url('/admin/')}}">
+                                <a href="{{url('/student/')}}">
                                     <i class="fa fa-dashboard"></i> <span>Dashboard</span>
                                 </a>
                             </li>
@@ -114,6 +116,11 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
                             <li class="treeview">
                                 <a href="{{url('/student/company/')}}">
                                     <i class="fa fa-list-alt"></i> <span>Companies</span>
+                                </a>
+                            </li>
+                            <li class="treeview">
+                                <a href="{{url('/student/lecture/')}}">
+                                    <i class="fa fa-youtube-play"></i> <span>Lectures</span>
                                 </a>
                             </li>
                         </ul>
@@ -203,7 +210,7 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
                             <ul class="dropdown-menu drp-mnu">
                                 <!-- <li> <a href="#"><i class="fa fa-cog"></i> Settings</a> </li> -->
                                 <!-- <li> <a href="#"><i class="fa fa-user"></i> My Account</a> </li> -->
-                                <li> <a href="{{url('/student/pr/')}}"><i class="fa fa-suitcase"></i> Profile</a> </li>
+                                <li> <a href="{{url('/student/profile/')}}"><i class="fa fa-suitcase"></i> Profile</a> </li>
                                 <li> <a href="{{url('/logout/')}}"><i class="fa fa-sign-out"></i> Logout</a> </li>
                             </ul>
                         </li>
