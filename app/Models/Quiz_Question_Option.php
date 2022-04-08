@@ -10,4 +10,5 @@ class Quiz_Question_Option extends Model
     use HasFactory;
     public $table = "Quiz_Question_Option";
     public $timestamps = false;
+    protected $primaryKey = 'Quiz_Question_Option_Id';
 }

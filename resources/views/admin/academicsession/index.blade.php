@@ -32,7 +32,7 @@
                     <td>{{$count}}</td>
                     <td>{{$AcademicSession->Academic_Session_Name}}</td>
                     <td>{{$AcademicSession->Academic_Session_Status}}</td>
-                    <td><button type="button" onclick="edit('{{$AcademicSession->Academic_Session_Id}}')">Edit</button></td>
+                    <td><a href="{{ url('admin/academicsession/edit/' . $AcademicSession->Academic_Session_Id) }}"><i class="fa fa-edit"></i></a></td>
                 </tr>
 
                 @endforeach
@@ -44,10 +44,6 @@
 <script>
     function create() {
         window.location.href = "{{url('admin/academicsession/create')}}";
-    }
-
-    function edit(AcademicSessionId) {
-        window.location.href = "Edit.php?AcademicSessionId=" + AcademicSessionId;
     }
 </script>
 

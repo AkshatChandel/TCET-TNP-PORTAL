@@ -10,4 +10,5 @@ class Company_Round extends Model
     use HasFactory;
     public $table = "Company_Round";
     public $timestamps = false;
+    protected $primaryKey = 'Company_Round_Id';
 }

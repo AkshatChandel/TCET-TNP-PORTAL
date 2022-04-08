@@ -10,4 +10,5 @@ class Announcement extends Model
     use HasFactory;
     public $table = "Announcement";
     public $timestamps = false;
+    protected $primaryKey = 'Announcement_Id';
 }

@@ -10,4 +10,5 @@ class Company_Master extends Model
     use HasFactory;
     public $table = "Company_Master";
     public $timestamps = false;
+    protected $primaryKey = 'Company_Id';
 }

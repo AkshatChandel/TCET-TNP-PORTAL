@@ -10,4 +10,5 @@ class Academic_Session_Master extends Model
     use HasFactory;
     public $table = "Academic_Session_Master";
     public $timestamps = false;
+    protected $primaryKey = 'Academic_Session_Id';
 }

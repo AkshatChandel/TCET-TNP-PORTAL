@@ -10,4 +10,5 @@ class Staff_Login extends Model
     use HasFactory;
     public $table = "Staff_Login";
     public $timestamps = false;
+    protected $primaryKey = 'Staff_Login_Id';
 }

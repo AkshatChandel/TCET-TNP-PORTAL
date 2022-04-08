@@ -10,4 +10,5 @@ class Student_Login extends Model
     use HasFactory;
     public $table = "Student_Login";
     public $timestamps = false;
+    protected $primaryKey = 'Student_Login_Id';
 }

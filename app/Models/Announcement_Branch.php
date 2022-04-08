@@ -10,4 +10,5 @@ class Announcement_Branch extends Model
     use HasFactory;
     public $table = "Announcement_Branch";
     public $timestamps = false;
+    protected $primaryKey = 'Announcement_Branch_Id';
 }

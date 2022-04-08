@@ -10,4 +10,5 @@ class Message_Draft extends Model
     use HasFactory;
     public $table = "Message_Draft";
     public $timestamps = false;
+    protected $primaryKey = 'Message_Draft_Id';
 }

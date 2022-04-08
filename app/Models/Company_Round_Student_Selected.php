@@ -10,4 +10,5 @@ class Company_Round_Student_Selected extends Model
     use HasFactory;
     public $table = "Company_Round_Student_Selected";
     public $timestamps = false;
+    protected $primaryKey = 'Company_Round_Student_Selected_Id';
 }

@@ -57,6 +57,27 @@ class AnnouncementController extends Controller
         return redirect("/admin/announcement/");
     }
 
+    // public function edit($AnnouncementId)
+    // {
+    //     $announcement = DB::Table('Announcement')
+    //         ->where('editAnnouncement_Id', '=', $AnnouncementId)
+    //         ->first();
+
+    //     return view("admin.announcement.edit", ["announcement" => $announcement]);
+    // }
+
+    // public function editAnnouncement($AnnouncementId, Request $request)
+    // {
+    //     $AcademicSessionName = $request->Academic_Session_Name;
+    //     $AcademicSessionStatus = $request->Academic_Session_Status;
+
+    //     $rowsAffected = DB::table('Academic_Session_Master')
+    //         ->where('Academic_Session_Id', $AnnouncementId)
+    //         ->update(['Academic_Session_Name' => $AcademicSessionName, 'Academic_Session_Status' => $AcademicSessionStatus]);
+
+    //     return redirect("/admin/announcement/");
+    // }
+
     public function viewAnnouncementDetails($AnnouncementId)
     {
         $announcement = DB::Table('Announcement')

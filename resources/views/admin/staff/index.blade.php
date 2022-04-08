@@ -28,7 +28,7 @@
                     <td>{{$staff->Designation_Name}}</td>
                     <td>{{$staff->Branch_Name}}</td>
                     <td>{{$staff->Contact_No}}</td>
-                    <td><button type="button" onclick="edit('$student->Student_Id')">Edit</button></td>
+                    <td><a href="{{ url('admin/staff/edit/' . $staff->Staff_Id) }}"><i class="fa fa-edit"></i></a></td>
                 </tr>
 
                 @endforeach
@@ -40,10 +40,6 @@
 <script>
     function create() {
         window.location.href = "{{url('admin/staff/create')}}";
-    }
-
-    function edit(StaffId) {
-        window.location.href = "Edit.php?StaffId=" + StaffId;
     }
 </script>
 

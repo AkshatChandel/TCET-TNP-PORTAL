@@ -10,4 +10,5 @@ class Training_Lecture extends Model
     use HasFactory;
     public $table = "Training_Lecture";
     public $timestamps = false;
+    protected $primaryKey = 'Training_Lecture_Id';
 }

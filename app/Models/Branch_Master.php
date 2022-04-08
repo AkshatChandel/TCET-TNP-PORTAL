@@ -10,4 +10,5 @@ class Branch_Master extends Model
     use HasFactory;
     public $table = "Branch_Master";
     public $timestamps = false;
+    protected $primaryKey = 'Branch_Id';
 }

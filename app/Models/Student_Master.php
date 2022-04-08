@@ -10,4 +10,5 @@ class Student_Master extends Model
     use HasFactory;
     public $table = "Student_Master";
     public $timestamps = false;
+    protected $primaryKey = 'Student_Id';
 }

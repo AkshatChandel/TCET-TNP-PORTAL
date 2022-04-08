@@ -34,7 +34,7 @@ class StudentController extends Controller
         $branches = Branch_Master::where('Branch_Status', 'Active')->get();
         $AcademicSessions = Academic_Session_Master::where('Academic_Session_Status', 'Active')->get();
 
-        return view("admin.student.create", ["branches" => $branches, "AcademicSessions" => $AcademicSessions]);
+        return view("admin.student.create", ["branches" => $branches, "academicSessions" => $AcademicSessions]);
     }
 
     public function createStudent(Request $request)
@@ -129,6 +129,97 @@ class StudentController extends Controller
         $student_login->Student_Password = "S" . $student_master->Student_College_Id;
         $student_login->Student_Login_Status = "Active";
         $student_login->save();
+
+        return redirect('/admin/student/');
+    }
+
+    public function edit($StudentId)
+    {
+        $student = DB::Table('Student_Master')
+            ->join('Student_Class', 'Student_Class.Student_Id', '=', 'Student_Master.Student_Id')
+            ->where('Student_Master.Student_Id', '=', $StudentId)
+            ->where('Student_Class.Student_Class_Status', '=', 'Active')
+            ->first();
+
+        $branches = Branch_Master::where('Branch_Status', 'Active')->get();
+        $academicSessions = Academic_Session_Master::where('Academic_Session_Status', 'Active')->get();
+
+        return view("admin.student.edit", ["student" => $student, "branches" => $branches, "academicSessions" => $academicSessions]);
+    }
+
+    public function editStudent($StudentId, Request $request)
+    {
+        $student_master = Student_Master::find($StudentId);
+        $student_master->Student_College_Id = $request->Student_College_Id;
+        $student_master->First_Name = $request->First_Name;
+        $student_master->Middle_Name = $request->Middle_Name;
+        $student_master->Last_Name = $request->Last_Name;
+        $student_master->Date_Of_Birth = $request->Date_Of_Birth;
+        $student_master->Gender = $request->Gender;
+        $student_master->Contact_No = $request->Contact_No;
+        $student_master->Email_Id = $request->Email_Id;
+        $student_master->Address = $request->Address;
+        $student_master->Class_10_Percentage = $request->Class_10_Percentage;
+        $student_master->From_Class12_Or_Diploma = $request->From_Class12_Or_Diploma;
+
+        if ($request->From_Class12_Or_Diploma == "Class 12") {
+
+            if ($request->Class_12_Percentage != null && trim($request->Class_12_Percentage) != "") {
+                $student_master->Class_12_Percentage = $request->Class_12_Percentage;
+            } else {
+                $student_master->Class_12_Percentage = 0;
+            }
+
+            if ($request->JEE_Marks != null && trim($request->JEE_Marks) != "") {
+                $student_master->JEE_Marks = $request->JEE_Marks;
+            } else {
+                $student_master->JEE_Marks = 0;
+            }
+
+            if ($request->JEE_Out_Of != null && trim($request->JEE_Out_Of) != "") {
+                $student_master->JEE_Out_Of = $request->JEE_Out_Of;
+            } else {
+                $student_master->JEE_Out_Of = 0;
+            }
+
+            if ($request->CET_Marks != null && trim($request->CET_Marks) != "") {
+                $student_master->CET_Marks = $request->CET_Marks;
+            } else {
+                $student_master->CET_Marks = 0;
+            }
+
+            if ($request->CET_Out_Of != null && trim($request->CET_Out_Of) != "") {
+                $student_master->CET_Out_Of = $request->CET_Out_Of;
+            } else {
+                $student_master->CET_Out_Of = 0;
+            }
+            $student_master->Diploma_Percentage = 0;
+        } else if ($request->From_Class12_Or_Diploma == "Diploma") {
+
+            if ($request->Diploma_Percentage != null && trim($request->Diploma_Percentage) != "") {
+                $student_master->Diploma_Percentage = $request->Diploma_Percentage;
+            } else {
+                $student_master->Diploma_Percentage = 0;
+            }
+            $student_master->Class_12_Percentage = 0;
+            $student_master->JEE_Marks = 0;
+            $student_master->JEE_Out_Of = 0;
+            $student_master->CET_Marks = 0;
+            $student_master->CET_Out_Of = 0;
+        }
+
+        $student_master->Student_Status = $request->Student_Status;
+        $student_master->save();
+
+        $student_class = Student_Class::where('Student_Id', '=', $StudentId)
+            ->where('Student_Class_Status', '=', 'Active')->first();
+        // $student_class = Student_Class::find($StudentClassId);
+        $student_class->Academic_Session_Id = $request->Academic_Session_Id;
+        $student_class->Branch_Id = $request->Branch_Id;
+        $student_class->Semester = $request->Semester;
+        $student_class->Roll_No = $request->Roll_No;
+        // $student_class->Student_Class_Status = "Active";
+        $student_class->save();
 
         return redirect('/admin/student/');
     }

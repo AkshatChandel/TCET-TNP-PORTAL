@@ -10,4 +10,5 @@ class Designation_Master extends Model
     use HasFactory;
     public $table = "Designation_Master";
     public $timestamps = false;
+    protected $primaryKey = 'Designation_Id';
 }

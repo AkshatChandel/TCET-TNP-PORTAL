@@ -57,19 +57,23 @@
     @endif
 
     @endfor
+</div>
 
-    <!-- calendar start -->
-    <!-- <div id="page-wrapper">
-        <div class="main-page"> -->
-    <div class="elements">
-        <div class="agil-info-calendar">
+@endif
+
+
+<!-- calendar start -->
+<!-- <div id="page-wrapper">
+    <div class="main-page">
+        <div class="elements">
+            <div class="agil-info-calendar">
             <div class="col-md-4 agile-calendar">
                 <div class="calendar-widget">
                     <header class="widget-header">
                         <h4 class="widget-title">Calender widget</h4>
                     </header>
                     <hr class="widget-separator">
-                    <!-- grids -->
+                    grids
                     <div class="agile-calendar-grid">
                         <div class="page">
 
@@ -85,49 +89,45 @@
                     </div>
                 </div>
             </div>
+            </div>
         </div>
     </div>
-    <!-- </div>
-    </div> -->
+</div> -->
 
-    <!-- calendar end -->
+<!-- calendar end -->
 
-    <!-- calendar -->
-    <script type="text/javascript" src="js/monthly.js"></script>
-    <script type="text/javascript">
-        $(window).load(function() {
+<!-- calendar -->
+<!-- <script type="text/javascript" src="js/monthly.js"></script>
+<script type="text/javascript">
+    $(window).load(function() {
 
-            $('#mycalendar').monthly({
-                mode: 'event',
-
-            });
-
-            $('#mycalendar2').monthly({
-                mode: 'picker',
-                target: '#mytarget',
-                setWidth: '250px',
-                startHidden: true,
-                showTrigger: '#mytarget',
-                stylePast: true,
-                disablePast: true
-            });
-
-            switch (window.location.protocol) {
-                case 'http:':
-                case 'https:':
-                    // running on a server, should be good.
-                    break;
-                case 'file:':
-                    alert('Just a heads-up, events will not work when run locally.');
-            }
+        $('#mycalendar').monthly({
+            mode: 'event',
 
         });
-    </script>
-    <!-- //calendar -->
 
-</div>
+        // $('#mycalendar2').monthly({
+        //     mode: 'picker',
+        //     target: '#mytarget',
+        //     setWidth: '250px',
+        //     startHidden: true,
+        //     showTrigger: '#mytarget',
+        //     stylePast: true,
+        //     disablePast: true
+        // });
 
-@endif
+        switch (window.location.protocol) {
+            case 'http:':
+            case 'https:':
+                // running on a server, should be good.
+                break;
+            case 'file:':
+                alert('Just a heads-up, events will not work when run locally.');
+        }
+
+    });
+</script> -->
+<!-- //calendar -->
 
 <!-- <div class="col_3">
     <div class="col-md-3 widget widget1">

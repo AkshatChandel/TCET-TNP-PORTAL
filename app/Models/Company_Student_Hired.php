@@ -10,4 +10,5 @@ class Company_Student_Hired extends Model
     use HasFactory;
     public $table = "Company_Student_Hired";
     public $timestamps = false;
+    protected $primaryKey = 'Company_Student_Hired_Id';
 }

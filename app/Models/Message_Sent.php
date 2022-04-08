@@ -10,4 +10,5 @@ class Message_Sent extends Model
     use HasFactory;
     public $table = "Message_Sent";
     public $timestamps = false;
+    protected $primaryKey = 'Message_Sent_Id';
 }

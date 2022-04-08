@@ -10,4 +10,5 @@ class Student_Quiz_Answer extends Model
     use HasFactory;
     public $table = "Student_Quiz_Answer";
     public $timestamps = false;
+    protected $primaryKey = 'Student_Quiz_Answer_Id';
 }

@@ -53,7 +53,7 @@
                     <td>{{$student->Branch_Name}}</td>
                     <td>{{$student->Semester}}</td>
                     <td>{{$student->Roll_No}}</td>
-                    <td><button type="button" onclick="edit('$student->Student_Id')">Edit</button></td>
+                    <td><a href="{{ url('admin/student/edit/' . $student->Student_Id) }}"><i class="fa fa-edit"></i></a></td>
                 </tr>
 
                 @endforeach
@@ -65,10 +65,6 @@
 <script>
     function create() {
         window.location.href = "{{url('admin/student/create')}}";
-    }
-
-    function edit(StudentId) {
-        window.location.href = "Edit.php?StudentId=" + StudentId;
     }
 </script>
 

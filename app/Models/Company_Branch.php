@@ -10,4 +10,5 @@ class Company_Branch extends Model
     use HasFactory;
     public $table = "Company_Branch";
     public $timestamps = false;
+    protected $primaryKey = 'Company_Branch_Id';
 }

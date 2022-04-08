@@ -130,8 +130,8 @@
                         <label for="select_Academic_Session_Id" class="col-sm-2 control-label">Academic Session</label>
                         <div class="col-sm-9">
                             <select id="select_Academic_Session_Id" name="Academic_Session_Id" class="form-control">
-                                @foreach($AcademicSessions as $AcademicSession)
-                                <option value="{{$AcademicSession->Academic_Session_Id}}">{{$AcademicSession->Academic_Session_Name}}</option>
+                                @foreach($academicSessions as $academicSession)
+                                <option value="{{$academicSession->Academic_Session_Id}}">{{$academicSession->Academic_Session_Name}}</option>
                                 @endforeach
                             </select>
                         </div>
