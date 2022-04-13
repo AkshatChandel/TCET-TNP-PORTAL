@@ -277,4 +277,10 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
     <!-- Bootstrap Core JavaScript -->
     <script src="{{url('js/bootstrap.js')}}"> </script>
     <!-- //Bootstrap Core JavaScript -->
+
+    <script>
+        $(function() {
+            $('[data-toggle="tooltip"]').tooltip()
+        })
+    </script>
 </body>

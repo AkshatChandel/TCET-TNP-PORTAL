@@ -17,7 +17,6 @@
                     <th scope="col">Academic Session</th>
                     <th scope="col">Status</th>
                     <th scope="col"></th>
-                    <th scope="col"></th>
                 </tr>
             </thead>
             <tbody>
@@ -39,8 +38,10 @@
                     <td>{{$lecture->Lecture_DateTime}}</td>
                     <td>{{$lecture->Academic_Session_Name}}</td>
                     <td>{{$lecture->Lecture_Status}}</td>
-                    <td><button type="button" onclick="edit('{{$lecture->Training_Lecture_Id}}')">Edit</button></td>
-                    <td><button type="button" onclick="view('{{$lecture->Training_Lecture_Id}}')">View</button></td>
+                    <td>
+                        <!-- <a href="{{ url('admin/lecture/edit/' . $lecture->Training_Lecture_Id) }}" data-toggle="tooltip" data-placement="left" title="" data-original-title="Edit"><i class="fa fa-edit"></i></a> -->
+                        <a href="{{ url('admin/lecture/view/' . $lecture->Training_Lecture_Id) }}" data-toggle="tooltip" data-placement="top" title="" data-original-title="View"><i class="fa fa-eye"></i></a>
+                    </td>
                 </tr>
 
                 @endforeach
@@ -53,14 +54,6 @@
     function create() {
         window.location.href = "{{url('admin/lecture/create')}}";
     }
-
-    function view(TrainingLectureId) {
-        window.location.href = "{{url('admin/lecture/view/')}}" + "/" + TrainingLectureId;
-    }
-
-    // function edit(DesignationId) {
-    //     window.location.href = "Edit.php?DesignationId=" + DesignationId;
-    // }
 </script>
 
 @stop

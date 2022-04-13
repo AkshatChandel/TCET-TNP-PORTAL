@@ -56,7 +56,9 @@
                                 <td><button type="button" onclick="checkQuizOptions('{{$student->Student_Class_Id}}', '{{$quizData[0]->Quiz_Id}}')">Check Answers</button></td>
                             </tr>
 
+                            @php
                             $score = 0;
+                            @endphp
 
                         @endif
 

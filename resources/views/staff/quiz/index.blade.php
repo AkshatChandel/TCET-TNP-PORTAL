@@ -18,7 +18,6 @@
                     <th scope="col">Quiz Duration (in minutes)</th>
                     <th scope="col">Quiz Status</th>
                     <th scope="col"></th>
-                    <th scope="col"></th>
                 </tr>
             </thead>
             <tbody>
@@ -41,8 +40,11 @@
                     <td>{{$quiz->Quiz_Time}}</td>
                     <td>{{$quiz->Quiz_Duration}}</td>
                     <td>{{$quiz->Quiz_Status}}</td>
-                    <td><button type="button" onclick="edit('{{$quiz->Quiz_Id}}')">Edit</button></td>
-                    <td><button type="button" onclick="checkQuiz('{{$quiz->Quiz_Id}}')">Check Quiz</button></td>
+                    <td>
+                        <!-- <a href="{{ url('staff/quiz/edit/' . $quiz->Quiz_Id) }}" data-toggle="tooltip" data-placement="left" title="" data-original-title="Edit"><i class="fa fa-edit"></i></a> -->
+                        <a href="{{ url('staff/quiz/view/' . $quiz->Quiz_Id) }}" data-toggle="tooltip" data-placement="top" title="" data-original-title="View"><i class="fa fa-eye"></i></a>
+                        <a href="{{ url('staff/quiz/checkquiz/' . $quiz->Quiz_Id) }}" data-toggle="tooltip" data-placement="right" title="" data-original-title="Check Quiz"><i class="fa fa-external-link"></i></a>
+                    </td>
                 </tr>
 
                 @endforeach
@@ -54,14 +56,6 @@
 <script>
     function create() {
         window.location.href = "{{url('admin/quiz/create')}}";
-    }
-
-    // function edit(QuizId) {
-    //     window.location.href = "Edit.php?QuizId=" + QuizId;
-    // }
-
-    function checkQuiz(QuizId) {
-        window.location.href = "{{url('staff/quiz/checkquiz/')}}" + "/" + QuizId;
     }
 </script>
 

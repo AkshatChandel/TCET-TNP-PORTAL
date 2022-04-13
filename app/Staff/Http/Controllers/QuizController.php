@@ -39,7 +39,7 @@ class QuizController extends Controller
         $quiz_master->Quiz_Status = $request->Quiz_Status;
         $quiz_master->save();
 
-        $QuizId = $quiz_master->id;
+        $QuizId = $quiz_master->Quiz_Id;
 
         $QuizQuestions = $request->Quiz_Question;
         $QuizOptions = $request->Quiz_Option;
@@ -53,7 +53,7 @@ class QuizController extends Controller
             $quiz_question->Quiz_Question = $QuizQuestion;
             $quiz_question->save();
 
-            $QuizQuestionId = $quiz_question->id;
+            $QuizQuestionId = $quiz_question->Quiz_Question_Id;
 
             $QuizOptionsLoopEnd = $QuizOptionsCounter + 4;
 
@@ -68,6 +68,20 @@ class QuizController extends Controller
         }
 
         return redirect('/staff/quiz/');
+    }
+
+    public function viewQuiz($QuizId)
+    {
+        $quiz = Quiz_Master::find($QuizId)
+            ->join('Staff_Master', 'Staff_Master.Staff_Id', '=', 'Quiz_Master.Staff_Id')
+            ->first();
+
+        $quizQuestionsOptions = DB::Table('Quiz_Question')
+            ->join('Quiz_Question_Option', 'Quiz_Question_Option.Quiz_Question_Id', '=', 'Quiz_Question.Quiz_Question_Id')
+            ->where('Quiz_Question.Quiz_Id', '=', $QuizId)
+            ->get();
+
+        return view("staff.quiz.view", ['quiz' => $quiz, 'quizQuestionsOptions' => $quizQuestionsOptions]);
     }
 
     public function checkQuiz($QuizId)

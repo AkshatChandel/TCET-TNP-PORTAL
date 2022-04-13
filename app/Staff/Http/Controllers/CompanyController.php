@@ -48,14 +48,14 @@ class CompanyController extends Controller
         if ($CompanyCriterias != null && $Branches != null && $Rounds != null && $Round_DateTimes != null && $Round_Durations != null && $Round_Statuses != null) {
 
             if (count($CompanyCriterias) != 0 && count($Branches) != 0 && count($Rounds) != 0 && count($Round_DateTimes) != 0 && count($Round_Durations) != 0 && count($Round_Statuses) != 0) {
-                
+
                 $company_master = new Company_Master;
                 $company_master->Company_Name = $request->Company_Name;
                 $company_master->Company_Status = $request->Company_Status;
                 $company_master->Academic_Session_Id = $request->Academic_Session_Id;
                 $company_master->save();
 
-                $CompanyId = $company_master->id;
+                $CompanyId = $company_master->Company_Id;
 
                 foreach ($CompanyCriterias as $CompanyCriteria) {
                     $company_criteria = new Company_Criteria;

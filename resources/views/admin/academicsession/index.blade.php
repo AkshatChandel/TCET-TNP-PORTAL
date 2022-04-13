@@ -32,7 +32,7 @@
                     <td>{{$count}}</td>
                     <td>{{$AcademicSession->Academic_Session_Name}}</td>
                     <td>{{$AcademicSession->Academic_Session_Status}}</td>
-                    <td><a href="{{ url('admin/academicsession/edit/' . $AcademicSession->Academic_Session_Id) }}"><i class="fa fa-edit"></i></a></td>
+                    <td><a href="{{ url('admin/academicsession/edit/' . $AcademicSession->Academic_Session_Id) }}" data-toggle="tooltip" data-placement="left" title="" data-original-title="Edit"><i class="fa fa-edit"></i></a></td>
                 </tr>
 
                 @endforeach

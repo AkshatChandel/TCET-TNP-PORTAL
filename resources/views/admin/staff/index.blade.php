@@ -28,7 +28,9 @@
                     <td>{{$staff->Designation_Name}}</td>
                     <td>{{$staff->Branch_Name}}</td>
                     <td>{{$staff->Contact_No}}</td>
-                    <td><a href="{{ url('admin/staff/edit/' . $staff->Staff_Id) }}"><i class="fa fa-edit"></i></a></td>
+                    <td>
+                        <a href="{{ url('admin/staff/edit/' . $staff->Staff_Id) }}" data-toggle="tooltip" data-placement="left" title="" data-original-title="Edit"><i class="fa fa-edit"></i></a>
+                    </td>
                 </tr>
 
                 @endforeach

@@ -110,7 +110,7 @@ class StudentController extends Controller
         $student_master->Student_Status = "Active";
         $student_master->save();
 
-        $StudentId = $student_master->id;
+        $StudentId = $student_master->Student_Id;
 
         $student_class = new Student_Class;
         $student_class->Student_Id = $StudentId;

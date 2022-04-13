@@ -14,7 +14,6 @@
                     <th scope="col">Message Draft Head</th>
                     <!-- <th scope="col">Sent To (No. of students)</th> -->
                     <th scope="col"></th>
-                    <th scope="col"></th>
                 </tr>
             </thead>
             <tbody>
@@ -32,8 +31,11 @@
                 <tr>
                     <td>{{$count}}</td>
                     <td>{{$messageDraft->Message_Draft_Head}}</td>
-                    <td><button class="btn btn-success" type="button" onclick="view('{{$messageDraft->Message_Draft_Id}}')">View</button></td>
-                    <td><button class="btn btn-success" type="button" onclick="sendMessage('{{$messageDraft->Message_Draft_Id}}')">Send Message</button></td>
+                    <td>
+                        <!-- <a href="{{ url('staff/student/edit/' . $messageDraft->Message_Draft_Id) }}" data-toggle="tooltip" data-placement="left" title="" data-original-title="Edit"><i class="fa fa-edit"></i></a> -->
+                        <a href="{{ url('staff/message/view/' . $messageDraft->Message_Draft_Id) }}" data-toggle="tooltip" data-placement="top" title="" data-original-title="View"><i class="fa fa-eye"></i></a>
+                        <a href="{{ url('staff/message/send/' . $messageDraft->Message_Draft_Id) }}" data-toggle="tooltip" data-placement="right" title="" data-original-title="Send Message"><i class="fa fa-mail-forward"></i></a>
+                    </td>
                 </tr>
 
                 @endforeach

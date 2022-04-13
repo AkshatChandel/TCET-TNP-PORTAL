@@ -12,11 +12,13 @@ class AnnouncementController extends Controller
 {
     public function index()
     {
+        $StaffId = session()->get('UserId');
+
         $announcements = DB::Table('Announcement')
             ->join('Staff_Master', 'Staff_Master.Staff_Id', '=', 'Announcement.Staff_Id')
             ->get();
 
-        return view("staff.announcement.index", ["announcements" => $announcements]);
+        return view("staff.announcement.index", ["announcements" => $announcements, "StaffId" => $StaffId]);
     }
 
     public function create()
@@ -43,7 +45,46 @@ class AnnouncementController extends Controller
             $announcement->Announcement_Status = 'Active';
             $announcement->save();
 
-            $AnnouncementId = $announcement->id;
+            $AnnouncementId = $announcement->Announcement_Id;
+
+            foreach ($Branches as $BranchId) {
+                $announcement_branch = new Announcement_Branch();
+                $announcement_branch->Announcement_Id = $AnnouncementId;
+                $announcement_branch->Branch_Id = $BranchId;
+                $announcement_branch->Announcement_Branch_Status = 'Active';
+                $announcement_branch->save();
+            }
+        }
+
+        return redirect("/staff/announcement/");
+    }
+
+    public function edit($AnnouncementId)
+    {
+        $announcement = DB::Table('Announcement')
+            ->where('Announcement_Id', '=', $AnnouncementId)
+            ->first();
+
+        $announcementBranches = Announcement_Branch::where('Announcement_Id', '=', $AnnouncementId)->get();
+        $branches = Branch_Master::where('Branch_Status', 'Active')->get();
+
+        return view("staff.announcement.edit", ["announcement" => $announcement, "announcementBranches" => $announcementBranches, "branches" => $branches]);
+    }
+
+    public function editAnnouncement($AnnouncementId, Request $request)
+    {
+        $Branches = $request->Branch_Id;
+
+        if ($Branches != null && count($Branches) != 0) {
+
+            $announcement = Announcement::find($AnnouncementId);
+            $announcement->Announcement_Head = $request->Announcement_Head;
+            $announcement->Announcement_Content = $request->Announcement_Content;
+            // $announcement->Staff_Id = $StaffId;
+            $announcement->Announcement_Status = $request->Announcement_Status;
+            $announcement->save();
+
+            $deletedRows = Announcement_Branch::where('Announcement_Id', $AnnouncementId)->delete();
 
             foreach ($Branches as $BranchId) {
                 $announcement_branch = new Announcement_Branch();

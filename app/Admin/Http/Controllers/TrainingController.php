@@ -46,7 +46,7 @@ class TrainingController extends Controller
             $training_lecture->Lecture_Status = $request->Lecture_Status;
             $training_lecture->save();
 
-            $TrainingLectureId = $training_lecture->id;
+            $TrainingLectureId = $training_lecture->Training_Lecture_Id;
 
             foreach ($Branches as $BranchId) {
                 $training_lecture_branch = new Training_Lecture_Branch;

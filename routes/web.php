@@ -60,6 +60,8 @@ Route::group(['middleware' => ['adminAuthenticate']], function () {
     Route::get("admin/branch", [App\Admin\Http\Controllers\BranchController::class, 'index']);
     Route::get("admin/branch/create", [App\Admin\Http\Controllers\BranchController::class, 'create']);
     Route::post("admin/branch/create", [App\Admin\Http\Controllers\BranchController::class, 'createBranch']);
+    Route::get("admin/branch/edit/{branchid}", [App\Admin\Http\Controllers\BranchController::class, 'edit']);
+    Route::post("admin/branch/edit/{branchid}", [App\Admin\Http\Controllers\BranchController::class, 'editBranch']);
 
     Route::get("admin/designation", [App\Admin\Http\Controllers\DesignationController::class, 'index']);
     Route::get("admin/designation/create", [App\Admin\Http\Controllers\DesignationController::class, 'create']);
@@ -82,6 +84,7 @@ Route::group(['middleware' => ['adminAuthenticate']], function () {
     Route::get("admin/quiz", [App\Admin\Http\Controllers\QuizController::class, 'index']);
     Route::get("admin/quiz/create", [App\Admin\Http\Controllers\QuizController::class, 'create']);
     Route::post("admin/quiz/create", [App\Admin\Http\Controllers\QuizController::class, 'createQuiz']);
+    Route::get("admin/quiz/view/{quizid}", [App\Admin\Http\Controllers\QuizController::class, 'viewQuiz']);
     Route::get("admin/quiz/checkquiz/{quizid}", [App\Admin\Http\Controllers\QuizController::class, 'checkQuiz']);
     Route::get("admin/quiz/checkquizoptions/{quizid}", [App\Admin\Http\Controllers\QuizController::class, 'checkQuizOptions']);
 
@@ -108,8 +111,8 @@ Route::group(['middleware' => ['adminAuthenticate']], function () {
     Route::get("admin/announcement", [App\Admin\Http\Controllers\AnnouncementController::class, 'index']);
     Route::get("admin/announcement/create", [App\Admin\Http\Controllers\AnnouncementController::class, 'create']);
     Route::post("admin/announcement/create", [App\Admin\Http\Controllers\AnnouncementController::class, 'createAnnouncement']);
-    // Route::get("admin/announcement/edit/{announcementid}", [App\Admin\Http\Controllers\AnnouncementController::class, 'edit']);
-    // Route::post("admin/announcement/edit/{announcementid}", [App\Admin\Http\Controllers\AnnouncementController::class, 'editAnnouncement']);
+    Route::get("admin/announcement/edit/{announcementid}", [App\Admin\Http\Controllers\AnnouncementController::class, 'edit']);
+    Route::post("admin/announcement/edit/{announcementid}", [App\Admin\Http\Controllers\AnnouncementController::class, 'editAnnouncement']);
     Route::get("admin/announcement/view/{announcementid}", [App\Admin\Http\Controllers\AnnouncementController::class, 'viewAnnouncementDetails']);
 
     Route::get("admin/lecture", [App\Admin\Http\Controllers\TrainingController::class, 'index']);
@@ -126,6 +129,7 @@ Route::group(['middleware' => ['staffAuthenticate']], function () {
     Route::get("staff/quiz", [App\Staff\Http\Controllers\QuizController::class, 'index']);
     Route::get("staff/quiz/create", [App\Staff\Http\Controllers\QuizController::class, 'create']);
     Route::post("staff/quiz/create", [App\Staff\Http\Controllers\QuizController::class, 'createQuiz']);
+    Route::get("staff/quiz/view/{quizid}", [App\Staff\Http\Controllers\QuizController::class, 'viewQuiz']);
     Route::get("staff/quiz/checkquiz/{quizid}", [App\Staff\Http\Controllers\QuizController::class, 'checkQuiz']);
     Route::get("staff/quiz/checkquizoptions/{quizid}", [App\Staff\Http\Controllers\QuizController::class, 'checkQuizOptions']);
 
@@ -152,6 +156,8 @@ Route::group(['middleware' => ['staffAuthenticate']], function () {
     Route::get("staff/announcement", [App\Staff\Http\Controllers\AnnouncementController::class, 'index']);
     Route::get("staff/announcement/create", [App\Staff\Http\Controllers\AnnouncementController::class, 'create']);
     Route::post("staff/announcement/create", [App\Staff\Http\Controllers\AnnouncementController::class, 'createAnnouncement']);
+    Route::get("staff/announcement/edit/{announcementid}", [App\Staff\Http\Controllers\AnnouncementController::class, 'edit']);
+    Route::post("staff/announcement/edit/{announcementid}", [App\Staff\Http\Controllers\AnnouncementController::class, 'editAnnouncement']);
     Route::get("staff/announcement/view/{announcementid}", [App\Staff\Http\Controllers\AnnouncementController::class, 'viewAnnouncementDetails']);
 
     Route::get("staff/lecture", [App\Staff\Http\Controllers\TrainingController::class, 'index']);

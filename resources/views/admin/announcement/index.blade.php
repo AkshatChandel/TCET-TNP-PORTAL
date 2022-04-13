@@ -13,9 +13,7 @@
                     <th scope="col">#</th>
                     <th scope="col">Announcement Head</th>
                     <th scope="col">Staff</th>
-                    <th scope="col">Company Status</th>
-                    <!-- <th scope="col"></th> -->
-                    <th scope="col"></th>
+                    <th scope="col">Status</th>
                     <th scope="col"></th>
                 </tr>
             </thead>
@@ -36,9 +34,10 @@
                     <td>{{$announcement->Announcement_Head}}</td>
                     <td>{{$announcement->First_Name . ' ' . $announcement->Middle_Name . ' ' . $announcement->Last_Name}}</td>
                     <td>{{$announcement->Announcement_Status}}</td>
-                    <!-- <td><button type="button" onclick="edit('{{$announcement->Announcement_Id}}')">Edit</button></td> -->
-                    <td><button type="button" class="btn btn-success" onclick="view('{{$announcement->Announcement_Id}}')">View</button></td>
-                    <td><button type="button" class="btn btn-success" onclick="updateCompany('{{$announcement->Announcement_Id}}')">Update</button></td>
+                    <td>
+                        <a href="{{ url('admin/announcement/view/' . $announcement->Announcement_Id) }}" data-toggle="tooltip" data-placement="top" title="" data-original-title="View"><i class="fa fa-eye"></i></a>
+                        <a href="{{ url('admin/announcement/edit/' . $announcement->Announcement_Id) }}" data-toggle="tooltip" data-placement="left" title="" data-original-title="Edit"><i class="fa fa-edit"></i></a>
+                    </td>
                 </tr>
 
                 @endforeach
@@ -50,10 +49,6 @@
 <script>
     function create() {
         window.location.href = "{{url('admin/announcement/create')}}";
-    }
-
-    function view(AnnouncementId) {
-        window.location.href = "{{url('admin/announcement/view')}}" + "/" + AnnouncementId;
     }
 </script>
 

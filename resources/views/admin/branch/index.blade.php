@@ -23,7 +23,7 @@
                 $count = 0;
                 @endphp
 
-                @foreach($Branches as $Branch)
+                @foreach($branches as $branch)
 
                 @php
                 $count++;
@@ -31,10 +31,10 @@
 
                 <tr>
                     <td>{{$count}}</td>
-                    <td>{{$Branch->Branch_Name}}</td>
-                    <td>{{$Branch->Branch_Code}}</td>
-                    <td>{{$Branch->Branch_Status}}</td>
-                    <td><button type="button" onclick="edit('{{$Branch->Branch_Id}}')">Edit</button></td>
+                    <td>{{$branch->Branch_Name}}</td>
+                    <td>{{$branch->Branch_Code}}</td>
+                    <td>{{$branch->Branch_Status}}</td>
+                    <td><a href="{{ url('admin/branch/edit/' . $branch->Branch_Id) }}" data-toggle="tooltip" data-placement="left" title="" data-original-title="Edit"><i class="fa fa-edit"></i></a></td>
                 </tr>
 
                 @endforeach

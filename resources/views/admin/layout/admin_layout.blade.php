@@ -1,3 +1,13 @@
+@php
+
+$StaffId = session()->get('UserId');
+
+$staff = DB::Table('Staff_Master')
+->where('Staff_Master.Staff_Id', '=', $StaffId)
+->first();
+
+@endphp
+
 <!DOCTYPE HTML>
 <html>
 
@@ -95,6 +105,7 @@
                                 </a>
                                 <ul class="treeview-menu">
                                     <li><a href="{{url('/admin/academicsession/')}}"><i class="fa fa-angle-right"></i>Academic Session</a></li>
+                                    <li><a href="{{url('/admin/branch/')}}"><i class="fa fa-angle-right"></i>Branch Master</a></li>
                                     <li><a href="{{url('/admin/designation/')}}"><i class="fa fa-angle-right"></i>Designation</a></li>
                                     <li><a href="{{url('/admin/staff/')}}"><i class="fa fa-angle-right"></i>Staff Master</a></li>
                                     <li><a href="{{url('/admin/student/')}}"><i class="fa fa-angle-right"></i>Student Master</a></li>
@@ -147,7 +158,7 @@
                 <!--toggle button end-->
                 <div class="profile_details_left">
                     <!--notifications of menu start -->
-                    <ul class="nofitications-dropdown">
+                    <!-- <ul class="nofitications-dropdown">
                         <li class="dropdown head-dpdn">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><i class="fa fa-envelope"></i><span class="badge">4</span></a>
                             <ul class="dropdown-menu">
@@ -187,7 +198,7 @@
                                 </li>
                             </ul>
                         </li>
-                    </ul>
+                    </ul> -->
                     <div class="clearfix"> </div>
                 </div>
                 <!--notification menu end -->
@@ -201,7 +212,7 @@
                                 <div class="profile_img">
                                     <span class="prfil-img"><img src="{{url('images/2.jpg')}}" alt=""> </span>
                                     <div class="user-name">
-                                        <p>Admin Name</p>
+                                        <p>{{$staff->First_Name . ' ' . $staff->Last_Name}}</p>
                                         <span>Administrator</span>
                                     </div>
                                     <i class="fa fa-angle-down lnr"></i>
@@ -212,7 +223,7 @@
                             <ul class="dropdown-menu drp-mnu">
                                 <!-- <li> <a href="#"><i class="fa fa-cog"></i> Settings</a> </li>
                                 <li> <a href="#"><i class="fa fa-user"></i> My Account</a> </li> -->
-                                <li> <a href="#"><i class="fa fa-suitcase"></i> Profile</a> </li>
+                                <!-- <li> <a href="#"><i class="fa fa-suitcase"></i> Profile</a> </li> -->
                                 <li> <a href="{{url('/logout/')}}"><i class="fa fa-sign-out"></i> Logout</a> </li>
                             </ul>
                         </li>
@@ -275,4 +286,10 @@
     <!-- Bootstrap Core JavaScript -->
     <script src="{{url('js/bootstrap.js')}}"> </script>
     <!-- //Bootstrap Core JavaScript -->
+
+    <script>
+        $(function() {
+            $('[data-toggle="tooltip"]').tooltip()
+        })
+    </script>
 </body>

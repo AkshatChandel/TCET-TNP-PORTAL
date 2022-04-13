@@ -29,7 +29,7 @@
                     <div class="form-group">
                         <label for="txt_LectureDateTime" class="col-sm-2 control-label">Lecture Date Time</label>
                         <div class="col-sm-9">
-                            <input disabled type="datetime-local" class="form-control" id="txt_LectureDateTime" value="{{$lecture->Lecture_DateTime}}" />
+                            <input disabled type="text" class="form-control" id="txt_LectureDateTime" value="{{$lecture->Lecture_DateTime}}" />
                         </div>
                     </div>
                     <div class="form-group">

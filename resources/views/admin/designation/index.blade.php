@@ -32,7 +32,7 @@
                     <td>{{$count}}</td>
                     <td>{{$Designation->Designation_Name}}</td>
                     <td>{{$Designation->Designation_Status}}</td>
-                    <td><a href="{{ url('admin/designation/edit/' . $Designation->Designation_Id) }}"><i class="fa fa-edit"></i></a></td>
+                    <td><a href="{{ url('admin/designation/edit/' . $Designation->Designation_Id) }}" data-toggle="tooltip" data-placement="left" title="" data-original-title="Edit"><i class="fa fa-edit"></i></a></td>
                 </tr>
 
                 @endforeach

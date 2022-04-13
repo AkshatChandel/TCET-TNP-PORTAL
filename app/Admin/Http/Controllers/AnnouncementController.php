@@ -43,7 +43,7 @@ class AnnouncementController extends Controller
             $announcement->Announcement_Status = 'Active';
             $announcement->save();
 
-            $AnnouncementId = $announcement->id;
+            $AnnouncementId = $announcement->Announcement_Id;
 
             foreach ($Branches as $BranchId) {
                 $announcement_branch = new Announcement_Branch();
@@ -57,26 +57,44 @@ class AnnouncementController extends Controller
         return redirect("/admin/announcement/");
     }
 
-    // public function edit($AnnouncementId)
-    // {
-    //     $announcement = DB::Table('Announcement')
-    //         ->where('editAnnouncement_Id', '=', $AnnouncementId)
-    //         ->first();
+    public function edit($AnnouncementId)
+    {
+        $announcement = DB::Table('Announcement')
+            ->where('Announcement_Id', '=', $AnnouncementId)
+            ->first();
 
-    //     return view("admin.announcement.edit", ["announcement" => $announcement]);
-    // }
+        $announcementBranches = Announcement_Branch::where('Announcement_Id', '=', $AnnouncementId)->get();
+        $branches = Branch_Master::where('Branch_Status', 'Active')->get();
 
-    // public function editAnnouncement($AnnouncementId, Request $request)
-    // {
-    //     $AcademicSessionName = $request->Academic_Session_Name;
-    //     $AcademicSessionStatus = $request->Academic_Session_Status;
+        return view("admin.announcement.edit", ["announcement" => $announcement, "announcementBranches" => $announcementBranches, "branches" => $branches]);
+    }
 
-    //     $rowsAffected = DB::table('Academic_Session_Master')
-    //         ->where('Academic_Session_Id', $AnnouncementId)
-    //         ->update(['Academic_Session_Name' => $AcademicSessionName, 'Academic_Session_Status' => $AcademicSessionStatus]);
+    public function editAnnouncement($AnnouncementId, Request $request)
+    {
+        $Branches = $request->Branch_Id;
 
-    //     return redirect("/admin/announcement/");
-    // }
+        if ($Branches != null && count($Branches) != 0) {
+
+            $announcement = Announcement::find($AnnouncementId);
+            $announcement->Announcement_Head = $request->Announcement_Head;
+            $announcement->Announcement_Content = $request->Announcement_Content;
+            // $announcement->Staff_Id = $StaffId;
+            $announcement->Announcement_Status = $request->Announcement_Status;
+            $announcement->save();
+
+            $deletedRows = Announcement_Branch::where('Announcement_Id', $AnnouncementId)->delete();
+
+            foreach ($Branches as $BranchId) {
+                $announcement_branch = new Announcement_Branch();
+                $announcement_branch->Announcement_Id = $AnnouncementId;
+                $announcement_branch->Branch_Id = $BranchId;
+                $announcement_branch->Announcement_Branch_Status = 'Active';
+                $announcement_branch->save();
+            }
+        }
+
+        return redirect("/admin/announcement/");
+    }
 
     public function viewAnnouncementDetails($AnnouncementId)
     {

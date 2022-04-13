@@ -14,12 +14,12 @@ class QuizController extends Controller
 {
     public function index()
     {
-        $data = DB::table('Quiz_Master')
+        $quizzes = DB::table('Quiz_Master')
             ->join('Staff_Master', 'Staff_Master.Staff_Id', '=', 'Quiz_Master.Staff_Id')
             ->select('Staff_Master.Staff_Id', 'Staff_Master.Staff_College_Id', 'Staff_Master.First_Name', 'Staff_Master.Middle_Name', 'Staff_Master.Last_Name', 'Staff_Master.Date_Of_Birth', 'Staff_Master.Gender', 'Staff_Master.Contact_No', 'Staff_Master.Email_Id', 'Quiz_Master.Quiz_Id', 'Quiz_Master.Quiz_Name', 'Quiz_Master.Quiz_Code', 'Quiz_Master.Quiz_Time', 'Quiz_Master.Quiz_Duration', 'Quiz_Master.Quiz_Status')
             ->get();
 
-        return view("admin.quiz.index", ['quizzes' => $data]);
+        return view("admin.quiz.index", ['quizzes' => $quizzes]);
     }
 
     public function create()
@@ -39,7 +39,7 @@ class QuizController extends Controller
         $quiz_master->Quiz_Status = $request->Quiz_Status;
         $quiz_master->save();
 
-        $QuizId = $quiz_master->id;
+        $QuizId = $quiz_master->Quiz_Id;
 
         $QuizQuestions = $request->Quiz_Question;
         $QuizOptions = $request->Quiz_Option;
@@ -53,7 +53,7 @@ class QuizController extends Controller
             $quiz_question->Quiz_Question = $QuizQuestion;
             $quiz_question->save();
 
-            $QuizQuestionId = $quiz_question->id;
+            $QuizQuestionId = $quiz_question->Quiz_Question_Id;
 
             $QuizOptionsLoopEnd = $QuizOptionsCounter + 4;
 
@@ -70,10 +70,24 @@ class QuizController extends Controller
         return redirect('/admin/quiz/');
     }
 
-    public function checkQuiz($QuizId){
+    public function viewQuiz($QuizId)
+    {
+        $quiz = Quiz_Master::find($QuizId)
+            ->join('Staff_Master', 'Staff_Master.Staff_Id', '=', 'Quiz_Master.Staff_Id')
+            ->first();
 
+        $quizQuestionsOptions = DB::Table('Quiz_Question')
+            ->join('Quiz_Question_Option', 'Quiz_Question_Option.Quiz_Question_Id', '=', 'Quiz_Question.Quiz_Question_Id')
+            ->where('Quiz_Question.Quiz_Id', '=', $QuizId)
+            ->get();
+
+        return view("admin.quiz.view", ['quiz' => $quiz, 'quizQuestionsOptions' => $quizQuestionsOptions]);
+    }
+
+    public function checkQuiz($QuizId)
+    {
         $quizData = DB::table('Quiz_Master')
-            ->where('Quiz_Master.Quiz_Id','=',$QuizId)
+            ->where('Quiz_Master.Quiz_Id', '=', $QuizId)
             ->select('Quiz_Master.Quiz_Id', 'Quiz_Master.Quiz_Code', 'Quiz_Master.Quiz_Name')
             ->get();
 
@@ -96,8 +110,8 @@ class QuizController extends Controller
         return view("admin.quiz.checkquiz", ['quizData' => $quizData, 'studentsData' => $studentsData, 'quizCorrectAnswers' => $quizCorrectAnswers]);
     }
 
-    public function checkQuizOptions($QuizId, Request $request){
-
+    public function checkQuizOptions($QuizId, Request $request)
+    {
         $quiz = DB::table('Quiz_Master')
             ->join('Quiz_Question', 'Quiz_Question.Quiz_Id', '=', 'Quiz_Master.Quiz_Id')
             ->join('Quiz_Question_Option', 'Quiz_Question_Option.Quiz_Question_Id', '=', 'Quiz_Question.Quiz_Question_Id')

@@ -49,7 +49,7 @@ class StaffController extends Controller
         $staff_master->Staff_Status = "Active";
         $staff_master->save();
 
-        $StaffId = $staff_master->id;
+        $StaffId = $staff_master->Staff_Id;
 
         $staff_branch = new Staff_Branch;
         $staff_branch->Staff_Id = $StaffId;
