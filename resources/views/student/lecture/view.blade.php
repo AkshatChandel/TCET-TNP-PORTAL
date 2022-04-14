@@ -1,5 +1,7 @@
 @extends('student.layout.student_layout')
 
+@section('title', 'Training Lecture | ' . $lecture->Lecture_Name)
+
 @section('main_content')
 <div class="forms">
     <div class=" form-grids row form-grids-right">
@@ -26,10 +28,18 @@
                             <input disabled type="text" class="form-control" id="txt_LectureCode" value="{{$lecture->Lecture_Code}}" />
                         </div>
                     </div>
+                    @php
+
+                    $dateTime = $lecture->Lecture_DateTime;
+                    $date = substr($dateTime, 0, 10);
+                    $time = substr($dateTime, 11);
+                    $dateTimeValue = $date . "T" . $time;
+
+                    @endphp
                     <div class="form-group">
                         <label for="txt_LectureDateTime" class="col-sm-2 control-label">Lecture Date Time</label>
                         <div class="col-sm-9">
-                            <input disabled type="datetime-local" class="form-control" id="txt_LectureDateTime" value="{{$lecture->Lecture_DateTime}}" />
+                            <input disabled type="datetime-local" class="form-control" id="txt_LectureDateTime" value="{{$dateTimeValue}}" />
                         </div>
                     </div>
                     <div class="form-group">

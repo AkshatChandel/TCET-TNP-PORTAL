@@ -12,7 +12,7 @@ $staff = DB::Table('Staff_Master')
 <html>
 
 <head>
-    <title>TCET</title>
+    <title>@yield('title')</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta name="keywords" content="TCET" />
@@ -243,7 +243,7 @@ $staff = DB::Table('Staff_Master')
     </div>
 
     <div class="footer">
-        <p>&copy; TCET. All Rights Reserved | Developed by <a href="https://github.com/AkshatChandel" target="_blank">Akshat Chandel</a>, <a href="https://github.com/AkshatChandel" target="_blank">Darshil</a>, <a href="https://github.com/AkshatChandel" target="_blank">Hinal</a></p>
+        <p>&copy; TCET. All Rights Reserved | Developed by <a href="https://github.com/AkshatChandel" target="_blank">Akshat Chandel</a>, <a href="https://github.com/AkshatChandel" target="_blank">Darshil Ajudia</a>, <a href="https://github.com/AkshatChandel" target="_blank">Hinal Kuvadiya</a></p>
     </div>
 
     <!-- Classie -->

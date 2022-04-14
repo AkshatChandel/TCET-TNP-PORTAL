@@ -1,5 +1,7 @@
 @extends('staff.layout.staff_layout')
 
+@section('title', 'Company | ' . $companyDetails->Company_Name)
+
 @section('main_content')
 <div class="tables">
     <h2 class="title1">Company Details</h2>
@@ -9,6 +11,8 @@
         <div>
             <h3>Company Name: {{$companyDetails->Company_Name}}</h3>
         </div>
+
+        <hr />
 
         <div>
             <table class="table table-hover table-bordered">

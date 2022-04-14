@@ -1,5 +1,7 @@
 @extends('admin.layout.admin_layout')
 
+@section('title', 'TCET | Dashboard')
+
 @section('main_content')
 <!-- <div class="col_3">
     <div class="col-md-3 widget widget1">
@@ -9,7 +11,7 @@
                 <h5><strong>$452</strong></h5>
                 <span>Total Revenue</span>
             </div> -->
-        <!-- </div>
+<!-- </div>
     </div>
     <div class="col-md-3 widget widget1">
         <div class="r3_counter_box">
@@ -183,8 +185,8 @@
     <div class="mid-content-top charts-grids">
         <div class="middle-content">
             <h4 class="title">Carousel Slider</h4> -->
-            <!-- start content_slider -->
-            <!-- 1:30 PM</h6>
+<!-- start content_slider -->
+<!-- 1:30 PM</h6>
                     </div>
                     <div class="clearfix"> </div>
                 </div>
@@ -215,8 +217,8 @@
 
             </div>
         </div> -->
-        <!--//sreen-gallery-cursual---->
-    <!-- </div>
+<!--//sreen-gallery-cursual---->
+<!-- </div>
 </div>
 
 <div class="col_1">
@@ -231,7 +233,7 @@
                         <p>Hey ! There I'm available.</p>
                     </div>
                     <div class="col-xs-2 activity-desc1"> -->
-                        <!-- <h6>12:05 PM</h6>
+<!-- <h6>12:05 PM</h6>
                     </div>
                     <div class="clearfix"> </div>
                 </div>
@@ -263,7 +265,7 @@
                     <div class="clearfix"> </div>
                 </div>
                 <div class="activity-row"> -->
-                    <!-- <div class="col-xs-3 activity-img"><img src='images/1.jpg' class="img-responsive" alt="" /></div>
+<!-- <div class="col-xs-3 activity-img"><img src='images/1.jpg' class="img-responsive" alt="" /></div>
                     <div class="col-xs-7 activity-desc">
                         <h5><a href="#">David Samuel</a></h5>
                         <p>Hey ! There I'm available.</p>
@@ -311,7 +313,7 @@
                     <div class="col-xs-2 activity-desc1"></div>
                     <div class="col-xs-7 activity-img2">
                         <div class="activity-desc-sub1"> -->
-                            <!-- <h5>Alexander</h5>
+<!-- <h5>Alexander</h5>
                             <p>Hi,How are you ? What about our next meeting?</p>
                         </div>
                     </div>
@@ -351,7 +353,7 @@
         <div class="activity_box activity_box2">
             <h3>todo</h3>
             <div class="scrollbar" id="style-2"> -->
-                <!-- <div class="activity-row activity-row1">
+<!-- <div class="activity-row activity-row1">
                     <div class="single-bottom">
                         <ul>
                             <li>

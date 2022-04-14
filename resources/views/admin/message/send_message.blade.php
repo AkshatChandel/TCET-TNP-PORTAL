@@ -1,5 +1,7 @@
 @extends('admin.layout.admin_layout')
 
+@section('title', 'Message | Send Message')
+
 @section('main_content')
 
 <div class="forms">

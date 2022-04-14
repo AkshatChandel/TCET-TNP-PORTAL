@@ -91,6 +91,8 @@ Route::group(['middleware' => ['adminAuthenticate']], function () {
     Route::get("admin/company", [App\Admin\Http\Controllers\CompanyController::class, 'index']);
     Route::get("admin/company/create", [App\Admin\Http\Controllers\CompanyController::class, 'create']);
     Route::post("admin/company/create", [App\Admin\Http\Controllers\CompanyController::class, 'createCompany']);
+    Route::get("admin/company/edit/{companyid}", [App\Admin\Http\Controllers\CompanyController::class, 'edit']);
+    Route::post("admin/company/edit/{companyid}", [App\Admin\Http\Controllers\CompanyController::class, 'editCompany']);
     Route::get("admin/company/view/{companyid}", [App\Admin\Http\Controllers\CompanyController::class, 'viewCompanyDetails']);
     Route::get("admin/company/updateCompanyStudentRegistrationStatus", [App\Admin\Http\Controllers\CompanyController::class, 'updateCompanyStudentRegistrationStatus']);
     Route::get("admin/company/update/{companyid}", [App\Admin\Http\Controllers\CompanyController::class, 'updateCompany']);
@@ -118,6 +120,8 @@ Route::group(['middleware' => ['adminAuthenticate']], function () {
     Route::get("admin/lecture", [App\Admin\Http\Controllers\TrainingController::class, 'index']);
     Route::get("admin/lecture/create", [App\Admin\Http\Controllers\TrainingController::class, 'create']);
     Route::post("admin/lecture/create", [App\Admin\Http\Controllers\TrainingController::class, 'createLecture']);
+    Route::get("admin/lecture/edit/{traininglectureid}", [App\Admin\Http\Controllers\TrainingController::class, 'edit']);
+    Route::post("admin/lecture/edit/{traininglectureid}", [App\Admin\Http\Controllers\TrainingController::class, 'editLecture']);
     Route::get("admin/lecture/view/{traininglectureid}", [App\Admin\Http\Controllers\TrainingController::class, 'viewLectureDetails']);
 });
 
@@ -136,6 +140,8 @@ Route::group(['middleware' => ['staffAuthenticate']], function () {
     Route::get("staff/company", [App\Staff\Http\Controllers\CompanyController::class, 'index']);
     Route::get("staff/company/create", [App\Staff\Http\Controllers\CompanyController::class, 'create']);
     Route::post("staff/company/create", [App\Staff\Http\Controllers\CompanyController::class, 'createCompany']);
+    Route::get("staff/company/edit/{companyid}", [App\Staff\Http\Controllers\CompanyController::class, 'edit']);
+    Route::post("staff/company/edit/{companyid}", [App\Staff\Http\Controllers\CompanyController::class, 'editCompany']);
     Route::get("staff/company/view/{companyid}", [App\Staff\Http\Controllers\CompanyController::class, 'viewCompanyDetails']);
     Route::get("staff/company/updateCompanyStudentRegistrationStatus", [App\Staff\Http\Controllers\CompanyController::class, 'updateCompanyStudentRegistrationStatus']);
     Route::get("staff/company/update/{companyid}", [App\Staff\Http\Controllers\CompanyController::class, 'updateCompany']);
@@ -163,6 +169,8 @@ Route::group(['middleware' => ['staffAuthenticate']], function () {
     Route::get("staff/lecture", [App\Staff\Http\Controllers\TrainingController::class, 'index']);
     Route::get("staff/lecture/create", [App\Staff\Http\Controllers\TrainingController::class, 'create']);
     Route::post("staff/lecture/create", [App\Staff\Http\Controllers\TrainingController::class, 'createLecture']);
+    Route::get("staff/lecture/edit/{traininglectureid}", [App\Staff\Http\Controllers\TrainingController::class, 'edit']);
+    Route::post("staff/lecture/edit/{traininglectureid}", [App\Staff\Http\Controllers\TrainingController::class, 'editLecture']);
     Route::get("staff/lecture/view/{traininglectureid}", [App\Staff\Http\Controllers\TrainingController::class, 'viewLectureDetails']);
 });
 

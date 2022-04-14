@@ -103,11 +103,11 @@
                             <input type="text" class="form-control" id="txt_QuizName" name="Quiz_Name" placeholder="Quiz Name" required>
                         </div>
                     </div> -->
-
+<!-- 
 <div class="col-sm-offset-2">
     <button type="submit" name="submit" class="btn btn-success">Submit</button>
     <button type="reset" class="btn btn-warning">Reset</button>
-</div>
+</div> -->
 </form>
 
 <!-- <input type="button" value="Back To List" onclick="backToList()" class="btn btn-primary" /> -->

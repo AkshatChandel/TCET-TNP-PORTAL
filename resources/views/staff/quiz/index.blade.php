@@ -1,5 +1,7 @@
 @extends('staff.layout.staff_layout')
 
+@section('title', 'TCET | Quizzes')
+
 @section('main_content')
 <div class="tables">
     <h2 class="title1">Quizzes</h2>
@@ -55,7 +57,7 @@
 
 <script>
     function create() {
-        window.location.href = "{{url('admin/quiz/create')}}";
+        window.location.href = "{{url('staff/quiz/create')}}";
     }
 </script>
 

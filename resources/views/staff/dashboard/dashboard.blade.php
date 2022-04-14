@@ -1,5 +1,7 @@
 @extends('staff.layout.staff_layout')
 
+@section('title', 'TCET | Dashboard')
+
 @section('main_content')
 <!-- <div class="col_3">
     <div class="col-md-3 widget widget1">

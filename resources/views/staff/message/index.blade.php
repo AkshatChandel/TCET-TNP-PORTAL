@@ -1,5 +1,7 @@
 @extends('staff.layout.staff_layout')
 
+@section('title', 'TCET | Messages')
+
 @section('main_content')
 <div class="tables">
     <h2 class="title1">Message Drafts</h2>

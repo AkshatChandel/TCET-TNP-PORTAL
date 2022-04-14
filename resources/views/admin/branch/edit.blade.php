@@ -1,5 +1,7 @@
 @extends('admin.layout.admin_layout')
 
+@section('title', 'Branch | Edit')
+
 @section('main_content')
 <div class="forms">
     <div class=" form-grids row form-grids-right">

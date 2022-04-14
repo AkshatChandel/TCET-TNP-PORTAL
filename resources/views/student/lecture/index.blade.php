@@ -1,5 +1,7 @@
 @extends('student.layout.student_layout')
 
+@section('title', 'TCET | Training Lectures')
+
 @section('main_content')
 <div class="tables">
     <h2 class="title1">Training Lectures</h2>
@@ -13,7 +15,6 @@
                     <th scope="col">Date Time</th>
                     <th scope="col">Academic Session</th>
                     <th scope="col">Status</th>
-                    <th scope="col"></th>
                     <th scope="col"></th>
                 </tr>
             </thead>
@@ -36,8 +37,9 @@
                     <td>{{$lecture->Lecture_DateTime}}</td>
                     <td>{{$lecture->Academic_Session_Name}}</td>
                     <td>{{$lecture->Lecture_Status}}</td>
-                    <td><button type="button" onclick="edit('{{$lecture->Training_Lecture_Id}}')">Edit</button></td>
-                    <td><button type="button" onclick="view('{{$lecture->Training_Lecture_Id}}')">View</button></td>
+                    <td>
+                        <a href="{{ url('student/lecture/view/' . $lecture->Training_Lecture_Id) }}" data-toggle="tooltip" data-placement="top" title="" data-original-title="View"><i class="fa fa-eye"></i></a>
+                    </td>
                 </tr>
 
                 @endforeach
@@ -45,11 +47,5 @@
         </table>
     </div>
 </div>
-
-<script>
-    function view(TrainingLectureId) {
-        window.location.href = "{{url('student/lecture/view/')}}" + "/" + TrainingLectureId;
-    }
-</script>
 
 @stop

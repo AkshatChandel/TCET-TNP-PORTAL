@@ -1,5 +1,7 @@
 @extends('student.layout.student_layout')
 
+@section('title', 'TCET | Messages')
+
 @section('main_content')
 <div class="tables">
     <h2 class="title1">Messages</h2>
@@ -33,7 +35,7 @@
                     <td>{{$message->Message_Draft_Head}}</td>
                     <td>{{$message->First_Name}} {{$message->Middle_Name}} {{$message->Last_Name}}</td>
                     <td>Not Read</td>
-                    <td><button class="btn btn-success" type="button" onclick="view('{{$message->Message_Sent_Id}}')">View</button></td>
+                    <td><a href="{{ url('student/message/view/' . $message->Message_Sent_Id) }}" data-toggle="tooltip" data-placement="top" title="" data-original-title="View"><i class="fa fa-eye"></i></a></td>
                 </tr>
 
                 @else
@@ -43,7 +45,7 @@
                     <td>{{$message->Message_Draft_Head}}</td>
                     <td>{{$message->First_Name}} {{$message->Middle_Name}} {{$message->Last_Name}}</td>
                     <td>Read</td>
-                    <td><button class="btn btn-success" type="button" onclick="view('{{$message->Message_Sent_Id}}')">View</button></td>
+                    <td><a href="{{ url('student/message/view/' . $message->Message_Sent_Id) }}" data-toggle="tooltip" data-placement="top" title="" data-original-title="View"><i class="fa fa-eye"></i></a></td>  
                 </tr>
 
                 @endif
@@ -53,11 +55,5 @@
         </table>
     </div>
 </div>
-
-<script>
-    function view(MessageSentId) {
-        window.location.href = "{{url('student/message/view')}}" + "/" + MessageSentId;
-    }
-</script>
 
 @stop

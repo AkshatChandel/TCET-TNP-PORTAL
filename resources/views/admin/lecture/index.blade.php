@@ -1,5 +1,7 @@
 @extends('admin.layout.admin_layout')
 
+@section('title', 'TCET | Training Lectures')
+
 @section('main_content')
 <div class="tables">
     <h2 class="title1">Training Lectures</h2>
@@ -39,8 +41,8 @@
                     <td>{{$lecture->Academic_Session_Name}}</td>
                     <td>{{$lecture->Lecture_Status}}</td>
                     <td>
-                        <!-- <a href="{{ url('admin/lecture/edit/' . $lecture->Training_Lecture_Id) }}" data-toggle="tooltip" data-placement="left" title="" data-original-title="Edit"><i class="fa fa-edit"></i></a> -->
-                        <a href="{{ url('admin/lecture/view/' . $lecture->Training_Lecture_Id) }}" data-toggle="tooltip" data-placement="top" title="" data-original-title="View"><i class="fa fa-eye"></i></a>
+                        <a href="{{ url('admin/lecture/edit/' . $lecture->Training_Lecture_Id) }}" data-toggle="tooltip" data-placement="left" title="" data-original-title="Edit"><i class="fa fa-edit"></i></a>
+                        <a href="{{ url('admin/lecture/view/' . $lecture->Training_Lecture_Id) }}" data-toggle="tooltip" data-placement="right" title="" data-original-title="View"><i class="fa fa-eye"></i></a>
                     </td>
                 </tr>
 

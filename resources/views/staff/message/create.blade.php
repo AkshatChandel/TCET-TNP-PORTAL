@@ -1,5 +1,7 @@
 @extends('staff.layout.staff_layout')
 
+@section('title', 'Message Draft | Create')
+
 @section('main_content')
 <div class="forms">
     <div class=" form-grids row form-grids-right">

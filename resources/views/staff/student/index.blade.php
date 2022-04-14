@@ -1,5 +1,7 @@
 @extends('staff.layout.staff_layout')
 
+@section('title', 'TCET | Students')
+
 @section('main_content')
 <div class="tables">
     <h2 class="title1">Students</h2>

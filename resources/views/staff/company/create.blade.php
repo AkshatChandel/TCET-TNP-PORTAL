@@ -1,5 +1,7 @@
 @extends('staff.layout.staff_layout')
 
+@section('title', 'Company | Create')
+
 @section('main_content')
 <div class="forms">
     <div class=" form-grids row form-grids-right">
@@ -134,7 +136,7 @@
 
 <script>
     function backToList() {
-        window.location.href = "{{url('staff/academicsession/')}}";
+        window.location.href = "{{url('staff/company/')}}";
     }
 
     function addCompanyCriteriaRow() {
@@ -152,7 +154,7 @@
     addCompanyCriteriaRow();
 
     function addCompanyRound() {
-        let html = "<tr><td><input type='text' class='form-control' name='Round_Name[]' required /></td><td><input type='datetime-local' class='form-control' name='Round_DateTime[]' required /></td><td><input type='number' class='form-control' name='Round_Duration[]' required /></td><td><select class='form-control' name='Round_Status[]'><option value='To be held'>To be held</option><option value='In Progress'>In Progress</option><option value='Completed'>Completed</option><option>Cancelled</option></select></td><td><button type='button' class='btn btn-danger btn_CompanyRound_RemoveRow' onclick='removeCompanyRoundRow(this)'>-</button></td></tr>";
+        let html = "<tr><td><input type='text' class='form-control' name='Round_Name[]' required /></td><td><input type='datetime-local' class='form-control' name='Round_DateTime[]' required /></td><td><input type='number' class='form-control' name='Round_Duration[]' required /></td><td><select class='form-control' name='Round_Status[]'><option value='To be held'>To be held</option><option value='In Progress'>In Progress</option><option value='Completed'>Completed</option><option value='Cancelled'>Cancelled</option></select></td><td><button type='button' class='btn btn-danger btn_CompanyRound_RemoveRow' onclick='removeCompanyRoundRow(this)'>-</button></td></tr>";
 
         $("#company-round-tbody").append(html);
     }

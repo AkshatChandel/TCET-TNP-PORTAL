@@ -86,6 +86,77 @@ class CompanyController extends Controller
         return redirect("/admin/company/");
     }
 
+    public function edit($CompanyId)
+    {
+        $company = $this->getCompanyDetails($CompanyId);
+
+        $companyDetails = $company[0];
+        $companyBranches = $company[1];
+        $companyCriterias = $company[2];
+        $companyRounds = $company[3];
+
+        $branches = Branch_Master::where('Branch_Status', 'Active')->get();
+        $AcademicSessions = Academic_Session_Master::where('Academic_Session_Status', 'Active')->get();
+
+        return view("admin.company.edit", ['company' => $companyDetails, 'companyBranches' => $companyBranches, 'companyCriterias' => $companyCriterias, 'companyRounds' => $companyRounds, 'branches' => $branches, 'AcademicSessions' => $AcademicSessions]);
+    }
+
+    public function editCompany($CompanyId, Request $request)
+    {
+        $CompanyCriterias = $request->Company_Criteria;
+        $Branches = $request->Branch_Id;
+        $Rounds = $request->Round_Name;
+        $Round_DateTimes = $request->Round_DateTime;
+        $Round_Durations = $request->Round_Duration;
+        $Round_Statuses = $request->Round_Status;
+
+        if ($CompanyCriterias != null && $Branches != null && $Rounds != null && $Round_DateTimes != null && $Round_Durations != null && $Round_Statuses != null) {
+
+            if (count($CompanyCriterias) != 0 && count($Branches) != 0 && count($Rounds) != 0 && count($Round_DateTimes) != 0 && count($Round_Durations) != 0 && count($Round_Statuses) != 0) {
+
+                $company_master = Company_Master::find($CompanyId);
+                $company_master->Company_Name = $request->Company_Name;
+                $company_master->Company_Status = $request->Company_Status;
+                $company_master->Academic_Session_Id = $request->Academic_Session_Id;
+                $company_master->save();
+
+                $CompanyId = $company_master->Company_Id;
+
+                $deletedRows1 = Company_Criteria::where('Company_Id', $CompanyId)->delete();
+
+                foreach ($CompanyCriterias as $CompanyCriteria) {
+                    $company_criteria = new Company_Criteria;
+                    $company_criteria->Company_Id = $CompanyId;
+                    $company_criteria->Company_Criteria = $CompanyCriteria;
+                    $company_criteria->save();
+                }
+
+                $deletedRows2 = Company_Branch::where('Company_Id', $CompanyId)->delete();
+
+                foreach ($Branches as $BranchId) {
+                    $company_branch = new Company_Branch;
+                    $company_branch->Company_Id = $CompanyId;
+                    $company_branch->Branch_Id = $BranchId;
+                    $company_branch->save();
+                }
+
+                $deletedRows3 = Company_Round::where('Company_Id', $CompanyId)->delete();
+
+                for ($i = 0; $i < count($Rounds); $i++) {
+                    $company_round = new Company_Round;
+                    $company_round->Company_Id = $CompanyId;
+                    $company_round->Round_Name = $Rounds[$i];
+                    $company_round->Round_DateTime = $Round_DateTimes[$i];
+                    $company_round->Round_Duration = $Round_Durations[$i];
+                    $company_round->Round_Status = $Round_Statuses[$i];
+                    $company_round->save();
+                }
+            }
+        }
+
+        return redirect("/admin/company/");
+    }
+
     public function viewCompanyDetails($CompanyId)
     {
         $company = $this->getCompanyDetails($CompanyId);

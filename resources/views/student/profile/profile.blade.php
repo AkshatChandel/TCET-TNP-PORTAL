@@ -1,5 +1,7 @@
 @extends('student.layout.student_layout')
 
+@section('title', 'TCET | Profile')
+
 @section('main_content')
 <div class="forms">
     <div class=" form-grids row form-grids-right">

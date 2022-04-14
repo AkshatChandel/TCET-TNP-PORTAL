@@ -1,5 +1,7 @@
 @extends('student.layout.student_layout')
 
+@section('title', 'Company | ' . $companyDetails->Company_Name)
+
 @section('main_content')
 <div class="tables">
     <h2 class="title1">Company Details</h2>
@@ -10,10 +12,12 @@
             <h3>Company Name: {{$companyDetails->Company_Name}}</h3>
         </div>
 
+        <hr />
+
         <div>
             <table class="table table-hover table-bordered">
                 <thead>
-                    <tr>
+                    <tr class="active">
                         <th scope="col">#</th>
                         <th scope="col">Branch Name</th>
                         <th scope="col">Branch Code</th>
@@ -45,7 +49,7 @@
         <div>
             <table class="table table-hover table-bordered">
                 <thead>
-                    <tr>
+                    <tr class="active">
                         <th scope="col">#</th>
                         <th scope="col">Company Criteria</th>
                     </tr>
@@ -75,7 +79,7 @@
         <div>
             <table class="table table-hover table-bordered">
                 <thead>
-                    <tr>
+                    <tr class="active">
                         <th scope="col">#</th>
                         <th scope="col">Company Rounds</th>
                         <th scope="col">Company Date Time</th>

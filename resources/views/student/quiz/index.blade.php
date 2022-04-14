@@ -1,5 +1,7 @@
 @extends('student.layout.student_layout')
 
+@section('title', 'TCET | Quizzes')
+
 @section('main_content')
 <div class="tables">
     <h2 class="title1">Quizzes</h2>
@@ -37,7 +39,14 @@
                     <td>{{$quiz->Quiz_Time}}</td>
                     <td>{{$quiz->Quiz_Duration}}</td>
                     <td>{{$quiz->Quiz_Status}}</td>
-                    <td><button type="button" onclick="attemptQuiz('{{$quiz->Quiz_Id}}')">Attempt</button></td>
+
+                    @if((App\Models\Student_Quiz::where('Quiz_Id', '=', $quiz->Quiz_Id)->where('Student_Class_Id', '=', $StudentClassId)->first()) != null)
+                    <td></td>
+                    @else
+                    <td>
+                        <a href="{{ url('student/quiz/attempt/' . $quiz->Quiz_Id) }}" data-toggle="tooltip" data-placement="top" title="" data-original-title="Attempt"><i class="fa fa-external-link"></i></a>
+                    </td>
+                    @endif
                 </tr>
 
                 @endforeach
@@ -45,11 +54,5 @@
         </table>
     </div>
 </div>
-
-<script>
-    function attemptQuiz(QuizId) {
-        window.location.href = "{{url('student/quiz/attempt/')}}" + "/" + QuizId;
-    }
-</script>
 
 @stop

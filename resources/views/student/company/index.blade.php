@@ -1,5 +1,7 @@
 @extends('student.layout.student_layout')
 
+@section('title', 'TCET | Companies')
+
 @section('main_content')
 
 <div id="modal-div"></div>
@@ -15,7 +17,6 @@
                     <th scope="col">No. of Rounds</th>
                     <th scope="col">Company Status</th>
                     <th scope="col"></th>
-                    <!-- <th scope="col"></th> -->
                 </tr>
             </thead>
             <tbody>
@@ -28,74 +29,64 @@
                 $NoOfRounds = 0;
                 @endphp
 
-                @for($i = 0; $i < count($companies); $i++) 
-                    
-                    @php 
-                        $currentCompanyId = $companies[$i]->Company_Id;
+                @for($i = 0; $i < count($companies); $i++) @php $currentCompanyId=$companies[$i]->Company_Id;
                     @endphp
 
                     @if($i == 0)
 
-                        @php
+                    @php
 
-                            $previousCompanyId = $currentCompanyId;
+                    $previousCompanyId = $currentCompanyId;
 
-                        @endphp
+                    @endphp
 
                     @endif
 
                     @php
 
-                        $NoOfRounds++;
+                    $NoOfRounds++;
 
                     @endphp
 
                     @if($currentCompanyId != $previousCompanyId || $i == (count($companies) - 1))
 
-                        @if($i == (count($companies) - 1))
-                            @php
-                                $NoOfRounds++;
-                            @endphp
-                        @endif
+                    @if($i == (count($companies) - 1))
+                    @php
+                    $NoOfRounds++;
+                    @endphp
+                    @endif
 
-                        @php
-                            
-                            $SrNo++;
-                            $NoOfRounds--;
+                    @php
 
-                        @endphp
+                    $SrNo++;
+                    $NoOfRounds--;
 
-                        <tr>
-                            <td>{{$SrNo}}</td>
-                            <td>{{$companies[$i - 1]->Company_Name}}</td>
-                            <td>{{$NoOfRounds}}</td>
-                            <td>{{$companies[$i - 1]->Company_Status}}</td>
-                            <td><button type="button" onclick="viewCompanyDetails('{{$companies[$i]->Company_Id}}')">View Details</button></td>
-                            <!-- <td><button type="button" onclick="registerForCompany('{{$companies[$i]->Company_Id}}')">Register</button></td> -->
-                        </tr>
+                    @endphp
 
-                        @php
-                            $NoOfRounds = 1;
-                        @endphp
+                    <tr>
+                        <td>{{$SrNo}}</td>
+                        <td>{{$companies[$i - 1]->Company_Name}}</td>
+                        <td>{{$NoOfRounds}}</td>
+                        <td>{{$companies[$i - 1]->Company_Status}}</td>
+                        <td><a href="{{ url('student/company/view/' . $companies[$i - 1]->Company_Id) }}" data-toggle="tooltip" data-placement="top" title="" data-original-title="View"><i class="fa fa-eye"></i></a></td>
+                    </tr>
+
+                    @php
+                    $NoOfRounds = 1;
+                    @endphp
 
                     @endif
 
                     @php
 
-                        $previousCompanyId = $currentCompanyId;
+                    $previousCompanyId = $currentCompanyId;
 
                     @endphp
 
-                @endfor
+                    @endfor
             </tbody>
         </table>
     </div>
 </div>
-
-<script>
-    function viewCompanyDetails(CompanyId) {
-        window.location.href = "{{url('student/company/view/')}}" + "/" + CompanyId;
-    }
-</script>
 
 @stop

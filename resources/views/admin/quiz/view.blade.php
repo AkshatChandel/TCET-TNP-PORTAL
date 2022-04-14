@@ -1,5 +1,7 @@
 @extends('admin.layout.admin_layout')
 
+@section('title', 'Quiz | ' . $quiz->Quiz_Name)
+
 @section('main_content')
 <div class="forms">
     <div class="form-grids row form-grids-right">

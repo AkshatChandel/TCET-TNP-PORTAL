@@ -1,5 +1,7 @@
 @extends('student.layout.student_layout')
 
+@section('title', 'TCET | Message')
+
 @section('main_content')
 
 <div class="forms">

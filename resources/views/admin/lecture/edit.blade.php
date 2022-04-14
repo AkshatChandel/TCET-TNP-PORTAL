@@ -1,6 +1,6 @@
 @extends('admin.layout.admin_layout')
 
-@section('title', 'Training Lecture | Create')
+@section('title', 'Training Lecture | Edit')
 
 @section('main_content')
 <div class="forms">
@@ -10,34 +10,42 @@
                 <h4>Training Lecture</h4>
             </div>
             <div class="form-body">
-                <form class="form-horizontal" action="" method="POST">
+                <form class="form-horizontal" action="{{ $lecture->Training_Lecture_Id }}" method="POST">
                     @csrf
                     <div class="form-group">
                         <label for="txt_LectureName" class="col-sm-2 control-label">Lecture Topic</label>
                         <div class="col-sm-9">
-                            <input type="text" class="form-control" id="txt_LectureName" name="Lecture_Name" placeholder="Lecture Name" required>
+                            <input type="text" value="{{ $lecture->Lecture_Name }}" class="form-control" id="txt_LectureName" name="Lecture_Name" placeholder="Lecture Name" required>
                         </div>
                     </div>
                     <div class="form-group">
                         <label for="txt_LectureDescription" class="col-sm-2 control-label">Lecture Description</label>
-                        <div class="col-sm-8"><textarea name="Lecture_Description" maxlength="2000" minlength="0" id="txt_LectureDescription" rows="10" placeholder="Lecture Description" class="form-control"></textarea></div>
+                        <div class="col-sm-8"><textarea name="Lecture_Description" maxlength="2000" minlength="0" id="txt_LectureDescription" rows="10" placeholder="Lecture Description" class="form-control">{{ $lecture->Lecture_Description }}</textarea></div>
                     </div>
                     <div class="form-group">
                         <label for="txt_LectureCode" class="col-sm-2 control-label">Lecture Code</label>
                         <div class="col-sm-9">
-                            <input type="text" class="form-control" id="txt_LectureCode" name="Lecture_Code" placeholder="Lecture Code">
+                            <input type="text" value="{{ $lecture->Lecture_Code }}" class="form-control" id="txt_LectureCode" name="Lecture_Code" placeholder="Lecture Code">
                         </div>
                     </div>
+                    @php
+
+                    $dateTime = $lecture->Lecture_DateTime;
+                    $date = substr($dateTime, 0, 10);
+                    $time = substr($dateTime, 11);
+                    $dateTimeValue = $date . "T" . $time;
+
+                    @endphp
                     <div class="form-group">
                         <label for="txt_LectureDateTime" class="col-sm-2 control-label">Lecture Date Time</label>
                         <div class="col-sm-9">
-                            <input type="datetime-local" class="form-control" id="txt_LectureDateTime" name="Lecture_DateTime" required>
+                            <input type="datetime-local" value="{{$dateTimeValue}}" class="form-control" id="txt_LectureDateTime" name="Lecture_DateTime" required>
                         </div>
                     </div>
                     <div class="form-group">
                         <label for="txt_LectureLink" class="col-sm-2 control-label">Lecture Link</label>
                         <div class="col-sm-9">
-                            <input type="text" class="form-control" id="txt_LectureLink" name="Lecture_Link" placeholder="Lecture Link">
+                            <input type="text" value="{{ $lecture->Lecture_Link }}" class="form-control" id="txt_LectureLink" name="Lecture_Link" placeholder="Lecture Link">
                         </div>
                     </div>
                     <div class="form-group">
@@ -96,7 +104,12 @@
                                     <td>{{$count}}</td>
                                     <td>{{$branch->Branch_Name}}</td>
                                     <td>{{$branch->Branch_Code}}</td>
+
+                                    @if((App\Models\Training_Lecture_Branch::where('Branch_Id', '=', $branch->Branch_Id)->where('Training_Lecture_Id', '=', $lecture->Training_Lecture_Id)->first()) != null)
+                                    <td><input type='checkbox' name='Branch_Id[]' value='{{$branch->Branch_Id}}' checked /></td>
+                                    @else
                                     <td><input type='checkbox' name='Branch_Id[]' value='{{$branch->Branch_Id}}' /></td>
+                                    @endif
                                 </tr>
                                 @endforeach
                             </tbody>
@@ -114,6 +127,28 @@
         </div>
     </div>
 </div>
+
+<script>
+    let AcademicSessionId = "{{ $lecture->Academic_Session_Id }}";
+
+    let select_AcademicSessionId = document.getElementById("select_AcademicSessionId");
+    let options_AcademicSessionId = select_AcademicSessionId.options;
+    for (let j = 0, option; option = options_AcademicSessionId[j]; j++) {
+        if (option.value == AcademicSessionId) {
+            select_AcademicSessionId.selectedIndex = j;
+        }
+    }
+
+    let LectureStatus = "{{ $lecture->Lecture_Status }}";
+
+    let select_LectureStatus = document.getElementById("select_LectureStatus");
+    let options_LectureStatus = select_LectureStatus.options;
+    for (let j = 0, option; option = options_LectureStatus[j]; j++) {
+        if (option.value == LectureStatus) {
+            select_LectureStatus.selectedIndex = j;
+        }
+    }
+</script>
 
 <script>
     function backToList() {

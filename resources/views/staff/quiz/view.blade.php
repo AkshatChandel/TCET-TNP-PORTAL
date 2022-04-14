@@ -1,5 +1,7 @@
 @extends('staff.layout.staff_layout')
 
+@section('title', 'Quiz | ' . $quiz->Quiz_Name)
+
 @section('main_content')
 <div class="forms">
     <div class="form-grids row form-grids-right">
@@ -11,8 +13,7 @@
                 <div class="form-horizontal">
                     @csrf
 
-                    @for ($i = 0; $i < count($quizQuestionsOptions); $i=$i + 4)
-                    <div class="col-md-12 panel-grids">
+                    @for ($i = 0; $i < count($quizQuestionsOptions); $i=$i + 4) <div class="col-md-12 panel-grids">
                         <div class="panel panel-info">
                             <div class="panel-heading">
                                 <h3 class="panel-title">{{ $quizQuestionsOptions[$i]->Quiz_Question }}</h3>
@@ -24,8 +25,7 @@
 
                                 @endphp
 
-                                @for($j = 0; $j < 4; $j++) 
-                                <div class="form-group">
+                                @for($j = 0; $j < 4; $j++) <div class="form-group">
                                     <div class="input-group">
                                         <div class="input-group-addon">
                                             <input disabled type="radio" name="{{ $radioButtonName }}" value="{{ $quizQuestionsOptions[$i + $j]->Quiz_Question_Option_Id }}">
@@ -37,18 +37,18 @@
                                         <label class="form-control1">{{ $quizQuestionsOptions[$i + $j]->Quiz_Option }}</label>
                                         @endif
                                     </div>
-                                </div>
-                                @endfor
-
                             </div>
+                            @endfor
+
                         </div>
-                    </div>
-                    @endfor                    
-                        <input type="button" value="Back To List" onclick="backToList()" class="btn btn-primary" />                    
                 </div>
             </div>
+            @endfor
+            <input type="button" value="Back To List" onclick="backToList()" class="btn btn-primary" />
         </div>
     </div>
+</div>
+</div>
 </div>
 
 <script>

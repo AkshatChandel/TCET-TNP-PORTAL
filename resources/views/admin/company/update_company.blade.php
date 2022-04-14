@@ -1,5 +1,7 @@
 @extends('admin.layout.admin_layout')
 
+@section('title', 'Company | ' . $companyDetails->Company_Name)
+
 @section('main_content')
 <div class="tables">
     <h2 class="title1">Company Details</h2>

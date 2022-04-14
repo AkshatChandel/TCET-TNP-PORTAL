@@ -1,5 +1,7 @@
 @extends('admin.layout.admin_layout')
 
+@section('title', 'TCET | Companies')
+
 @section('main_content')
 <div class="tables">
     <h2 class="title1">Companies</h2>

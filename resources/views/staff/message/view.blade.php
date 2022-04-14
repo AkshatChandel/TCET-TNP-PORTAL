@@ -1,5 +1,7 @@
 @extends('staff.layout.staff_layout')
 
+@section('title', $messageDraft->Message_Draft_Head)
+
 @section('main_content')
 
 <div class="forms">

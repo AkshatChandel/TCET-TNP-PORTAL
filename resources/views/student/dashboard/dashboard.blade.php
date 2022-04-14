@@ -1,5 +1,7 @@
 @extends('student.layout.student_layout')
 
+@section('title', 'TCET | Dashboard')
+
 @section('head_content')
 <!-- calendar -->
 <link rel="stylesheet" href="{{url('css/monthly.css')}}">
