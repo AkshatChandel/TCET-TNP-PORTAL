@@ -44,7 +44,7 @@
                     <td>{{$quiz->Quiz_Status}}</td>
                     <td>
                         <!-- <a href="{{ url('staff/quiz/edit/' . $quiz->Quiz_Id) }}" data-toggle="tooltip" data-placement="left" title="" data-original-title="Edit"><i class="fa fa-edit"></i></a> -->
-                        <a href="{{ url('staff/quiz/view/' . $quiz->Quiz_Id) }}" data-toggle="tooltip" data-placement="top" title="" data-original-title="View"><i class="fa fa-eye"></i></a>
+                        <a href="{{ url('staff/quiz/view/' . $quiz->Quiz_Id) }}" data-toggle="tooltip" data-placement="left" title="" data-original-title="View"><i class="fa fa-eye"></i></a>
                         <a href="{{ url('staff/quiz/checkquiz/' . $quiz->Quiz_Id) }}" data-toggle="tooltip" data-placement="right" title="" data-original-title="Check Quiz"><i class="fa fa-external-link"></i></a>
                     </td>
                 </tr>

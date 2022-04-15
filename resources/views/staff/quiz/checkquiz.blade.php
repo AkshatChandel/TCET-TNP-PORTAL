@@ -1,5 +1,7 @@
 @extends('staff.layout.staff_layout')
 
+@section('title', 'Quiz | ' . $quiz->Quiz_Name)
+
 @section('main_content')
 
 <div class="tables">
@@ -53,10 +55,12 @@
                     <td>{{$SrNo}}</td>
                     <td>{{$student->First_Name}}</td>
                     <td>{{$score}} / {{ count($quizCorrectAnswers) }}</td>
-                    <td><button type="button" onclick="checkQuizOptions('{{$student->Student_Class_Id}}', '{{$quizData[0]->Quiz_Id}}')">Check Answers</button></td>
+                    <td><button type="button" class="btn btn-success" onclick="checkQuizOptions('{{$student->Student_Class_Id}}', '{{$quiz->Quiz_Id}}')">Check Answers</button></td>
                 </tr>
 
-                @php $score = 0; @endphp
+                @php
+                $score = 0;
+                @endphp
 
                 @endif
 
